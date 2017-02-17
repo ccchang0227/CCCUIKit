@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CCCAllAssetsViewController">
+            <connections>
+                <outlet property="assetPreviewView" destination="wDU-d3-bFA" id="jHV-jU-8ad"/>
+                <outlet property="assetsCollectionView" destination="79k-6m-jRl" id="8kt-r1-ZbP"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="79k-6m-jRl">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Tfq-LH-jXJ">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="79k-6m-jRl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7Xh-k8-vDJ"/>
+                <constraint firstAttribute="bottom" secondItem="79k-6m-jRl" secondAttribute="bottom" id="9y3-nz-Igq"/>
+                <constraint firstItem="79k-6m-jRl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="irx-cD-HyD"/>
+                <constraint firstAttribute="trailing" secondItem="79k-6m-jRl" secondAttribute="trailing" id="j4T-7z-4Nh"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+        </view>
+        <view contentMode="scaleToFill" id="wDU-d3-bFA" customClass="CCCAssetPreviewView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lky-6N-jNr">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                </imageView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XX-nH-eJM">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJw-xy-fvT" customClass="CCCAssetVideoPlayerView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fz-Qg-4na">
+                    <rect key="frame" x="321" y="0.0" width="54" height="54"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="54" id="4JE-eK-HxW"/>
+                        <constraint firstAttribute="width" secondItem="3fz-Qg-4na" secondAttribute="height" multiplier="1:1" id="OHK-gV-7cl"/>
+                    </constraints>
+                    <state key="normal" image="CCCAssets_CloseRed.png">
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="closeViewAction:" destination="wDU-d3-bFA" eventType="touchUpInside" id="Q9a-p0-KFC"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="7XX-nH-eJM" secondAttribute="trailing" id="4Ks-Z3-9oD"/>
+                <constraint firstAttribute="bottom" secondItem="7XX-nH-eJM" secondAttribute="bottom" id="4qL-bG-3fR"/>
+                <constraint firstItem="7XX-nH-eJM" firstAttribute="top" secondItem="wDU-d3-bFA" secondAttribute="top" id="7Hu-gb-FEa"/>
+                <constraint firstAttribute="trailing" secondItem="3fz-Qg-4na" secondAttribute="trailing" id="9rI-4H-twH"/>
+                <constraint firstAttribute="bottom" secondItem="kJw-xy-fvT" secondAttribute="bottom" id="B02-VI-45f"/>
+                <constraint firstItem="7XX-nH-eJM" firstAttribute="leading" secondItem="wDU-d3-bFA" secondAttribute="leading" id="GW7-MJ-Unz"/>
+                <constraint firstItem="kJw-xy-fvT" firstAttribute="leading" secondItem="wDU-d3-bFA" secondAttribute="leading" id="Ww0-kP-ocj"/>
+                <constraint firstAttribute="bottom" secondItem="Lky-6N-jNr" secondAttribute="bottom" id="Xo6-JM-YPJ"/>
+                <constraint firstItem="3fz-Qg-4na" firstAttribute="top" secondItem="wDU-d3-bFA" secondAttribute="top" id="YUH-c4-S6e"/>
+                <constraint firstItem="Lky-6N-jNr" firstAttribute="top" secondItem="wDU-d3-bFA" secondAttribute="top" id="bl7-Ne-ZXc"/>
+                <constraint firstAttribute="trailing" secondItem="Lky-6N-jNr" secondAttribute="trailing" id="eKd-l4-z0P"/>
+                <constraint firstItem="Lky-6N-jNr" firstAttribute="leading" secondItem="wDU-d3-bFA" secondAttribute="leading" id="imB-yx-qbv"/>
+                <constraint firstItem="kJw-xy-fvT" firstAttribute="top" secondItem="wDU-d3-bFA" secondAttribute="top" id="nFY-wC-zOF"/>
+                <constraint firstAttribute="trailing" secondItem="kJw-xy-fvT" secondAttribute="trailing" id="rNv-a9-do2"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="Lky-6N-jNr" id="wYV-MI-jZu"/>
+                <outlet property="closeButton" destination="3fz-Qg-4na" id="VBn-AA-gUd"/>
+                <outlet property="contentImageScrollView" destination="7XX-nH-eJM" id="3Rp-Ir-F4R"/>
+                <outlet property="videoPlayerView" destination="kJw-xy-fvT" id="ymt-4c-Dhu"/>
+            </connections>
+            <point key="canvasLocation" x="237" y="126"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="CCCAssets_CloseRed.png" width="44" height="44"/>
+    </resources>
+</document>

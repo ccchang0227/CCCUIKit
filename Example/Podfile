@@ -1,6 +1,0 @@
-use_frameworks!
-target 'CCCUIKit_Tests' do
-  pod 'CCCUIKit', :path => '../'
-  
-  
-end

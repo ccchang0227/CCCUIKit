@@ -1,42 +1,121 @@
-#
-# Be sure to run `pod lib lint CCCUIKit.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'CCCUIKit'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of CCCUIKit.'
+  s.version          = '1.0.0'
+  s.summary          = "C.C.Chang's custom UIKit."
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
-
-  s.homepage         = 'https://github.com/C.C.Chang/CCCUIKit'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/ccchang0227/CCCUIKit'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'C.C.Chang' => 'ccch.realtouch@gmail.com' }
-  s.source           = { :git => 'https://github.com/C.C.Chang/CCCUIKit.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.authors          = { 'Chih-chieh Chang' => 'ccch.realtouch@gmail.com' }
+  s.source           = { :git => 'https://github.com/ccchang0227/CCCUIKit.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '6.0'
+  s.source_files = 'Classes/CCCUIKit.h'
 
-  s.source_files = 'CCCUIKit/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'CCCUIKit' => ['CCCUIKit/Assets/*.png']
-  # }
+  s.frameworks = 'UIKit'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.subspec 'UIKit+CCCAdditions' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.ios.deployment_target = '6.0'
+    ss.tvos.deployment_target = '9.0'
+    ss.source_files = 'Classes/UIKit+CCCAdditions/**/*.{h,m}'
+  end
+
+  s.subspec 'CCCAssetsViewController' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCAssetsViewController/*.{h,m}'
+    ss.resources = 'Classes/CCCAssetsViewController/*.xib', 'Assets/*.png'
+    ss.frameworks = 'AssetsLibrary', 'MediaPlayer'
+    ss.weak_frameworks = 'Photos'
+
+    ss.subspec 'CCCAssetsModel' do |sss|
+      sss.source_files = 'Classes/CCCAssetsViewController/CCCAssetsModel/*.{h,m}'
+    end
+
+    ss.subspec 'ChildrenViewControllers' do |sss|
+      sss.source_files = 'Classes/CCCAssetsViewController/ChildrenViewControllers/*.{h,m}'
+      sss.resources = 'Classes/CCCAssetsViewController/ChildrenViewControllers/*.xib'
+    end
+  end
+
+  s.subspec 'CCCCamera' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCCamera/**/*.{h,m}'
+    ss.frameworks = 'AVFoundation', 'ImageIO', 'MobileCoreServices', 'CoreMotion'
+  end
+
+  s.subspec 'CCCCanvas' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCCanvas/**/*.{h,m}'
+    ss.frameworks = 'AVFoundation'
+    ss.dependency 'CCCUIKit/CCCSlider'
+  end
+
+  s.subspec 'CCCCycleView' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCCycleView/*.{h,m}'
+    ss.frameworks = 'GLKit', 'CoreGraphics', 'QuartzCore'
+
+    ss.subspec 'XYPieChart' do |sss|
+      sss.requires_arc = true
+      sss.source_files = 'Classes/CCCCycleView/XYPieChart/*.{h,m}'
+    end
+  end
+
+  s.subspec 'CCCDevice' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.ios.deployment_target = '6.0'
+    ss.tvos.deployment_target = '9.0'
+    ss.source_files = 'Classes/CCCDevice/**/*.{h,m}'
+  end
+
+  s.subspec 'CCCMaskedLabel' do |ss|
+    # current version: 0.0.5
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCMaskedLabel/**/*.{h,m}'
+  end
+
+  s.subspec 'CCCPageControl' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCPageControl/**/*.{h,m}'
+  end
+
+  s.subspec 'CCCRatingControl' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCRatingControl/**/*.{h,m}'
+  end
+
+  s.subspec 'CCCRecycleScrollView' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCRecycleScrollView/**/*.{h,m}'
+  end
+
+  s.subspec 'CCCSlider' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCSlider/**/*.{h,m}'
+  end
+
+  s.subspec 'CCCSlidingViewController' do |ss|
+    # current version: 1.0.0
+    ss.requires_arc = false
+    ss.source_files = 'Classes/CCCSlidingViewController/**/*.{h,m}'
+  end
+
+  s.subspec 'CCCSwitch' do |ss|
+    # current version: 0.0.5
+    ss.requires_arc = false
+    ss.ios.deployment_target = '6.0'
+    ss.tvos.deployment_target = '9.0'
+    ss.source_files = 'Classes/CCCSwitch/**/*.{h,m}'
+  end
+
 end
