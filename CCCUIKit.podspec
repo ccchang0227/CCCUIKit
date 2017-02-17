@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CCCUIKit'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = "C.C.Chang's custom UIKit."
 
   s.homepage         = 'https://github.com/ccchang0227/CCCUIKit'
@@ -36,6 +36,7 @@ Pod::Spec.new do |s|
     ss.subspec 'ChildrenViewControllers' do |sss|
       sss.source_files = 'Classes/CCCAssetsViewController/ChildrenViewControllers/*.{h,m}'
       sss.resources = 'Classes/CCCAssetsViewController/ChildrenViewControllers/*.xib'
+      sss.dependency 'CCCUIKit/CCCAssetsViewController/CCCAssetsModel'
     end
   end
 
