@@ -10,9 +10,9 @@
 /**
  * UILabel with transparent text.
  * 
- * @version 0.0.5
+ * @version 0.0.6
  * @author Chih-chieh Chang
- * @date 2017-02-17
+ * @date 2017-02-20
  */
 @interface CCCMaskedLabel : UILabel
 

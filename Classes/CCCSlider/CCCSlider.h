@@ -10,11 +10,19 @@
 /**
  * Custom UISlider (Mutiple color assignable)
  *
- * @version 1.0.0
+ * @version 1.1.0
  * @author Chih-chieh Chang
- * @date 2017-02-16
+ * @date 2017-02-20
  */
-@interface CCCSlider : UIControl
+@interface CCCSlider : UIControl {
+@protected
+    CAShapeLayer *_sliderBackgroundLayer;
+    CAGradientLayer *_sliderTrackingLayer;
+    CAShapeLayer *_thumbLayer;
+    
+    CALayer *_leftImageLayer;
+    CALayer *_rightImageLayer;
+}
 
 @property (nonatomic) CGFloat value; //default is 0.5.
 @property (nonatomic) CGFloat minimumValue; // default is 0.0.
@@ -33,14 +41,14 @@
 @property(retain, nonatomic) UIImage *minimumValueImage; // default is nil. image that appears to left of control.
 @property(retain, nonatomic) UIImage *maximumValueImage; // default is nil. image that appears to right of control.
 @property(retain, nonatomic) UIImage *thumbImage; // default is nil.
+@property (nonatomic, getter=isThumbHidden) BOOL thumbHidden; // default is NO.
 
 - (void)setValue:(CGFloat)value animated:(BOOL)animated;
-
-- (void)setThumbHidden:(BOOL)hidden;
 
 - (CGRect)minimumValueImageRectForBounds:(CGRect)bounds;
 - (CGRect)maximumValueImageRectForBounds:(CGRect)bounds;
 - (CGRect)trackRectForBounds:(CGRect)bounds;
 - (CGRect)thumbRectForBounds:(CGRect)bounds;
+- (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)rect value:(float)value;
 
 @end

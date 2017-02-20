@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CCCUIKit'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = "C.C.Chang's custom UIKit."
 
   s.homepage         = 'https://github.com/ccchang0227/CCCUIKit'
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit'
 
   s.subspec 'UIKit+CCCAdditions' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.ios.deployment_target = '6.0'
     ss.tvos.deployment_target = '9.0'
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCAssetsViewController' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCAssetsViewController/*.{h,m}'
     ss.resources = 'Classes/CCCAssetsViewController/*.xib', 'Assets/*.png'
@@ -41,14 +41,14 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCCamera' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCamera/**/*.{h,m}'
     ss.frameworks = 'AVFoundation', 'ImageIO', 'MobileCoreServices', 'CoreMotion'
   end
 
   s.subspec 'CCCCanvas' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCanvas/**/*.{h,m}'
     ss.frameworks = 'AVFoundation'
@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCCycleView' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCycleView/*.{h,m}'
     ss.frameworks = 'GLKit', 'CoreGraphics', 'QuartzCore'
@@ -68,7 +68,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCDevice' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.ios.deployment_target = '6.0'
     ss.tvos.deployment_target = '9.0'
@@ -76,43 +76,43 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCMaskedLabel' do |ss|
-    # current version: 0.0.5
+    # current version: 0.0.6
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCMaskedLabel/**/*.{h,m}'
   end
 
   s.subspec 'CCCPageControl' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCPageControl/**/*.{h,m}'
   end
 
   s.subspec 'CCCRatingControl' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCRatingControl/**/*.{h,m}'
   end
 
   s.subspec 'CCCRecycleScrollView' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCRecycleScrollView/**/*.{h,m}'
   end
 
   s.subspec 'CCCSlider' do |ss|
-    # current version: 1.0.0
+    # current version: 1.1.0
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCSlider/**/*.{h,m}'
   end
 
   s.subspec 'CCCSlidingViewController' do |ss|
-    # current version: 1.0.0
+    # current version: 1.0.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCSlidingViewController/**/*.{h,m}'
   end
 
   s.subspec 'CCCSwitch' do |ss|
-    # current version: 0.0.5
+    # current version: 0.0.6
     ss.requires_arc = false
     ss.ios.deployment_target = '6.0'
     ss.tvos.deployment_target = '9.0'

@@ -23,9 +23,9 @@ typedef NS_ENUM(NSInteger, CCCSlidingDirection) {
 /**
  * Custom sliding/spilt view controller
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @author Chih-chieh Chang
- * @date 2017-02-16
+ * @date 2017-02-20
  */
 @interface CCCSlidingViewController : UIViewController
 

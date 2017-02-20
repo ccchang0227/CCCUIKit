@@ -13,9 +13,9 @@ UIKIT_EXTERN UIImage *customPageImageWithColor(UIColor *strokeColor, UIColor *fi
 /**
  * Custom UIPageControl (UIImage assignable)
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @author Chih-chieh Chang
- * @date 2017-02-16
+ * @date 2017-02-20
  */
 @interface CCCPageControl : UIControl
 

@@ -25,11 +25,17 @@
 @end
 
 @implementation CCCSlider
+@synthesize sliderBackgroundLayer = _sliderBackgroundLayer;
+@synthesize sliderTrackingLayer = _sliderTrackingLayer;
+@synthesize thumbLayer = _thumbLayer;
+@synthesize leftImageLayer = _leftImageLayer;
+@synthesize rightImageLayer = _rightImageLayer;
+
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self setup];
+        [self _setup];
     }
     return self;
 }
@@ -37,7 +43,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self setup];
+        [self _setup];
     }
     
     return self;
@@ -46,7 +52,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setup];
+        [self _setup];
     }
     
     return self;
@@ -78,8 +84,8 @@
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     
-    [self setupLayers];
-    [self resizeLayers];
+    [self _setupLayers];
+    [self _resizeLayers];
 }
 
 - (void)updateConstraints {
@@ -112,7 +118,7 @@
     }
     _value = newValue;
     
-    [self setupValueAnimated:NO];
+    [self _setupValueAnimated:NO];
 }
 
 - (void)setMinimumValue:(CGFloat)minimumValue {
@@ -138,14 +144,17 @@
         return;
     }
     
+    if (_sliderBorderColor != sliderBorderColor) {
 #if !__has_feature(objc_arc)
-    if (_sliderBorderColor) {
-        [_sliderBorderColor release];
-    }
+        if (_sliderBorderColor) {
+            [_sliderBorderColor release];
+        }
 #endif
-    _sliderBorderColor = [sliderBorderColor retain];
-    
-    self.sliderBackgroundLayer.strokeColor = self.sliderBorderColor.CGColor;
+        _sliderBorderColor = [sliderBorderColor retain];
+        
+        self.sliderBackgroundLayer.strokeColor = self.sliderBorderColor.CGColor;
+    }
+
 }
 
 - (void)setSliderBackgroundColor:(UIColor *)sliderBackgroundColor {
@@ -153,14 +162,17 @@
         return;
     }
     
+    if (_sliderBackgroundColor != sliderBackgroundColor) {
 #if !__has_feature(objc_arc)
-    if (_sliderBackgroundColor) {
-        [_sliderBackgroundColor release];
-    }
+        if (_sliderBackgroundColor) {
+            [_sliderBackgroundColor release];
+        }
 #endif
-    _sliderBackgroundColor = [sliderBackgroundColor retain];
+        _sliderBackgroundColor = [sliderBackgroundColor retain];
+        
+        self.sliderBackgroundLayer.fillColor = self.sliderBackgroundColor.CGColor;
+    }
     
-    self.sliderBackgroundLayer.fillColor = self.sliderBackgroundColor.CGColor;
 }
 
 - (void)setSliderTrackingColors:(NSArray *)sliderTrackingColors {
@@ -172,24 +184,23 @@
 #endif
         _sliderTrackingColors = [sliderTrackingColors retain];
         
-    }
-    
-    if (_sliderTrackingColors == nil) {
-        self.sliderTrackingColors = @[[UIColor blueColor]];
-        return;
-    }
-    
-    if (self.sliderTrackingColors.count == 1) {
-        self.sliderTrackingLayer.backgroundColor = ((UIColor*)self.sliderTrackingColors[0]).CGColor;
-        self.sliderTrackingLayer.colors = nil;
-    }
-    else {
-        self.sliderTrackingLayer.backgroundColor = [UIColor clearColor].CGColor;
-        NSMutableArray *arrayCGColor = [NSMutableArray arrayWithCapacity:0];
-        for (UIColor *color in self.sliderTrackingColors) {
-            [arrayCGColor addObject:(id)color.CGColor];
+        if (_sliderTrackingColors == nil) {
+            self.sliderTrackingColors = @[[UIColor blueColor]];
+            return;
         }
-        self.sliderTrackingLayer.colors = arrayCGColor;
+        
+        if (self.sliderTrackingColors.count == 1) {
+            self.sliderTrackingLayer.backgroundColor = ((UIColor *)self.sliderTrackingColors[0]).CGColor;
+            self.sliderTrackingLayer.colors = nil;
+        }
+        else {
+            self.sliderTrackingLayer.backgroundColor = [UIColor clearColor].CGColor;
+            NSMutableArray *arrayCGColor = [NSMutableArray arrayWithCapacity:0];
+            for (UIColor *color in self.sliderTrackingColors) {
+                [arrayCGColor addObject:(id)color.CGColor];
+            }
+            self.sliderTrackingLayer.colors = arrayCGColor;
+        }
     }
     
 }
@@ -199,14 +210,17 @@
         return;
     }
     
+    if (_thumbBorderColor != thumbBorderColor) {
 #if !__has_feature(objc_arc)
-    if (_thumbBorderColor) {
-        [_thumbBorderColor release];
-    }
+        if (_thumbBorderColor) {
+            [_thumbBorderColor release];
+        }
 #endif
-    _thumbBorderColor = [_thumbBorderColor retain];
+        _thumbBorderColor = [thumbBorderColor retain];
+        
+        self.thumbLayer.strokeColor = self.thumbBorderColor.CGColor;
+    }
     
-    self.thumbLayer.strokeColor = self.thumbBorderColor.CGColor;
 }
 
 - (void)setThumbTintColor:(UIColor *)thumbTintColor {
@@ -214,21 +228,26 @@
         return;
     }
     
+    if (_thumbTintColor != thumbTintColor) {
 #if !__has_feature(objc_arc)
-    if (_thumbTintColor) {
-        [_thumbTintColor release];
-    }
+        if (_thumbTintColor) {
+            [_thumbTintColor release];
+        }
 #endif
-    _thumbTintColor = [thumbTintColor retain];
-    
-    self.thumbLayer.fillColor = self.thumbTintColor.CGColor;
+        _thumbTintColor = [thumbTintColor retain];
+        
+        self.thumbLayer.fillColor = self.thumbTintColor.CGColor;
+    }
+
 }
 
 - (void)setEdged:(BOOL)edged {
-    _edged = edged;
-    
-    if (edged) {
-        self.value = round(_value);
+    if (_edged != edged) {
+        _edged = edged;
+        
+        if (_edged) {
+            self.value = round(_value);
+        }
     }
 }
 
@@ -240,10 +259,11 @@
         }
 #endif
         _minimumValueImage = [minimumValueImage retain];
+        
+        self.leftImageLayer.contents = (id)_minimumValueImage.CGImage;
+        
+        [self _resizeLayers];
     }
-    self.leftImageLayer.contents = (id)_minimumValueImage.CGImage;
-    
-    [self resizeLayers];
 }
 
 - (void)setMaximumValueImage:(UIImage *)maximumValueImage {
@@ -254,11 +274,11 @@
         }
 #endif
         _maximumValueImage = [maximumValueImage retain];
+        
+        self.rightImageLayer.contents = (id)_maximumValueImage.CGImage;
+        
+        [self _resizeLayers];
     }
-    
-    self.rightImageLayer.contents = (id)_maximumValueImage.CGImage;
-    
-    [self resizeLayers];
 }
 
 - (void)setThumbImage:(UIImage *)thumbImage {
@@ -269,18 +289,32 @@
         }
 #endif
         _thumbImage = [thumbImage retain];
+        
+        self.thumbLayer.contents = (id)_thumbImage.CGImage;
+        if (_thumbImage) {
+            self.thumbLayer.path = nil;
+        }
+        else {
+            CGMutablePathRef pathThumbLayer = CGPathCreateMutable();
+            CGPathAddEllipseInRect(pathThumbLayer, &CGAffineTransformIdentity, self.thumbLayer.bounds);
+            self.thumbLayer.path = pathThumbLayer;
+            CGPathRelease(pathThumbLayer);
+        }
     }
-    
-    self.thumbLayer.contents = (id)_thumbImage.CGImage;
-    if (_thumbImage) {
-        self.thumbLayer.path = nil;
+}
+
+- (BOOL)isThumbHidden {
+    if (!self.thumbLayer) {
+        [self _setupLayers];
     }
-    else {
-        CGMutablePathRef pathThumbLayer = CGPathCreateMutable();
-        CGPathAddEllipseInRect(pathThumbLayer, &CGAffineTransformIdentity, self.thumbLayer.bounds);
-        self.thumbLayer.path = pathThumbLayer;
-        CGPathRelease(pathThumbLayer);
+    return self.thumbLayer.hidden;
+}
+
+- (void)setThumbHidden:(BOOL)hidden {
+    if (!self.thumbLayer) {
+        [self _setupLayers];
     }
+    self.thumbLayer.hidden = hidden;
 }
 
 - (void)setValue:(CGFloat)value animated:(BOOL)animated {
@@ -291,38 +325,63 @@
     }
     
     _value = newValue;
-    [self setupValueAnimated:YES];
-    
-}
-
-- (void)setThumbHidden:(BOOL)hidden {
-    if (!self.thumbLayer) {
-        [self setupLayers];
-    }
-    self.thumbLayer.hidden = hidden;
+    [self _setupValueAnimated:YES];
 }
 
 #pragma mark - Getter
 
 - (CGRect)minimumValueImageRectForBounds:(CGRect)bounds {
-    return CGRectMake((CGRectGetWidth(bounds)-40)/2.0, (CGRectGetHeight(bounds)-30)/2.0, 40, 30);
+    CGRect rectMinVal = {{0, 0}, {10, 30}};
+    if (self.minimumValueImage) {
+        rectMinVal.size.width = 40;
+    }
+    rectMinVal.origin.y = (CGRectGetHeight(bounds)-CGRectGetHeight(rectMinVal))/2.0;
+    return rectMinVal;
 }
 
 - (CGRect)maximumValueImageRectForBounds:(CGRect)bounds {
-    return CGRectMake((CGRectGetWidth(bounds)-40)/2.0, (CGRectGetHeight(bounds)-30)/2.0, 40, 30);
+    CGRect rectMaxVal = {{0, 0}, {10, 30}};
+    if (self.maximumValueImage) {
+        rectMaxVal.size.width = 40;
+    }
+    rectMaxVal.origin.x = CGRectGetWidth(bounds)-CGRectGetWidth(rectMaxVal);
+    rectMaxVal.origin.y = (CGRectGetHeight(bounds)-CGRectGetHeight(rectMaxVal))/2.0;
+    return rectMaxVal;
 }
     
 - (CGRect)trackRectForBounds:(CGRect)bounds {
-    return CGRectMake(10, (CGRectGetHeight(bounds)-10)/2.0, CGRectGetWidth(bounds)-20, 10);
+    CGRect rectMinVal = [self minimumValueImageRectForBounds:bounds];
+    CGRect rectMaxVal = [self maximumValueImageRectForBounds:bounds];
+    
+    CGRect rectTrack = {{0, 0}, {0, 10}};
+    rectTrack.size.width = CGRectGetWidth(bounds)-CGRectGetWidth(rectMinVal)-CGRectGetWidth(rectMaxVal);
+    rectTrack.origin.x = CGRectGetWidth(rectMinVal);
+    rectTrack.origin.y = (CGRectGetHeight(bounds)-CGRectGetHeight(rectTrack))/2.0;
+    return rectTrack;
 }
 
 - (CGRect)thumbRectForBounds:(CGRect)bounds {
-    return CGRectMake((CGRectGetWidth(bounds)-25)/2.0, (CGRectGetHeight(bounds)-25)/2.0, 25, 25);
+    return [self thumbRectForBounds:bounds trackRect:[self trackRectForBounds:bounds] value:self.value];
+}
+
+- (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)rect value:(float)value {
+    CGRect rectThumb = {{0, 0}, {25, 25}};
+    rectThumb.origin.y = (CGRectGetHeight(bounds)-CGRectGetHeight(rectThumb))/2.0;
+    
+    CGFloat realVal = (value >= _maximumValue)? _maximumValue: ((value <= _minimumValue)? _minimumValue: value);
+    realVal = (realVal-self.minimumValue)/(self.maximumValue-self.minimumValue);
+    if (self.minimumValue == self.maximumValue) {
+        realVal = 1.0;
+    }
+    CGFloat trackWidth = CGRectGetWidth(rect)*realVal;
+    
+    rectThumb.origin.x = trackWidth+CGRectGetMinX(rect)-5-CGRectGetWidth(rectThumb);
+    return rectThumb;
 }
 
 #pragma mark - Setup
 
-- (void)setup {
+- (void)_setup {
     _minimumValue = 0.0f;
     _maximumValue = 1.0f;
     _value = 0.5f;
@@ -341,29 +400,32 @@
     self.maximumValueImage = nil;
 }
 
-- (void)setupLayers {
+- (void)_setupLayers {
     if (self.leftImageLayer == nil) {
+        CGRect rect = [self minimumValueImageRectForBounds:self.bounds];
         self.leftImageLayer = [CALayer layer];
-        self.leftImageLayer.bounds = CGRectMake(0, 0, 10, 30);
-        self.leftImageLayer.position = CGPointMake(CGRectGetWidth(self.leftImageLayer.bounds)/2.0, CGRectGetHeight(self.bounds)/2.0);
+        self.leftImageLayer.bounds = CGRectMake(0, 0, rect.size.width, rect.size.height);
+        self.leftImageLayer.position = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
         self.leftImageLayer.contentsGravity = kCAGravityResizeAspect;
         self.leftImageLayer.contents = nil;
         [self.layer addSublayer:self.leftImageLayer];
     }
     
     if (self.rightImageLayer == nil) {
+        CGRect rect = [self maximumValueImageRectForBounds:self.bounds];
         self.rightImageLayer = [CALayer layer];
-        self.rightImageLayer.bounds = CGRectMake(0, 0, 10, 30);
-        self.rightImageLayer.position = CGPointMake(CGRectGetWidth(self.bounds)-CGRectGetWidth(self.rightImageLayer.bounds)/2.0, CGRectGetHeight(self.bounds)/2.0);
+        self.rightImageLayer.bounds = CGRectMake(0, 0, rect.size.width, rect.size.height);
+        self.rightImageLayer.position = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
         self.rightImageLayer.contentsGravity = kCAGravityResizeAspect;
         self.rightImageLayer.contents = nil;
         [self.layer addSublayer:self.rightImageLayer];
     }
     
     if (self.sliderBackgroundLayer == nil) {
+        CGRect rect = [self trackRectForBounds:self.bounds];
         self.sliderBackgroundLayer = [CAShapeLayer layer];
-        self.sliderBackgroundLayer.bounds = CGRectMake(0, 0, CGRectGetWidth(self.bounds)-CGRectGetWidth(self.leftImageLayer.frame)-CGRectGetWidth(self.rightImageLayer.frame), 10);
-        self.sliderBackgroundLayer.position = CGPointMake(CGRectGetWidth(self.bounds)/2.0, CGRectGetHeight(self.bounds)/2.0);
+        self.sliderBackgroundLayer.bounds = CGRectMake(0, 0, rect.size.width, rect.size.height);
+        self.sliderBackgroundLayer.position = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
         self.sliderBackgroundLayer.fillColor = self.sliderBackgroundColor.CGColor;
         self.sliderBackgroundLayer.strokeColor = self.sliderBorderColor.CGColor;
         [self.layer addSublayer:self.sliderBackgroundLayer];
@@ -374,7 +436,7 @@
         self.sliderTrackingLayer.bounds = self.sliderBackgroundLayer.bounds;
         self.sliderTrackingLayer.position = self.sliderBackgroundLayer.position;
         if (self.sliderTrackingColors.count == 1) {
-            self.sliderTrackingLayer.backgroundColor = ((UIColor*)self.sliderTrackingColors[0]).CGColor;
+            self.sliderTrackingLayer.backgroundColor = ((UIColor *)self.sliderTrackingColors[0]).CGColor;
             self.sliderTrackingLayer.colors = nil;
         }
         else {
@@ -399,9 +461,10 @@
     if (self.thumbLayer == nil) {
         CGMutablePathRef pathThumbLayer = CGPathCreateMutable();
         
+        CGRect rect = [self thumbRectForBounds:self.bounds];
         self.thumbLayer = [CAShapeLayer layer];
-        self.thumbLayer.bounds = CGRectMake(0, 0, 25, 25);
-        self.thumbLayer.position = CGPointMake(CGRectGetMinX(self.sliderTrackingLayer.frame), CGRectGetHeight(self.bounds)/2.0);
+        self.thumbLayer.bounds = CGRectMake(0, 0, rect.size.width, rect.size.height);
+        self.thumbLayer.position = CGPointMake(CGRectGetMinX(self.sliderTrackingLayer.frame), CGRectGetMidY(rect));
         self.thumbLayer.contentsGravity = kCAGravityResizeAspect;
         self.thumbLayer.contents = nil;
         
@@ -415,25 +478,18 @@
     }
 }
 
-- (void)resizeLayers {
-    if (self.minimumValueImage) {
-        self.leftImageLayer.bounds = CGRectMake(0, 0, 40, 30);
-    }
-    else {
-        self.leftImageLayer.bounds = CGRectMake(0, 0, 10, 30);
-    }
-    self.leftImageLayer.position = CGPointMake(CGRectGetWidth(self.leftImageLayer.bounds)/2.0, CGRectGetHeight(self.bounds)/2.0);
+- (void)_resizeLayers {
+    CGRect rectMinVal = [self minimumValueImageRectForBounds:self.bounds];
+    self.leftImageLayer.bounds = CGRectMake(0, 0, rectMinVal.size.width, rectMinVal.size.height);
+    self.leftImageLayer.position = CGPointMake(CGRectGetMidX(rectMinVal), CGRectGetMidY(rectMinVal));
     
-    if (self.maximumValueImage) {
-        self.rightImageLayer.bounds = CGRectMake(0, 0, 40, 30);
-    }
-    else {
-        self.rightImageLayer.bounds = CGRectMake(0, 0, 10, 30);
-    }
-    self.rightImageLayer.position = CGPointMake(CGRectGetWidth(self.bounds)-CGRectGetWidth(self.rightImageLayer.bounds)/2.0, CGRectGetHeight(self.bounds)/2.0);
+    CGRect rectMaxVal = [self maximumValueImageRectForBounds:self.bounds];
+    self.rightImageLayer.bounds = CGRectMake(0, 0, rectMaxVal.size.width, rectMaxVal.size.height);
+    self.rightImageLayer.position = CGPointMake(CGRectGetMidX(rectMaxVal), CGRectGetMidY(rectMaxVal));
     
-    self.sliderBackgroundLayer.bounds = CGRectMake(0, 0, CGRectGetWidth(self.bounds)-CGRectGetWidth(self.leftImageLayer.frame)-CGRectGetWidth(self.rightImageLayer.frame), 10);
-    self.sliderBackgroundLayer.position = CGPointMake(CGRectGetWidth(self.sliderBackgroundLayer.bounds)/2.0+CGRectGetWidth(self.leftImageLayer.frame), CGRectGetHeight(self.bounds)/2.0);
+    CGRect rectTrack = [self trackRectForBounds:self.bounds];
+    self.sliderBackgroundLayer.bounds = CGRectMake(0, 0, rectTrack.size.width, rectTrack.size.height);
+    self.sliderBackgroundLayer.position = CGPointMake(CGRectGetMidX(rectTrack), CGRectGetMidY(rectTrack));
     
     self.sliderTrackingLayer.bounds = self.sliderBackgroundLayer.bounds;
     self.sliderTrackingLayer.position = self.sliderBackgroundLayer.position;
@@ -441,33 +497,45 @@
     CALayer *trackingMaskLayer = self.sliderTrackingLayer.mask;
     trackingMaskLayer.frame = CGRectInset(self.sliderTrackingLayer.bounds, 0, 0.5);
     
-    self.thumbLayer.position = CGPointMake(CGRectGetMinX(self.sliderTrackingLayer.frame), CGRectGetHeight(self.bounds)/2.0);
+    CGRect rectThumb = [self thumbRectForBounds:self.bounds trackRect:rectTrack value:self.value];
+    self.thumbLayer.bounds = CGRectMake(0, 0, rectThumb.size.width, rectThumb.size.height);
+    self.thumbLayer.position = CGPointMake(CGRectGetMinX(self.sliderTrackingLayer.frame), CGRectGetMidY(rectThumb));
     
-    [self setupSlider];
+    [self _setupSlider];
 }
 
-- (void)setupSlider {
+- (void)_setupSlider {
     CGMutablePathRef pathBKLayer = CGPathCreateMutable();
-    CGPathAddRoundedRect(pathBKLayer, &CGAffineTransformIdentity, self.sliderBackgroundLayer.bounds, CGRectGetHeight(self.sliderBackgroundLayer.bounds)/2.0, CGRectGetHeight(self.sliderBackgroundLayer.bounds)/2.0);
+    CGPathAddRoundedRect(pathBKLayer,
+                         &CGAffineTransformIdentity,
+                         self.sliderBackgroundLayer.bounds,
+                         CGRectGetHeight(self.sliderBackgroundLayer.bounds)/2.0,
+                         CGRectGetHeight(self.sliderBackgroundLayer.bounds)/2.0);
     
     self.sliderBackgroundLayer.path = pathBKLayer;
     
     CGPathRelease(pathBKLayer);
     
-    [self setupValueAnimated:NO];
+    [self _setupValueAnimated:NO];
 }
 
-- (void)setupValueAnimated:(BOOL)animated {
+- (void)_setupValueAnimated:(BOOL)animated {
     [CATransaction begin];
     
+    CGRect rectThumb = [self thumbRectForBounds:self.bounds];
+    self.thumbLayer.bounds = CGRectMake(0, 0, rectThumb.size.width, rectThumb.size.height);
+    
     CGFloat value = (self.value-self.minimumValue)/(self.maximumValue-self.minimumValue);
-    if (self.minimumValue == self.maximumValue) value = 1.0;
-    CGFloat width = CGRectGetWidth(self.sliderTrackingLayer.bounds)*value;
+    if (self.minimumValue == self.maximumValue) {
+        value = 1.0;
+    }
+    CGFloat width = CGRectGetMinX(rectThumb)-CGRectGetMinX(self.sliderTrackingLayer.frame)+5+CGRectGetWidth(rectThumb);
     
     if (!animated) {
         [CATransaction setDisableActions:YES];
     }
     else {
+        [CATransaction setDisableActions:NO];
         [CATransaction setAnimationDuration:0.25];
         [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     }
@@ -476,7 +544,7 @@
     maskLayer.frame = CGRectMake(maskLayer.frame.origin.x, maskLayer.frame.origin.y, width, maskLayer.frame.size.height);
     
     width = (width <= CGRectGetHeight(self.sliderTrackingLayer.bounds))? CGRectGetHeight(self.sliderTrackingLayer.bounds): width;
-    self.thumbLayer.position = CGPointMake(width+CGRectGetMinX(self.sliderTrackingLayer.frame)-5, self.thumbLayer.position.y);
+    self.thumbLayer.position = CGPointMake(width+CGRectGetMinX(self.sliderTrackingLayer.frame)-5, CGRectGetMidY(rectThumb));
     
     [CATransaction commit];
 }
@@ -505,7 +573,7 @@
             _value = round(_value);
         }
         
-        [self setupValueAnimated:NO];
+        [self _setupValueAnimated:NO];
         
         if (self.isContinuous)
             [self sendActionsForControlEvents:UIControlEventValueChanged];
@@ -534,7 +602,7 @@
         _value = round(_value);
     }
     
-    [self setupValueAnimated:NO];
+    [self _setupValueAnimated:NO];
     
     if (self.isContinuous)
         [self sendActionsForControlEvents:UIControlEventValueChanged];

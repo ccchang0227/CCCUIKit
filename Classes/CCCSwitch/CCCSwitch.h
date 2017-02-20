@@ -18,9 +18,9 @@ typedef NS_ENUM(NSInteger, CCCSwitchStyle) {
 /**
  * Custom UISwitch
  *
- * @version 0.0.5
+ * @version 0.0.6
  * @author Chih-chieh Chang
- * @date 2017-02-16
+ * @date 2017-02-20
  */
 @interface CCCSwitch : UIControl
 

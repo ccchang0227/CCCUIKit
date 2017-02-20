@@ -12,9 +12,9 @@
 /**
  * C.C.Chang's custom UIKit.
  *
- * @version 1.0.0
+ * @version 1.0.2
  * @author Chih-chieh Chang
- * @date 2017-02-16
+ * @date 2017-02-20
  */
 
 #if !TARGET_OS_MAC
