@@ -1,0 +1,1 @@
+../../../../../Classes/CCCAssetsViewController/CCCAssetsModel/CCCAsset.h

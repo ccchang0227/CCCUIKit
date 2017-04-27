@@ -44,12 +44,16 @@ UIImage *powerKeyImageInSize(CGSize size) {
     BOOL _didDrag;
 }
 
+@property (retain, nonatomic) UIView *contentView;
+
 @property (retain, nonatomic) CALayer *backgroundLayer;
 @property (retain, nonatomic) CALayer *switchLayer;
 @property (retain, nonatomic) CALayer *thumbLayer;
 
 @property (retain, nonatomic) NSLayoutConstraint *widthConstraint;
 @property (retain, nonatomic) NSLayoutConstraint *heightConstraint;
+@property (retain, nonatomic) NSLayoutConstraint *centerXConstraint;
+@property (retain, nonatomic) NSLayoutConstraint *centerYConstraint;
 
 @end
 
@@ -105,12 +109,15 @@ UIImage *powerKeyImageInSize(CGSize size) {
 - (void)dealloc {
     
 #if !__has_feature(objc_arc)
+    [_contentView release];
     [_backgroundLayer release];
     [_switchLayer release];
     [_thumbLayer release];
     [_onTintColor release];
     [_widthConstraint release];
     [_heightConstraint release];
+    [_centerXConstraint release];
+    [_centerYConstraint release];
     [super dealloc];
 #endif
     
@@ -126,6 +133,12 @@ UIImage *powerKeyImageInSize(CGSize size) {
     }
     
     [self setupDisplay];
+}
+
+- (void)layoutSubviews {
+    [self setupDisplay];
+    
+    [super layoutSubviews];
 }
 
 - (void)setTranslatesAutoresizingMaskIntoConstraints:(BOOL)translatesAutoresizingMaskIntoConstraints {
@@ -166,27 +179,44 @@ UIImage *powerKeyImageInSize(CGSize size) {
 }
 
 - (void)setupDisplay {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+        _contentView.backgroundColor = [UIColor clearColor];
+        _contentView.userInteractionEnabled = NO;
+        [self addSubview:_contentView];
+    }
     CGRect newFrame = [self switchFrameFromCurrentStyle];
-    super.frame = newFrame;
+    _contentView.frame = newFrame;
     
     if (!self.translatesAutoresizingMaskIntoConstraints) {
+        _contentView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        if (!self.centerXConstraint) {
+            self.centerXConstraint = [NSLayoutConstraint constraintWithItem:_contentView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+            [self addConstraint:self.centerXConstraint];
+        }
+        if (!self.centerYConstraint) {
+            self.centerYConstraint = [NSLayoutConstraint constraintWithItem:_contentView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
+            [self addConstraint:self.centerYConstraint];
+        }
+        
         if (!self.widthConstraint) {
-            self.widthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:newFrame.size.width];
+            self.widthConstraint = [NSLayoutConstraint constraintWithItem:_contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:newFrame.size.width];
             [self addConstraint:self.widthConstraint];
         }
         else {
             self.widthConstraint.constant = newFrame.size.width;
         }
         if (!self.heightConstraint) {
-            self.heightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:newFrame.size.height];
+            self.heightConstraint = [NSLayoutConstraint constraintWithItem:_contentView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:newFrame.size.height];
             [self addConstraint:self.heightConstraint];
         }
         else {
             self.heightConstraint.constant = newFrame.size.height;
         }
         
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
+//        [self setNeedsLayout];
+//        [self layoutIfNeeded];
     }
     
     [self setupSwitch];
@@ -218,36 +248,39 @@ UIImage *powerKeyImageInSize(CGSize size) {
         frame.size.height = frame.size.width;
     }
     
+    frame.origin.x = (CGRectGetWidth(self.frame)-CGRectGetWidth(frame))/2.0;
+    frame.origin.y = (CGRectGetHeight(self.frame)-CGRectGetHeight(frame))/2.0;
+    
     return frame;
 }
 
 - (void)setupSwitch {
-    [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [self.contentView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
     if (self.style == CCCSwitchStyleDefault) {
         CAShapeLayer *backgroundLayer = [CAShapeLayer layer];
-        backgroundLayer.bounds = CGRectMake(0, 0, CGRectGetWidth(self.bounds)-20, 10);
-        backgroundLayer.position = CGPointMake(CGRectGetWidth(self.bounds)/2.0, CGRectGetHeight(self.bounds)/2.0);
+        backgroundLayer.bounds = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds)-20, 10);
+        backgroundLayer.position = CGPointMake(CGRectGetWidth(self.contentView.bounds)/2.0, CGRectGetHeight(self.contentView.bounds)/2.0);
         CGMutablePathRef pathBKLayer = CGPathCreateMutable();
         CGPathAddRoundedRect(pathBKLayer, &CGAffineTransformIdentity, backgroundLayer.bounds, CGRectGetHeight(backgroundLayer.bounds)/2.0, CGRectGetHeight(backgroundLayer.bounds)/2.0);
         backgroundLayer.path = pathBKLayer;
         CGPathRelease(pathBKLayer);
         backgroundLayer.fillColor = [UIColor whiteColor].CGColor;
         backgroundLayer.strokeColor = [UIColor blackColor].CGColor;
-        [self.layer addSublayer:backgroundLayer];
+        [self.contentView.layer addSublayer:backgroundLayer];
         self.backgroundLayer = backgroundLayer;
         
         CALayer *switchLayer = [CALayer layer];
         switchLayer.bounds = CGRectMake(0, 0, CGRectGetWidth(backgroundLayer.bounds), CGRectGetHeight(backgroundLayer.bounds)-1);
-        switchLayer.position = CGPointMake(CGRectGetWidth(self.bounds)/2.0, CGRectGetHeight(self.bounds)/2.0);
+        switchLayer.position = CGPointMake(CGRectGetWidth(self.contentView.bounds)/2.0, CGRectGetHeight(self.contentView.bounds)/2.0);
         switchLayer.cornerRadius = CGRectGetHeight(switchLayer.bounds)/2.0;
         switchLayer.backgroundColor = self.onTintColor.CGColor;
-        [self.layer addSublayer:switchLayer];
+        [self.contentView.layer addSublayer:switchLayer];
         self.switchLayer = switchLayer;
         
         CAShapeLayer *thumbLayer = [CAShapeLayer layer];
         thumbLayer.bounds = CGRectMake(0, 0, 25, 25);
-        thumbLayer.position = CGPointMake(CGRectGetMinX(self.switchLayer.frame), CGRectGetHeight(self.bounds)/2.0);
+        thumbLayer.position = CGPointMake(CGRectGetMinX(self.switchLayer.frame), CGRectGetHeight(self.contentView.bounds)/2.0);
         thumbLayer.contentsGravity = kCAGravityResizeAspect;
         thumbLayer.contents = nil;
         CGMutablePathRef pathThumbLayer = CGPathCreateMutable();
@@ -256,41 +289,41 @@ UIImage *powerKeyImageInSize(CGSize size) {
         CGPathRelease(pathThumbLayer);
         thumbLayer.fillColor = [UIColor whiteColor].CGColor;
         thumbLayer.strokeColor = [UIColor blackColor].CGColor;
-        [self.layer addSublayer:thumbLayer];
+        [self.contentView.layer addSublayer:thumbLayer];
         self.thumbLayer = thumbLayer;
     }
     else if (self.style == CCCSwitchStyleValue1) {
         CALayer *backgroundLayer = [CALayer layer];
-        backgroundLayer.frame = CGRectInset(self.bounds, 5, 5);
+        backgroundLayer.frame = CGRectInset(self.contentView.bounds, 5, 5);
         backgroundLayer.backgroundColor = [UIColor whiteColor].CGColor;
         backgroundLayer.borderColor = [UIColor blackColor].CGColor;
         backgroundLayer.borderWidth = 2.0;
-        [self.layer addSublayer:backgroundLayer];
+        [self.contentView.layer addSublayer:backgroundLayer];
         self.backgroundLayer = backgroundLayer;
         
         CATransformLayer *switchLayer = [CATransformLayer layer];
-        switchLayer.frame = CGRectInset(self.bounds, 10, 10);
+        switchLayer.frame = CGRectInset(self.contentView.bounds, 10, 10);
         
         [self addSublayersOnSwitchLayer:switchLayer];
         
-        [self.layer addSublayer:switchLayer];
+        [self.contentView.layer addSublayer:switchLayer];
         self.switchLayer = switchLayer;
     }
     else if (self.style == CCCSwitchStyleValue2) {
         CALayer *backgroundLayer = [CALayer layer];
-        backgroundLayer.frame = CGRectInset(self.bounds, 5, 5);
+        backgroundLayer.frame = CGRectInset(self.contentView.bounds, 5, 5);
         backgroundLayer.backgroundColor = [UIColor whiteColor].CGColor;
         backgroundLayer.borderColor = [UIColor blackColor].CGColor;
         backgroundLayer.borderWidth = 2.0;
-        [self.layer addSublayer:backgroundLayer];
+        [self.contentView.layer addSublayer:backgroundLayer];
         self.backgroundLayer = backgroundLayer;
         
         CATransformLayer *switchLayer = [CATransformLayer layer];
-        switchLayer.frame = CGRectInset(self.bounds, 10, 10);
+        switchLayer.frame = CGRectInset(self.contentView.bounds, 10, 10);
         
         [self addSublayersOnSwitchLayer:switchLayer];
         
-        [self.layer addSublayer:switchLayer];
+        [self.contentView.layer addSublayer:switchLayer];
         self.switchLayer = switchLayer;
     }
     else if (self.style == CCCSwitchStyleValue3) {
@@ -298,23 +331,23 @@ UIImage *powerKeyImageInSize(CGSize size) {
     }
     else if (self.style == CCCSwitchStylePowerKey) {
         CAShapeLayer *backgroundLayer = [CAShapeLayer layer];
-        backgroundLayer.frame = CGRectInset(self.bounds, CGRectGetWidth(self.bounds)*0.05, CGRectGetWidth(self.bounds)*0.05);
+        backgroundLayer.frame = CGRectInset(self.contentView.bounds, CGRectGetWidth(self.contentView.bounds)*0.05, CGRectGetWidth(self.contentView.bounds)*0.05);
         CGMutablePathRef path = CGPathCreateMutable();
         CGPathAddEllipseInRect(path, &CGAffineTransformIdentity, backgroundLayer.bounds);
         backgroundLayer.path = path;
         CGPathRelease(path);
         backgroundLayer.strokeColor = [UIColor blackColor].CGColor;
         backgroundLayer.fillColor = [UIColor whiteColor].CGColor;
-        backgroundLayer.lineWidth = CGRectGetWidth(self.bounds)*0.1;
-        [self.layer addSublayer:backgroundLayer];
+        backgroundLayer.lineWidth = CGRectGetWidth(self.contentView.bounds)*0.1;
+        [self.contentView.layer addSublayer:backgroundLayer];
         self.backgroundLayer = backgroundLayer;
         
         CALayer *switchLayer = [CALayer layer];
-        switchLayer.frame = CGRectInset(self.bounds, CGRectGetWidth(self.bounds)*0.1, CGRectGetWidth(self.bounds)*0.1);
-        UIImage *image = powerKeyImageInSize(CGSizeApplyAffineTransform(self.bounds.size, CGAffineTransformMakeScale(2.0, 2.0)));
+        switchLayer.frame = CGRectInset(self.contentView.bounds, CGRectGetWidth(self.contentView.bounds)*0.1, CGRectGetWidth(self.contentView.bounds)*0.1);
+        UIImage *image = powerKeyImageInSize(CGSizeApplyAffineTransform(self.contentView.bounds.size, CGAffineTransformMakeScale(2.0, 2.0)));
         switchLayer.contentsGravity = kCAGravityResizeAspect;
         switchLayer.contents = (id)image.CGImage;
-        [self.layer addSublayer:switchLayer];
+        [self.contentView.layer addSublayer:switchLayer];
         self.switchLayer = switchLayer;
         
         switchLayer.shadowColor = self.onTintColor.CGColor;
@@ -372,12 +405,12 @@ UIImage *powerKeyImageInSize(CGSize size) {
         CGFloat w = (CGRectGetWidth(switchLayer.frame)/2.0)*cos(angle)+1;
         
         CALayer *sublayer = [CALayer layer];
-        sublayer.frame = CGRectMake(CGRectGetWidth(self.bounds)/2.0-w, switchLayer.frame.origin.y, 2*w, switchLayer.frame.size.height);
+        sublayer.frame = CGRectMake(CGRectGetWidth(self.contentView.bounds)/2.0-w, switchLayer.frame.origin.y, 2*w, switchLayer.frame.size.height);
         sublayer.backgroundColor = [UIColor whiteColor].CGColor;
         sublayer.borderColor = [UIColor blackColor].CGColor;
         sublayer.borderWidth = 1.0;
         sublayer.name = @"shadowLayer";
-        [self.layer insertSublayer:sublayer below:switchLayer];
+        [self.contentView.layer insertSublayer:sublayer below:switchLayer];
         
         sublayer.shadowColor = [UIColor blackColor].CGColor;
         sublayer.shadowOpacity = 1.0;
@@ -504,7 +537,7 @@ UIImage *powerKeyImageInSize(CGSize size) {
         
         if (self.isOn) {
             perspective = CATransform3DRotate(perspective, angle, 0, 1, 0);
-            for (CALayer *shadowLayer in self.layer.sublayers) {
+            for (CALayer *shadowLayer in self.contentView.layer.sublayers) {
                 if ([shadowLayer.name isEqualToString:@"shadowLayer"]) {
                     shadowLayer.shadowOffset = CGSizeMake(-4, 1);
                     break;
@@ -521,7 +554,7 @@ UIImage *powerKeyImageInSize(CGSize size) {
         }
         else {
             perspective = CATransform3DRotate(perspective, -angle, 0, 1, 0);
-            for (CALayer *shadowLayer in self.layer.sublayers) {
+            for (CALayer *shadowLayer in self.contentView.layer.sublayers) {
                 if ([shadowLayer.name isEqualToString:@"shadowLayer"]) {
                     shadowLayer.shadowOffset = CGSizeMake(4, 1);
                     break;

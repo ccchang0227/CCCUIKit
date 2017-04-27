@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CCCUIKit'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = "C.C.Chang's custom UIKit."
 
   s.homepage         = 'https://github.com/ccchang0227/CCCUIKit'
@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCCamera' do |ss|
-    # current version: 1.0.1
+    # current version: 1.1.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCamera/**/*.{h,m}'
     ss.frameworks = 'AVFoundation', 'ImageIO', 'MobileCoreServices', 'CoreMotion'
@@ -82,7 +82,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCPageControl' do |ss|
-    # current version: 1.0.1
+    # current version: 1.0.2
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCPageControl/**/*.{h,m}'
   end
@@ -112,7 +112,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCSwitch' do |ss|
-    # current version: 0.0.6
+    # current version: 0.0.7
     ss.requires_arc = false
     ss.ios.deployment_target = '6.0'
     ss.tvos.deployment_target = '9.0'

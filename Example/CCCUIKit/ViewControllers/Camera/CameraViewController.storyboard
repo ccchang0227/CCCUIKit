@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Zg3-lu-40A">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Camera-->
+        <scene sceneID="E9l-H9-E27">
+            <objects>
+                <viewController id="Zg3-lu-40A" customClass="CameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BuL-s1-Pkz"/>
+                        <viewControllerLayoutGuide type="bottom" id="cGz-8q-i6l"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="t38-Cl-ZHs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vnr-MB-oJ9">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="xfg-8U-EoH"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem image="qrcode_symbol" id="l3r-St-4SQ">
+                                        <connections>
+                                            <action selector="qrCodeAction:" destination="Zg3-lu-40A" id="kV6-xe-5Oz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="aspect_fit" id="CwO-2S-zCy">
+                                        <connections>
+                                            <action selector="starAction:" destination="Zg3-lu-40A" id="UQc-33-afH"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Asb-t7-Flz"/>
+                                    <barButtonItem systemItem="camera" id="aDQ-63-muo">
+                                        <connections>
+                                            <action selector="takePicture:" destination="Zg3-lu-40A" id="KVP-FU-ahQ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="cCc-pz-e9G"/>
+                                    <barButtonItem title="640x480" id="scF-zi-5tb">
+                                        <connections>
+                                            <action selector="selectQuality:" destination="Zg3-lu-40A" id="Nns-Yl-CfY"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdR-1r-gsx" customClass="CCCCameraView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fdR-1r-gsx" secondAttribute="trailing" id="4F8-2T-XGL"/>
+                            <constraint firstItem="fdR-1r-gsx" firstAttribute="top" secondItem="BuL-s1-Pkz" secondAttribute="bottom" id="CUo-sH-28N"/>
+                            <constraint firstItem="fdR-1r-gsx" firstAttribute="leading" secondItem="t38-Cl-ZHs" secondAttribute="leading" id="Xiz-p4-80Z"/>
+                            <constraint firstItem="vnr-MB-oJ9" firstAttribute="top" secondItem="fdR-1r-gsx" secondAttribute="bottom" id="bG4-NX-9mw"/>
+                            <constraint firstItem="cGz-8q-i6l" firstAttribute="top" secondItem="vnr-MB-oJ9" secondAttribute="bottom" id="hDb-as-N1u"/>
+                            <constraint firstAttribute="trailing" secondItem="vnr-MB-oJ9" secondAttribute="trailing" id="okd-pb-LI8"/>
+                            <constraint firstItem="vnr-MB-oJ9" firstAttribute="leading" secondItem="t38-Cl-ZHs" secondAttribute="leading" id="ups-Vv-Bnf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Camera" id="dLu-Ly-lbi">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="bW7-bo-0fa"/>
+                        <rightBarButtonItems>
+                            <barButtonItem image="flash_auto" id="Skl-up-Lhh">
+                                <connections>
+                                    <action selector="changeFlash:" destination="Zg3-lu-40A" id="lfR-eT-LHX"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="switch" id="pLg-wr-Hfd">
+                                <connections>
+                                    <action selector="switchCamera:" destination="Zg3-lu-40A" id="DCC-qi-IQY"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="cameraButton" destination="aDQ-63-muo" id="Zrw-ND-0bo"/>
+                        <outlet property="cameraView" destination="fdR-1r-gsx" id="dib-VD-DeB"/>
+                        <outlet property="flashButton" destination="Skl-up-Lhh" id="7ei-Ba-Uhq"/>
+                        <outlet property="myToolBar" destination="vnr-MB-oJ9" id="dvV-fq-9I7"/>
+                        <outlet property="qrCodeButton" destination="l3r-St-4SQ" id="Nbk-dE-GnY"/>
+                        <outlet property="qualityButton" destination="scF-zi-5tb" id="vQ2-pu-eg9"/>
+                        <outlet property="scaleTypeButton" destination="CwO-2S-zCy" id="1FB-v5-x0p"/>
+                        <outlet property="switchButton" destination="pLg-wr-Hfd" id="6bA-Gw-6n2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lak-U3-Mzk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-162" y="235"/>
+        </scene>
+        <!--Display Image View Controller-->
+        <scene sceneID="JEf-eC-8aO">
+            <objects>
+                <viewController storyboardIdentifier="DisplayImageViewController" id="vDW-hh-Ot6" customClass="DisplayImageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5nR-uC-g6D"/>
+                        <viewControllerLayoutGuide type="bottom" id="H1q-dZ-xG4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vzl-F2-WiT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUc-EI-cnb">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="hKe-Qb-lha"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QfN-XW-PJJ"/>
+                                    <barButtonItem systemItem="action" id="RWg-wT-Nga"/>
+                                </items>
+                            </toolbar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4G2-jA-e3s">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fUc-EI-cnb" firstAttribute="top" secondItem="4G2-jA-e3s" secondAttribute="bottom" id="0iR-hy-LNV"/>
+                            <constraint firstItem="4G2-jA-e3s" firstAttribute="top" secondItem="5nR-uC-g6D" secondAttribute="bottom" id="4Vl-5O-WcO"/>
+                            <constraint firstItem="4G2-jA-e3s" firstAttribute="leading" secondItem="Vzl-F2-WiT" secondAttribute="leading" id="9t5-gh-LWR"/>
+                            <constraint firstItem="fUc-EI-cnb" firstAttribute="leading" secondItem="Vzl-F2-WiT" secondAttribute="leading" id="cKQ-ko-sqM"/>
+                            <constraint firstItem="H1q-dZ-xG4" firstAttribute="top" secondItem="fUc-EI-cnb" secondAttribute="bottom" id="d6Z-5h-Y8V"/>
+                            <constraint firstAttribute="trailing" secondItem="4G2-jA-e3s" secondAttribute="trailing" id="thF-W6-8hC"/>
+                            <constraint firstAttribute="trailing" secondItem="fUc-EI-cnb" secondAttribute="trailing" id="vKN-zX-RJV"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kuq-XD-goy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="646" y="234"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="aspect_fit" width="40" height="40"/>
+        <image name="flash_auto" width="40" height="40"/>
+        <image name="qrcode_symbol" width="40" height="40"/>
+        <image name="switch" width="40" height="40"/>
+    </resources>
+</document>

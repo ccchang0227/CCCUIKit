@@ -1726,6 +1726,9 @@
         if (barcodeObjects.count > 0) {
             barcodeSet = [NSSet setWithArray:barcodeObjects];
         }
+        if (!barcodeSet) {
+            return;
+        }
         
         [CCCCameraSession _executeOnMainThread:^ {
             if (_delegate && [_delegate respondsToSelector:@selector(cccCameraSession:didDetectBarcodes:)]) {

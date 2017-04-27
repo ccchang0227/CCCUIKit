@@ -4,6 +4,10 @@ All notable changes to CCCCamera will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) <br>
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased] - 2017-04-27
+### Fixed
+- 修正delegate在只偵測到人臉時還是會呼叫`-cccCameraView:didScanBarcodeWithArray:`方法的bug
+
 ## [1.0.1] - 2017-02-20
 ### Added
 - CHANGLOG.md file.

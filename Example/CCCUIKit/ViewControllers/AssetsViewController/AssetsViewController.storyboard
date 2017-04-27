@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SCM-By-GFf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Assets View Controller-->
+        <scene sceneID="tQN-Jc-MIC">
+            <objects>
+                <viewController id="SCM-By-GFf" customClass="AssetsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gNo-HU-guj"/>
+                        <viewControllerLayoutGuide type="bottom" id="bpr-SU-2bd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ql7-sj-eeF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9U-BT-MVB">
+                                <rect key="frame" x="112" y="218" width="150" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="6Ma-of-xp7"/>
+                                    <constraint firstAttribute="width" constant="150" id="YkM-tx-Gha"/>
+                                </constraints>
+                                <state key="normal" title="相片"/>
+                                <connections>
+                                    <action selector="showAssetsPicker:" destination="SCM-By-GFf" eventType="touchUpInside" id="Jh5-EQ-Pcx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sia-DW-2PV">
+                                <rect key="frame" x="112" y="308.5" width="150" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="j6c-oT-HLC"/>
+                                    <constraint firstAttribute="width" constant="150" id="rkt-vK-K5S"/>
+                                </constraints>
+                                <state key="normal" title="影片"/>
+                                <connections>
+                                    <action selector="showAssetsPicker:" destination="SCM-By-GFf" eventType="touchUpInside" id="uhN-rI-GpW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sxl-K6-58l">
+                                <rect key="frame" x="112" y="398.5" width="150" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="RGP-el-s5B"/>
+                                    <constraint firstAttribute="width" constant="150" id="qxK-xD-qpG"/>
+                                </constraints>
+                                <state key="normal" title="相片&amp;影片"/>
+                                <connections>
+                                    <action selector="showAssetsPicker:" destination="SCM-By-GFf" eventType="touchUpInside" id="kn4-et-fEN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Sxl-K6-58l" firstAttribute="top" secondItem="sia-DW-2PV" secondAttribute="bottom" constant="40" id="2H7-bV-jfz"/>
+                            <constraint firstItem="Sxl-K6-58l" firstAttribute="leading" secondItem="sia-DW-2PV" secondAttribute="leading" id="6TA-VX-QjA"/>
+                            <constraint firstItem="sia-DW-2PV" firstAttribute="centerY" secondItem="ql7-sj-eeF" secondAttribute="centerY" id="OGb-qg-Z5o"/>
+                            <constraint firstItem="sia-DW-2PV" firstAttribute="centerX" secondItem="ql7-sj-eeF" secondAttribute="centerX" id="cOw-di-wnC"/>
+                            <constraint firstItem="sia-DW-2PV" firstAttribute="leading" secondItem="n9U-BT-MVB" secondAttribute="leading" id="oSO-mP-16f"/>
+                            <constraint firstItem="sia-DW-2PV" firstAttribute="top" secondItem="n9U-BT-MVB" secondAttribute="bottom" constant="40" id="ohc-KS-SyQ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wct-RZ-G55" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-220" y="80"/>
+        </scene>
+    </scenes>
+</document>

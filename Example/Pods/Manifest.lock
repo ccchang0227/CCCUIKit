@@ -1,0 +1,50 @@
+PODS:
+  - CCCUIKit (1.0.3):
+    - CCCUIKit/CCCAssetsViewController (= 1.0.3)
+    - CCCUIKit/CCCCamera (= 1.0.3)
+    - CCCUIKit/CCCCanvas (= 1.0.3)
+    - CCCUIKit/CCCCycleView (= 1.0.3)
+    - CCCUIKit/CCCDevice (= 1.0.3)
+    - CCCUIKit/CCCMaskedLabel (= 1.0.3)
+    - CCCUIKit/CCCPageControl (= 1.0.3)
+    - CCCUIKit/CCCRatingControl (= 1.0.3)
+    - CCCUIKit/CCCRecycleScrollView (= 1.0.3)
+    - CCCUIKit/CCCSlider (= 1.0.3)
+    - CCCUIKit/CCCSlidingViewController (= 1.0.3)
+    - CCCUIKit/CCCSwitch (= 1.0.3)
+    - CCCUIKit/UIKit+CCCAdditions (= 1.0.3)
+  - CCCUIKit/CCCAssetsViewController (1.0.3):
+    - CCCUIKit/CCCAssetsViewController/CCCAssetsModel (= 1.0.3)
+    - CCCUIKit/CCCAssetsViewController/ChildrenViewControllers (= 1.0.3)
+  - CCCUIKit/CCCAssetsViewController/CCCAssetsModel (1.0.3)
+  - CCCUIKit/CCCAssetsViewController/ChildrenViewControllers (1.0.3):
+    - CCCUIKit/CCCAssetsViewController/CCCAssetsModel
+  - CCCUIKit/CCCCamera (1.0.3)
+  - CCCUIKit/CCCCanvas (1.0.3):
+    - CCCUIKit/CCCSlider
+  - CCCUIKit/CCCCycleView (1.0.3):
+    - CCCUIKit/CCCCycleView/XYPieChart (= 1.0.3)
+  - CCCUIKit/CCCCycleView/XYPieChart (1.0.3)
+  - CCCUIKit/CCCDevice (1.0.3)
+  - CCCUIKit/CCCMaskedLabel (1.0.3)
+  - CCCUIKit/CCCPageControl (1.0.3)
+  - CCCUIKit/CCCRatingControl (1.0.3)
+  - CCCUIKit/CCCRecycleScrollView (1.0.3)
+  - CCCUIKit/CCCSlider (1.0.3)
+  - CCCUIKit/CCCSlidingViewController (1.0.3)
+  - CCCUIKit/CCCSwitch (1.0.3)
+  - CCCUIKit/UIKit+CCCAdditions (1.0.3)
+
+DEPENDENCIES:
+  - CCCUIKit (from `../`)
+
+EXTERNAL SOURCES:
+  CCCUIKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CCCUIKit: 4dd8c037405dc47dfd99bc7e850ffd97ebcf5452
+
+PODFILE CHECKSUM: 95cc187a81c58049fe4ab1b72bca62437636456a
+
+COCOAPODS: 1.2.0

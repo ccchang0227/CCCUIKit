@@ -1,0 +1,1266 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05FFE46F0D0011E9B3928AFA19ED98AC /* CCCAssetsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B085F5D58E32843516F9ECBCFCBD7407 /* CCCAssetsModel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		08D8F61DE2DFAA90BCC148D921A5EECC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8497C8F36667F2CFCDE375C36C5D22AE /* MediaPlayer.framework */; };
+		0B249FD431CD55358E58FA54119FBED3 /* CCCUIKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8583A2D43BBD4F7304212BE5F6ADF2 /* CCCUIKit-dummy.m */; };
+		0C3B1EE7AF965DF2B3D3F5D597F9AFF7 /* CCCAllAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 419E86F5E71CC793AC943C7E224E3CE8 /* CCCAllAssetsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		13B18287A9C1C995A4A79A63CC56FCB2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9841FF6DE61D321E726E394E0623521B /* ImageIO.framework */; };
+		173B0E05D3A88004878493762E4F98BC /* CCCFloatRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DEDEE09EABF060C77887741376F5897 /* CCCFloatRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17689EE925E72468FC579C46B66B56B8 /* UIKit+CCCAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2B289232A33D2DD11EECD413B69F4F /* UIKit+CCCAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		19105DA6BB56A70EF7DA6DEC667BD1F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23D6ED95CB609FE7F334A99A5911B45 /* Foundation.framework */; };
+		22720B9E71EBA34B82E0D1F6D5E4E20C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C816AFD0E8C969FFB8A9D70F9C035C /* CoreGraphics.framework */; };
+		23EF6EA83FD27FAB9464F18561FEA554 /* CCCAllAssetsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EB33A76D9522ABC67D6139C011FD8525 /* CCCAllAssetsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2AF483A60E59E071E721861F244C0095 /* CCCMaskedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C7112A4BA224CB6A706E7EF4F9173 /* CCCMaskedLabel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2BD88B622A0CCFC792816033934029F4 /* CCCCameraSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D1F2D60B94DA22A0FE599DEB18A0416 /* CCCCameraSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2BEBFCCD69B0F1C4A229C80B5E2F46D1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C2B15AE47992013FA232CB7ED484E1 /* CoreMotion.framework */; };
+		305F3779A21A7487CA046CBB029A4409 /* CCCDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C23BBF24776A56AD2750DC70EC486D /* CCCDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		314182E5EB911C101043E84399C489CA /* CCCAssetPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DC3443EBCA0E6A50BF26D24F17AC4 /* CCCAssetPreviewView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3198477C6A99FDDDE1B5CEDE837EFEA3 /* UIKit+CCCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 29FC60CD33C00478175B6B1D76D4FF91 /* UIKit+CCCAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		36835D9A5EFDF73F1B2A72807B1B8CA6 /* CCCAssetsGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9327C7BE03EBD77E48AC4CCAC0F64FD7 /* CCCAssetsGroup.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		399241707D8CBF3DCCF9362F22896C63 /* CCCCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 336BEB02887546C3B783D36471CFEAB8 /* CCCCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A02F0F2AE57BC58240E2AC60ADFE303 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D0275C5717107E4621A8EF1C83C9AD /* AssetsLibrary.framework */; };
+		3B98E131673A722997A44F3ECD75C90E /* CCCUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6F1470A68E6D7F0DA2AD4D49BCB6EC /* CCCUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		443633E9983B115A77DC83E763D3F3A9 /* CCCCanvasLineWidthSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD799397EB92CF81326FE53A54608 /* CCCCanvasLineWidthSelectionView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4777EF3FFCAF01B58C9FDB4186AD2289 /* CCCPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = BBAB96BEE91BA4B91682E64BFFE1469F /* CCCPageControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F99F09FFD2E2F549D09A67B36290ADE /* CCCCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53852E3B49B87188167743E9228F9698 /* CCCCameraView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		53E8B789E088C3BFC091052DA0323299 /* XYPieChart.h in Headers */ = {isa = PBXBuildFile; fileRef = EFD58888D65C31263CAFCF9A1A9C49BB /* XYPieChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		56B227C85966F95A5D72CACC42E79907 /* CCCCanvasPaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F4D523B53D57CEFA4379EE4C19FA4 /* CCCCanvasPaletteView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5B1A1621DD57349F04CBF98276B836B9 /* CCCSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FA151581C69B67E4FACF2C00B35296 /* CCCSlidingViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5ECC0E9C2DDBF978C4C19409FB416AFB /* CCCCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 576BAEFD7361C619675090A0E52A42E9 /* CCCCycleView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		60ADE82014ACEA77AD3813C6055CAD94 /* CCCAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = 57F5256326759475D26A7F89CC0306A8 /* CCCAsset.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		63C34710679C7BDCF198A5B46A5892C7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C344F290B4804A8425DE9AAF32D836D8 /* AVFoundation.framework */; };
+		6DD2521513209257A49DE0742542DD7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23D6ED95CB609FE7F334A99A5911B45 /* Foundation.framework */; };
+		703280DD048BF76AD988DD60177B759F /* CCCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = D40C468078925BE3E17B36910F0B8291 /* CCCSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		70E5035E8B1CC6AE68428A73143F4C08 /* CCCCameraConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E211937BD1B95AB187DC0F61D50BE9E /* CCCCameraConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		73D6BFF7EE5C9C679586E9442593AAA5 /* CCCRecycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF71316617CC3F0E65DDCCEC6DE4B58A /* CCCRecycleScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		74DD4D2B0C40E350A2A384C9A8A8A7C1 /* CCCAssetsModel.h in Headers */ = {isa = PBXBuildFile; fileRef = B5099616449C4C705C494401ED35D1DF /* CCCAssetsModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75F6BFDC714D300DCBD8778C3E553CE2 /* CCCRatingControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DADB42AB0F186357426183160888D80 /* CCCRatingControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		76D987461AC011AF10CC29B76BED0178 /* CCCCameraView.h in Headers */ = {isa = PBXBuildFile; fileRef = E4D733115655110BCF5E282EB83DF10C /* CCCCameraView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7C5EB8B1F2FCE4E43215286A425682AE /* CCCAssetPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = 47902F64551B234125D60A4A06872AB9 /* CCCAssetPreviewView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7CC001884E5F303C4E18E3CF54B550E1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52D597C992E56736E2C63F49AD0E51E /* GLKit.framework */; };
+		7F30C8EF2FAEB90DCE15EC06D25B7A25 /* CCCCanvasPaletteView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DBEE13D484EF6DEC0D47512308C83B9 /* CCCCanvasPaletteView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8A1763D2D7E006BA27F8ECA35B510977 /* CCCSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 70209D87AACA68ECCACB4293F35C6367 /* CCCSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		930D77F2E47B7CB4CCAD8A43313FA823 /* CCCAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1116D7549F9DC217BB2721F974EB5EB4 /* CCCAssetsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		97BADC642898B61E7AEB4908FCBF9A9E /* CCCAssetsGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4818B4C6C5BA0158E0C54DC91F2AB9FC /* CCCAssetsGroupsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9DFFD7809873D1B41C60693400C5D99E /* CCCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A5796E34CDBF286781457DE066AE7F /* CCCSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A428F0588A6B7D12F5D30E3A05BC0BD6 /* CCCCameraSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 32857F60C5BF1C67D2327F0BE365497B /* CCCCameraSession.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		ACA98D369B78F685DE6E9357D4AF621E /* CCCCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D2B9FE792A1D59BC59573075C87499 /* CCCCanvas.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AE1BC4344AA281A53235D04D2042D5C5 /* CCCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = CE20093CBCD85D7F89DC05D30C0D8F26 /* CCCAsset.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AE7CF7C9B230C28A174EE433D1588EC3 /* CCCAssetsGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = BA59CB8D889112D89F11811F35F1ADFC /* CCCAssetsGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0D9AED74A422391820BDC8AD6B1179B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AED32DE27CE5D4750980C01CBF5A9C0 /* UIKit.framework */; };
+		B295BFA08DE26639EC81D7D080A5AD81 /* CCCDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAEA8043BBD72A5EEAD4960783C2460 /* CCCDevice.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B8493FC1C463D82D8DCF6C8AEEFB0BEA /* CCCRecycleScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 00EEB6D40B90A65282C19A1BB1B4E203 /* CCCRecycleScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE105D1699D5F42F0840E3767BF422D1 /* CCCAssetsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CA02AA5D638B3AC8F898174EB4429B16 /* CCCAssetsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF56B521421E94C65AEC5BDC189D39FD /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F765D1421C37BE4F49662D97959AB7 /* XYPieChart.m */; };
+		C88CC4187118D7362968C7E33B024AAF /* CCCCycleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 42FC6F872A81981A605BA152F4B43405 /* CCCCycleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAEF7E4412794A03A639CAB65C712BE3 /* CCCCanvasLineWidthSelectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = A1DF79199074C5F374F03469E77C75FB /* CCCCanvasLineWidthSelectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB52367596ECC484DD1BC9A7E722BFA2 /* CCCPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD9B15884889AB3C40C41CEE44A4D10 /* CCCPageControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CE07E2D81078966CF9FA7E0EC79D86E7 /* UIImage+CCCProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AC76179B2C41953868003CA2A3221BE /* UIImage+CCCProcessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CED690BF5F9D9EECEB6395A7C1ABE1E6 /* CCCCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 75F3D62D3AC3DA14B0ACBCF4C6422442 /* CCCCanvas.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D005F897231A97BBE26557E2FB3BEA6F /* CCCRatingControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 23029EE26F0E2A7F1633132740EC1418 /* CCCRatingControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D0679587C62A6E8362901C6CFABCFA4C /* CCCSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD9FCD7D49FBF3BBC60B71BC593D644 /* CCCSwitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3FCEB8535D93F93DB21053C5618C342 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2C9D242576326DB342B6C16407359C9 /* MobileCoreServices.framework */; };
+		DD6EF01AA920E435528A183F48FB8EAF /* CCCSlidingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1B6B5BE7E6D9DD3ADC5A57214A2E34 /* CCCSlidingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE60838CAD4BF034BB2225922CDF5580 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5E80FF94F531A86C6EF91AC0C49D7B /* QuartzCore.framework */; };
+		E0373BCFC86F65811395122992A45501 /* Pods-CCCUIKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2C538228DAD84050D619976E74EBE1 /* Pods-CCCUIKit-dummy.m */; };
+		E1CFC022A3E1AFEC4E50E1AE4925D9FA /* UIImage+CCCProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC4B6DCB839FE061A03B2E788C67945 /* UIImage+CCCProcessor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E48BCAA87E926A52A5459592B2BA2F32 /* CCCAssetsGroupsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 99B3AE2FF4F6EA1E7088EA262030B78D /* CCCAssetsGroupsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E4F6AA7747A227174626E5084C914C41 /* CCCFloatRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 202E743C5CB2C010350C41DD2FA11708 /* CCCFloatRange.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FA6699C2C237DE9C102E06C26F35521C /* CCCMaskedLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F955B5C33884B76349C67C450866D92 /* CCCMaskedLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8EA7BD3698B4A9D5616A95398EBCDCB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F086D702C2A87CF684AE32E0BAEAB30B;
+			remoteInfo = CCCUIKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00AECC21AC15509A339194225E3760C6 /* CCCAssets_BackWhite.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_BackWhite.png; sourceTree = "<group>"; };
+		00EEB6D40B90A65282C19A1BB1B4E203 /* CCCRecycleScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCRecycleScrollView.h; sourceTree = "<group>"; };
+		06C23BBF24776A56AD2750DC70EC486D /* CCCDevice.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCDevice.h; sourceTree = "<group>"; };
+		0F2B289232A33D2DD11EECD413B69F4F /* UIKit+CCCAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIKit+CCCAdditions.h"; sourceTree = "<group>"; };
+		0F955B5C33884B76349C67C450866D92 /* CCCMaskedLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCMaskedLabel.h; sourceTree = "<group>"; };
+		1116D7549F9DC217BB2721F974EB5EB4 /* CCCAssetsViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAssetsViewController.m; sourceTree = "<group>"; };
+		14556851CB1946E29AE9CF12FBD63AEC /* Pods-CCCUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CCCUIKit.debug.xcconfig"; sourceTree = "<group>"; };
+		15C0D3B252337F9C41E33ECB08A93F74 /* CCCAssets_CloseWhite@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_CloseWhite@2x.png"; sourceTree = "<group>"; };
+		1E822A848F10D67656C8068F27C40EB9 /* CCCAssetsViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = CCCAssetsViewController.xib; sourceTree = "<group>"; };
+		1FD9B15884889AB3C40C41CEE44A4D10 /* CCCPageControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCPageControl.m; sourceTree = "<group>"; };
+		202E743C5CB2C010350C41DD2FA11708 /* CCCFloatRange.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCFloatRange.m; sourceTree = "<group>"; };
+		23029EE26F0E2A7F1633132740EC1418 /* CCCRatingControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCRatingControl.m; sourceTree = "<group>"; };
+		23D0275C5717107E4621A8EF1C83C9AD /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
+		29FC60CD33C00478175B6B1D76D4FF91 /* UIKit+CCCAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIKit+CCCAdditions.m"; sourceTree = "<group>"; };
+		2A6F4D523B53D57CEFA4379EE4C19FA4 /* CCCCanvasPaletteView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCanvasPaletteView.m; sourceTree = "<group>"; };
+		2AED32DE27CE5D4750980C01CBF5A9C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		2BE54FD6FB30D00396B6F4811E2E193E /* Pods-CCCUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CCCUIKit.release.xcconfig"; sourceTree = "<group>"; };
+		2F14A61658C95CFDF0B57F7116197C64 /* libCCCUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCCCUIKit.a; path = libCCCUIKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F5E80FF94F531A86C6EF91AC0C49D7B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		3042DCF82A222EB574C6858661B1A340 /* libPods-CCCUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-CCCUIKit.a"; path = "libPods-CCCUIKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		31D2B9FE792A1D59BC59573075C87499 /* CCCCanvas.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCanvas.m; sourceTree = "<group>"; };
+		32857F60C5BF1C67D2327F0BE365497B /* CCCCameraSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCameraSession.m; sourceTree = "<group>"; };
+		336BEB02887546C3B783D36471CFEAB8 /* CCCCamera.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCamera.h; sourceTree = "<group>"; };
+		3806B7B8AC5E6FDD79E5D4C45134F74D /* CCCAssets_Play@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_Play@2x.png"; sourceTree = "<group>"; };
+		419E86F5E71CC793AC943C7E224E3CE8 /* CCCAllAssetsViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAllAssetsViewController.m; sourceTree = "<group>"; };
+		41C2B15AE47992013FA232CB7ED484E1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		42FC6F872A81981A605BA152F4B43405 /* CCCCycleView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCycleView.h; sourceTree = "<group>"; };
+		4368AC6E8CB429889865E7EB2D03EFFD /* Pods-CCCUIKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CCCUIKit-acknowledgements.plist"; sourceTree = "<group>"; };
+		47902F64551B234125D60A4A06872AB9 /* CCCAssetPreviewView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetPreviewView.h; sourceTree = "<group>"; };
+		4818B4C6C5BA0158E0C54DC91F2AB9FC /* CCCAssetsGroupsViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAssetsGroupsViewController.m; sourceTree = "<group>"; };
+		4A18BD16DE9AAC4B8E48E33E2BC1B600 /* CCCAssets_BackWhite@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_BackWhite@2x.png"; sourceTree = "<group>"; };
+		4A9AEE7AB84D5FA5B7C5A022E16CA599 /* CCCAllAssetsViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = CCCAllAssetsViewController.xib; sourceTree = "<group>"; };
+		4CAF25542342B111094CA7425A29F7ED /* CCCUIKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CCCUIKit-prefix.pch"; sourceTree = "<group>"; };
+		4CEE6E83D6C5B839D31D387AE0EE0E13 /* CCCAssets_VideoIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_VideoIcon.png; sourceTree = "<group>"; };
+		4E211937BD1B95AB187DC0F61D50BE9E /* CCCCameraConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCameraConstants.h; sourceTree = "<group>"; };
+		53852E3B49B87188167743E9228F9698 /* CCCCameraView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCameraView.m; sourceTree = "<group>"; };
+		53F68E4CCCFE113199823051284539A4 /* CCCUIKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CCCUIKit.xcconfig; sourceTree = "<group>"; };
+		576BAEFD7361C619675090A0E52A42E9 /* CCCCycleView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCycleView.m; sourceTree = "<group>"; };
+		57F5256326759475D26A7F89CC0306A8 /* CCCAsset.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAsset.h; sourceTree = "<group>"; };
+		5C6F1470A68E6D7F0DA2AD4D49BCB6EC /* CCCUIKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCUIKit.h; sourceTree = "<group>"; };
+		65B9B8598BE32E93BFCE910AA9005A56 /* Pods-CCCUIKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CCCUIKit-acknowledgements.markdown"; sourceTree = "<group>"; };
+		6DEDEE09EABF060C77887741376F5897 /* CCCFloatRange.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCFloatRange.h; sourceTree = "<group>"; };
+		70209D87AACA68ECCACB4293F35C6367 /* CCCSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCSlider.h; sourceTree = "<group>"; };
+		72ABD799397EB92CF81326FE53A54608 /* CCCCanvasLineWidthSelectionView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCanvasLineWidthSelectionView.m; sourceTree = "<group>"; };
+		74A2CB4E5393FC1387A740EFA32787F7 /* CCCAssetsGroupsViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = CCCAssetsGroupsViewController.xib; sourceTree = "<group>"; };
+		75F3D62D3AC3DA14B0ACBCF4C6422442 /* CCCCanvas.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCanvas.h; sourceTree = "<group>"; };
+		7794549368A632B27D0C92D79B806CAE /* CCCAssets_CloseRed.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_CloseRed.png; sourceTree = "<group>"; };
+		7AC76179B2C41953868003CA2A3221BE /* UIImage+CCCProcessor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+CCCProcessor.h"; sourceTree = "<group>"; };
+		7CAEA8043BBD72A5EEAD4960783C2460 /* CCCDevice.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCDevice.m; sourceTree = "<group>"; };
+		7D1F2D60B94DA22A0FE599DEB18A0416 /* CCCCameraSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCameraSession.h; sourceTree = "<group>"; };
+		8497C8F36667F2CFCDE375C36C5D22AE /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		8B1B6B5BE7E6D9DD3ADC5A57214A2E34 /* CCCSlidingViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCSlidingViewController.h; sourceTree = "<group>"; };
+		8CDDABE6A6C6FA0333A88C5874C305CA /* Pods-CCCUIKit-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CCCUIKit-frameworks.sh"; sourceTree = "<group>"; };
+		8DADB42AB0F186357426183160888D80 /* CCCRatingControl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCRatingControl.h; sourceTree = "<group>"; };
+		8DBEE13D484EF6DEC0D47512308C83B9 /* CCCCanvasPaletteView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCanvasPaletteView.h; sourceTree = "<group>"; };
+		930BFB28FBA23BF321983AF61B22AAC3 /* CCCAssets_CloseWhite.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_CloseWhite.png; sourceTree = "<group>"; };
+		9327C7BE03EBD77E48AC4CCAC0F64FD7 /* CCCAssetsGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAssetsGroup.m; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93C816AFD0E8C969FFB8A9D70F9C035C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		946E3676FB69FCB5A8DACA4F97349969 /* CCCAssets_Pause@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_Pause@2x.png"; sourceTree = "<group>"; };
+		9841FF6DE61D321E726E394E0623521B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
+		99B3AE2FF4F6EA1E7088EA262030B78D /* CCCAssetsGroupsViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetsGroupsViewController.h; sourceTree = "<group>"; };
+		9E8583A2D43BBD4F7304212BE5F6ADF2 /* CCCUIKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CCCUIKit-dummy.m"; sourceTree = "<group>"; };
+		9F9DC3443EBCA0E6A50BF26D24F17AC4 /* CCCAssetPreviewView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAssetPreviewView.m; sourceTree = "<group>"; };
+		A0A5796E34CDBF286781457DE066AE7F /* CCCSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCSlider.m; sourceTree = "<group>"; };
+		A182AECB92E5E485DB2938CF72976719 /* Pods-CCCUIKit-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CCCUIKit-resources.sh"; sourceTree = "<group>"; };
+		A1DF79199074C5F374F03469E77C75FB /* CCCCanvasLineWidthSelectionView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCanvasLineWidthSelectionView.h; sourceTree = "<group>"; };
+		A2C9D242576326DB342B6C16407359C9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		A52D597C992E56736E2C63F49AD0E51E /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
+		B085F5D58E32843516F9ECBCFCBD7407 /* CCCAssetsModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAssetsModel.m; sourceTree = "<group>"; };
+		B2B061BF8E3EAE883FEF9C59EB0041C1 /* CCCAssets_VideoIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_VideoIcon@2x.png"; sourceTree = "<group>"; };
+		B5099616449C4C705C494401ED35D1DF /* CCCAssetsModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetsModel.h; sourceTree = "<group>"; };
+		BA59CB8D889112D89F11811F35F1ADFC /* CCCAssetsGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetsGroup.h; sourceTree = "<group>"; };
+		BBAB96BEE91BA4B91682E64BFFE1469F /* CCCPageControl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCPageControl.h; sourceTree = "<group>"; };
+		C1FA151581C69B67E4FACF2C00B35296 /* CCCSlidingViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCSlidingViewController.m; sourceTree = "<group>"; };
+		C344F290B4804A8425DE9AAF32D836D8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		CA02AA5D638B3AC8F898174EB4429B16 /* CCCAssetsViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetsViewController.h; sourceTree = "<group>"; };
+		CE20093CBCD85D7F89DC05D30C0D8F26 /* CCCAsset.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAsset.m; sourceTree = "<group>"; };
+		CEFF5580E604691DB304DE338697364C /* CCCAssets_Pause.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_Pause.png; sourceTree = "<group>"; };
+		CFC4B6DCB839FE061A03B2E788C67945 /* UIImage+CCCProcessor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CCCProcessor.m"; sourceTree = "<group>"; };
+		D40C468078925BE3E17B36910F0B8291 /* CCCSwitch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCSwitch.m; sourceTree = "<group>"; };
+		D736E5E5B7D1166D7D0EE75C346B550A /* CCCAssets_Play.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_Play.png; sourceTree = "<group>"; };
+		DC7C7112A4BA224CB6A706E7EF4F9173 /* CCCMaskedLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCMaskedLabel.m; sourceTree = "<group>"; };
+		DF2C538228DAD84050D619976E74EBE1 /* Pods-CCCUIKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CCCUIKit-dummy.m"; sourceTree = "<group>"; };
+		E4D733115655110BCF5E282EB83DF10C /* CCCCameraView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCameraView.h; sourceTree = "<group>"; };
+		E6F765D1421C37BE4F49662D97959AB7 /* XYPieChart.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
+		EB33A76D9522ABC67D6139C011FD8525 /* CCCAllAssetsViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAllAssetsViewController.h; sourceTree = "<group>"; };
+		EF71316617CC3F0E65DDCCEC6DE4B58A /* CCCRecycleScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCRecycleScrollView.m; sourceTree = "<group>"; };
+		EFD58888D65C31263CAFCF9A1A9C49BB /* XYPieChart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
+		F23D6ED95CB609FE7F334A99A5911B45 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		FDD9FCD7D49FBF3BBC60B71BC593D644 /* CCCSwitch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCSwitch.h; sourceTree = "<group>"; };
+		FFF74B55511079FEEBA2F098D30D0071 /* CCCAssets_CloseRed@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_CloseRed@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6B1920042902B0F0E85E86FDFF13F2A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A02F0F2AE57BC58240E2AC60ADFE303 /* AssetsLibrary.framework in Frameworks */,
+				63C34710679C7BDCF198A5B46A5892C7 /* AVFoundation.framework in Frameworks */,
+				22720B9E71EBA34B82E0D1F6D5E4E20C /* CoreGraphics.framework in Frameworks */,
+				2BEBFCCD69B0F1C4A229C80B5E2F46D1 /* CoreMotion.framework in Frameworks */,
+				6DD2521513209257A49DE0742542DD7D /* Foundation.framework in Frameworks */,
+				7CC001884E5F303C4E18E3CF54B550E1 /* GLKit.framework in Frameworks */,
+				13B18287A9C1C995A4A79A63CC56FCB2 /* ImageIO.framework in Frameworks */,
+				08D8F61DE2DFAA90BCC148D921A5EECC /* MediaPlayer.framework in Frameworks */,
+				D3FCEB8535D93F93DB21053C5618C342 /* MobileCoreServices.framework in Frameworks */,
+				DE60838CAD4BF034BB2225922CDF5580 /* QuartzCore.framework in Frameworks */,
+				B0D9AED74A422391820BDC8AD6B1179B /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91A9481BC0242198FBC247C43B473AAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19105DA6BB56A70EF7DA6DEC667BD1F0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00DFD1263354494257A0694122E1E6A2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5E262C03AED3AF20E64499E85BC4FC1F /* CCCCamera */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		01C5B43EDF8EA76E3703CE4967ACF38F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EDFAAE12B80C410F827B3CDCB04D237C /* CCCCycleView */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		064B273458B16854E0B37497588743A3 /* CCCAssetsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D1150900ABA6787910952A4559269D9F /* CCCAssetsModel */,
+				39CD89CC54BB717833E4A85D709CD02F /* ChildrenViewControllers */,
+				A315B7D392D33196EC411D42B06C4D12 /* Classes */,
+				2488046C4166320492578C4AFF900093 /* Resources */,
+			);
+			name = CCCAssetsViewController;
+			sourceTree = "<group>";
+		};
+		0E8A5E172DD2EE39510F6CA52064C1FF /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EF51931E7569329FE5989CE1A61CE6FD /* UIKit+CCCAdditions */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		1247F30D30B6E95C4D8D68031749CACC /* CCCUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				064B273458B16854E0B37497588743A3 /* CCCAssetsViewController */,
+				6E4D8F7C8213BB5980394FEC1DF4AB70 /* CCCCamera */,
+				B40C28732E4CFB1483A7A31D09F6DAB4 /* CCCCanvas */,
+				713CB22D90C31BC0524867A84887A10A /* CCCCycleView */,
+				2B7B2E6659C2C3B4C136C01D8EE7C322 /* CCCDevice */,
+				98A1AD70C26AD45CDFEBC19C89A74435 /* CCCMaskedLabel */,
+				8EACE4A6CAB394FF5B27A04A76D1A661 /* CCCPageControl */,
+				F10BB058A98B15E3984548F178748CE9 /* CCCRatingControl */,
+				30158EFE10BA8B75975CA2A1F0AC9794 /* CCCRecycleScrollView */,
+				9FA53DEA17FA920705E2D053C550C979 /* CCCSlider */,
+				980984722F477F3113608203C69594F1 /* CCCSlidingViewController */,
+				2ECCF5C54C20FB40EBB9C756BAC85E2B /* CCCSwitch */,
+				6F93E03663E85F06689B364044816392 /* Classes */,
+				7EAF3C5683B963D7B5FDE23CDB47F5DD /* Support Files */,
+				E85E16A9016EF9520EFF8C9A0BDD16D1 /* UIKit+CCCAdditions */,
+			);
+			name = CCCUIKit;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		1713884FB7C31B25541350B6CCFFA221 /* CCCMaskedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				0F955B5C33884B76349C67C450866D92 /* CCCMaskedLabel.h */,
+				DC7C7112A4BA224CB6A706E7EF4F9173 /* CCCMaskedLabel.m */,
+			);
+			name = CCCMaskedLabel;
+			path = CCCMaskedLabel;
+			sourceTree = "<group>";
+		};
+		18E12478D01CAA84C68CF58F236F1148 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9E3EDDF6C3D0FD7E098A46E0DEA6566D /* CCCPageControl */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19D8F784676057C22C2ECAD12BD4845D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BCC61F8A8CD417675A20E40617CC3C80 /* Classes */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1FBD84C46A4BEF268D70E7ADB2B3F529 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				CA2571B0B60D39981A191FD835805974 /* Pods-CCCUIKit */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		2488046C4166320492578C4AFF900093 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B37EEBA99CBB777C8C3CFC3BCFBEEAE8 /* Assets */,
+				F088869CC0EE5859CD8C611D4430D3D7 /* Classes */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29F2619D9A16E128FD44E2B01B5E275B /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				23D0275C5717107E4621A8EF1C83C9AD /* AssetsLibrary.framework */,
+				C344F290B4804A8425DE9AAF32D836D8 /* AVFoundation.framework */,
+				93C816AFD0E8C969FFB8A9D70F9C035C /* CoreGraphics.framework */,
+				41C2B15AE47992013FA232CB7ED484E1 /* CoreMotion.framework */,
+				F23D6ED95CB609FE7F334A99A5911B45 /* Foundation.framework */,
+				A52D597C992E56736E2C63F49AD0E51E /* GLKit.framework */,
+				9841FF6DE61D321E726E394E0623521B /* ImageIO.framework */,
+				8497C8F36667F2CFCDE375C36C5D22AE /* MediaPlayer.framework */,
+				A2C9D242576326DB342B6C16407359C9 /* MobileCoreServices.framework */,
+				2F5E80FF94F531A86C6EF91AC0C49D7B /* QuartzCore.framework */,
+				2AED32DE27CE5D4750980C01CBF5A9C0 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		2A8EE9CFFBEECD11523974327FEC4342 /* CCCSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8B1B6B5BE7E6D9DD3ADC5A57214A2E34 /* CCCSlidingViewController.h */,
+				C1FA151581C69B67E4FACF2C00B35296 /* CCCSlidingViewController.m */,
+			);
+			name = CCCSlidingViewController;
+			path = CCCSlidingViewController;
+			sourceTree = "<group>";
+		};
+		2B7B2E6659C2C3B4C136C01D8EE7C322 /* CCCDevice */ = {
+			isa = PBXGroup;
+			children = (
+				4741E85E6E29FDF0BADCE2427E6A1B36 /* Classes */,
+			);
+			name = CCCDevice;
+			sourceTree = "<group>";
+		};
+		2ECCF5C54C20FB40EBB9C756BAC85E2B /* CCCSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				DE40969255926C2AFD3EDF8A1D3CF505 /* Classes */,
+			);
+			name = CCCSwitch;
+			sourceTree = "<group>";
+		};
+		30158EFE10BA8B75975CA2A1F0AC9794 /* CCCRecycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				AECB9319B29E1EB44FDC8E1544466302 /* Classes */,
+			);
+			name = CCCRecycleScrollView;
+			sourceTree = "<group>";
+		};
+		39CD89CC54BB717833E4A85D709CD02F /* ChildrenViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F5094B4FAFD4C7D0DA28EEECAEC5AD78 /* Classes */,
+				19D8F784676057C22C2ECAD12BD4845D /* Resources */,
+			);
+			name = ChildrenViewControllers;
+			sourceTree = "<group>";
+		};
+		4741E85E6E29FDF0BADCE2427E6A1B36 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				57019271BFA9B53FE2891CB5AFE390C4 /* CCCDevice */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		4B9F48EBE3BECFA412ACA5CB142B41A2 /* CCCAssetsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9B7939491EBC42C560DC05DBCA0AC967 /* ChildrenViewControllers */,
+			);
+			name = CCCAssetsViewController;
+			path = CCCAssetsViewController;
+			sourceTree = "<group>";
+		};
+		4F0DE8A5A9B7D2477FF1B0833134D162 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2A8EE9CFFBEECD11523974327FEC4342 /* CCCSlidingViewController */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		566360A051A32ACDB88950B81F0E830F /* CCCCycleView */ = {
+			isa = PBXGroup;
+			children = (
+				42FC6F872A81981A605BA152F4B43405 /* CCCCycleView.h */,
+				576BAEFD7361C619675090A0E52A42E9 /* CCCCycleView.m */,
+				6DEDEE09EABF060C77887741376F5897 /* CCCFloatRange.h */,
+				202E743C5CB2C010350C41DD2FA11708 /* CCCFloatRange.m */,
+			);
+			name = CCCCycleView;
+			path = CCCCycleView;
+			sourceTree = "<group>";
+		};
+		57019271BFA9B53FE2891CB5AFE390C4 /* CCCDevice */ = {
+			isa = PBXGroup;
+			children = (
+				06C23BBF24776A56AD2750DC70EC486D /* CCCDevice.h */,
+				7CAEA8043BBD72A5EEAD4960783C2460 /* CCCDevice.m */,
+			);
+			name = CCCDevice;
+			path = CCCDevice;
+			sourceTree = "<group>";
+		};
+		5C43D1D917FF95F826C00E321B2221C3 /* CCCSlider */ = {
+			isa = PBXGroup;
+			children = (
+				70209D87AACA68ECCACB4293F35C6367 /* CCCSlider.h */,
+				A0A5796E34CDBF286781457DE066AE7F /* CCCSlider.m */,
+			);
+			name = CCCSlider;
+			path = CCCSlider;
+			sourceTree = "<group>";
+		};
+		5E262C03AED3AF20E64499E85BC4FC1F /* CCCCamera */ = {
+			isa = PBXGroup;
+			children = (
+				336BEB02887546C3B783D36471CFEAB8 /* CCCCamera.h */,
+				4E211937BD1B95AB187DC0F61D50BE9E /* CCCCameraConstants.h */,
+				7D1F2D60B94DA22A0FE599DEB18A0416 /* CCCCameraSession.h */,
+				32857F60C5BF1C67D2327F0BE365497B /* CCCCameraSession.m */,
+				E4D733115655110BCF5E282EB83DF10C /* CCCCameraView.h */,
+				53852E3B49B87188167743E9228F9698 /* CCCCameraView.m */,
+				7AC76179B2C41953868003CA2A3221BE /* UIImage+CCCProcessor.h */,
+				CFC4B6DCB839FE061A03B2E788C67945 /* UIImage+CCCProcessor.m */,
+			);
+			name = CCCCamera;
+			path = CCCCamera;
+			sourceTree = "<group>";
+		};
+		627B8F2D1611B2308BD64EAC38ADE237 /* CCCAssetsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CA02AA5D638B3AC8F898174EB4429B16 /* CCCAssetsViewController.h */,
+				1116D7549F9DC217BB2721F974EB5EB4 /* CCCAssetsViewController.m */,
+			);
+			name = CCCAssetsViewController;
+			path = CCCAssetsViewController;
+			sourceTree = "<group>";
+		};
+		66CD68376A8A18150E8208936A938534 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A1993F4982C298D85517631726110D10 /* CCCRatingControl */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		695B42B65FCFFADD511B2228F7584AE5 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				566360A051A32ACDB88950B81F0E830F /* CCCCycleView */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6A258D75A3E66599ED0F56A593C30060 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1713884FB7C31B25541350B6CCFFA221 /* CCCMaskedLabel */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6CB248FDE087FE64D83B9E1341090E32 /* CCCSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				FDD9FCD7D49FBF3BBC60B71BC593D644 /* CCCSwitch.h */,
+				D40C468078925BE3E17B36910F0B8291 /* CCCSwitch.m */,
+			);
+			name = CCCSwitch;
+			path = CCCSwitch;
+			sourceTree = "<group>";
+		};
+		6E4D8F7C8213BB5980394FEC1DF4AB70 /* CCCCamera */ = {
+			isa = PBXGroup;
+			children = (
+				00DFD1263354494257A0694122E1E6A2 /* Classes */,
+			);
+			name = CCCCamera;
+			sourceTree = "<group>";
+		};
+		6F93E03663E85F06689B364044816392 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F1470A68E6D7F0DA2AD4D49BCB6EC /* CCCUIKit.h */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		713CB22D90C31BC0524867A84887A10A /* CCCCycleView */ = {
+			isa = PBXGroup;
+			children = (
+				695B42B65FCFFADD511B2228F7584AE5 /* Classes */,
+				D78CE8C14FE669A9F764253930D99C5B /* XYPieChart */,
+			);
+			name = CCCCycleView;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				FDDED61BFDA399FE2F3C09204E6C6A09 /* Development Pods */,
+				EB57DDB3388FBC701046A1E93218737F /* Frameworks */,
+				F5AEC6F33391A620DCCC7317B1680D3C /* Products */,
+				1FBD84C46A4BEF268D70E7ADB2B3F529 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		7EAF3C5683B963D7B5FDE23CDB47F5DD /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				53F68E4CCCFE113199823051284539A4 /* CCCUIKit.xcconfig */,
+				9E8583A2D43BBD4F7304212BE5F6ADF2 /* CCCUIKit-dummy.m */,
+				4CAF25542342B111094CA7425A29F7ED /* CCCUIKit-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/CCCUIKit";
+			sourceTree = "<group>";
+		};
+		8EACE4A6CAB394FF5B27A04A76D1A661 /* CCCPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				18E12478D01CAA84C68CF58F236F1148 /* Classes */,
+			);
+			name = CCCPageControl;
+			sourceTree = "<group>";
+		};
+		980984722F477F3113608203C69594F1 /* CCCSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4F0DE8A5A9B7D2477FF1B0833134D162 /* Classes */,
+			);
+			name = CCCSlidingViewController;
+			sourceTree = "<group>";
+		};
+		98A1AD70C26AD45CDFEBC19C89A74435 /* CCCMaskedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				6A258D75A3E66599ED0F56A593C30060 /* Classes */,
+			);
+			name = CCCMaskedLabel;
+			sourceTree = "<group>";
+		};
+		9B7939491EBC42C560DC05DBCA0AC967 /* ChildrenViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EB33A76D9522ABC67D6139C011FD8525 /* CCCAllAssetsViewController.h */,
+				419E86F5E71CC793AC943C7E224E3CE8 /* CCCAllAssetsViewController.m */,
+				47902F64551B234125D60A4A06872AB9 /* CCCAssetPreviewView.h */,
+				9F9DC3443EBCA0E6A50BF26D24F17AC4 /* CCCAssetPreviewView.m */,
+				99B3AE2FF4F6EA1E7088EA262030B78D /* CCCAssetsGroupsViewController.h */,
+				4818B4C6C5BA0158E0C54DC91F2AB9FC /* CCCAssetsGroupsViewController.m */,
+			);
+			name = ChildrenViewControllers;
+			path = ChildrenViewControllers;
+			sourceTree = "<group>";
+		};
+		9E3EDDF6C3D0FD7E098A46E0DEA6566D /* CCCPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				BBAB96BEE91BA4B91682E64BFFE1469F /* CCCPageControl.h */,
+				1FD9B15884889AB3C40C41CEE44A4D10 /* CCCPageControl.m */,
+			);
+			name = CCCPageControl;
+			path = CCCPageControl;
+			sourceTree = "<group>";
+		};
+		9EE57F168A78F49743990ED773AD363A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E45569AF5CE2C22A5D78B7452AEBAC74 /* CCCAssetsViewController */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		9FA53DEA17FA920705E2D053C550C979 /* CCCSlider */ = {
+			isa = PBXGroup;
+			children = (
+				D86DB1277BE1BCBF02BE7ECEDBF9E3A5 /* Classes */,
+			);
+			name = CCCSlider;
+			sourceTree = "<group>";
+		};
+		A1993F4982C298D85517631726110D10 /* CCCRatingControl */ = {
+			isa = PBXGroup;
+			children = (
+				8DADB42AB0F186357426183160888D80 /* CCCRatingControl.h */,
+				23029EE26F0E2A7F1633132740EC1418 /* CCCRatingControl.m */,
+			);
+			name = CCCRatingControl;
+			path = CCCRatingControl;
+			sourceTree = "<group>";
+		};
+		A2CD2D6DF72B6BAD564747717E8CF148 /* CCCRecycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				00EEB6D40B90A65282C19A1BB1B4E203 /* CCCRecycleScrollView.h */,
+				EF71316617CC3F0E65DDCCEC6DE4B58A /* CCCRecycleScrollView.m */,
+			);
+			name = CCCRecycleScrollView;
+			path = CCCRecycleScrollView;
+			sourceTree = "<group>";
+		};
+		A315B7D392D33196EC411D42B06C4D12 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				627B8F2D1611B2308BD64EAC38ADE237 /* CCCAssetsViewController */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		AECB9319B29E1EB44FDC8E1544466302 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A2CD2D6DF72B6BAD564747717E8CF148 /* CCCRecycleScrollView */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		B0F164B66B8416E9D30B5235576D2E2E /* XYPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				EFD58888D65C31263CAFCF9A1A9C49BB /* XYPieChart.h */,
+				E6F765D1421C37BE4F49662D97959AB7 /* XYPieChart.m */,
+			);
+			name = XYPieChart;
+			path = XYPieChart;
+			sourceTree = "<group>";
+		};
+		B0F7428E648CD01F85B17A1387590DB2 /* CCCCanvas */ = {
+			isa = PBXGroup;
+			children = (
+				75F3D62D3AC3DA14B0ACBCF4C6422442 /* CCCCanvas.h */,
+				31D2B9FE792A1D59BC59573075C87499 /* CCCCanvas.m */,
+				A1DF79199074C5F374F03469E77C75FB /* CCCCanvasLineWidthSelectionView.h */,
+				72ABD799397EB92CF81326FE53A54608 /* CCCCanvasLineWidthSelectionView.m */,
+				8DBEE13D484EF6DEC0D47512308C83B9 /* CCCCanvasPaletteView.h */,
+				2A6F4D523B53D57CEFA4379EE4C19FA4 /* CCCCanvasPaletteView.m */,
+			);
+			name = CCCCanvas;
+			path = CCCCanvas;
+			sourceTree = "<group>";
+		};
+		B37EEBA99CBB777C8C3CFC3BCFBEEAE8 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				00AECC21AC15509A339194225E3760C6 /* CCCAssets_BackWhite.png */,
+				4A18BD16DE9AAC4B8E48E33E2BC1B600 /* CCCAssets_BackWhite@2x.png */,
+				7794549368A632B27D0C92D79B806CAE /* CCCAssets_CloseRed.png */,
+				FFF74B55511079FEEBA2F098D30D0071 /* CCCAssets_CloseRed@2x.png */,
+				930BFB28FBA23BF321983AF61B22AAC3 /* CCCAssets_CloseWhite.png */,
+				15C0D3B252337F9C41E33ECB08A93F74 /* CCCAssets_CloseWhite@2x.png */,
+				CEFF5580E604691DB304DE338697364C /* CCCAssets_Pause.png */,
+				946E3676FB69FCB5A8DACA4F97349969 /* CCCAssets_Pause@2x.png */,
+				D736E5E5B7D1166D7D0EE75C346B550A /* CCCAssets_Play.png */,
+				3806B7B8AC5E6FDD79E5D4C45134F74D /* CCCAssets_Play@2x.png */,
+				4CEE6E83D6C5B839D31D387AE0EE0E13 /* CCCAssets_VideoIcon.png */,
+				B2B061BF8E3EAE883FEF9C59EB0041C1 /* CCCAssets_VideoIcon@2x.png */,
+			);
+			name = Assets;
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		B40C28732E4CFB1483A7A31D09F6DAB4 /* CCCCanvas */ = {
+			isa = PBXGroup;
+			children = (
+				F6DD79839AA335E740746D07F5DD3AB7 /* Classes */,
+			);
+			name = CCCCanvas;
+			sourceTree = "<group>";
+		};
+		B6FD7A115FD57E590F5E2F3A76BC86AB /* CCCAssetsModel */ = {
+			isa = PBXGroup;
+			children = (
+				57F5256326759475D26A7F89CC0306A8 /* CCCAsset.h */,
+				CE20093CBCD85D7F89DC05D30C0D8F26 /* CCCAsset.m */,
+				BA59CB8D889112D89F11811F35F1ADFC /* CCCAssetsGroup.h */,
+				9327C7BE03EBD77E48AC4CCAC0F64FD7 /* CCCAssetsGroup.m */,
+				B5099616449C4C705C494401ED35D1DF /* CCCAssetsModel.h */,
+				B085F5D58E32843516F9ECBCFCBD7407 /* CCCAssetsModel.m */,
+			);
+			name = CCCAssetsModel;
+			path = CCCAssetsModel;
+			sourceTree = "<group>";
+		};
+		BCC61F8A8CD417675A20E40617CC3C80 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E6BD4CBB24017EFF10D8CD23F1CE0213 /* CCCAssetsViewController */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		CA2571B0B60D39981A191FD835805974 /* Pods-CCCUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				65B9B8598BE32E93BFCE910AA9005A56 /* Pods-CCCUIKit-acknowledgements.markdown */,
+				4368AC6E8CB429889865E7EB2D03EFFD /* Pods-CCCUIKit-acknowledgements.plist */,
+				DF2C538228DAD84050D619976E74EBE1 /* Pods-CCCUIKit-dummy.m */,
+				8CDDABE6A6C6FA0333A88C5874C305CA /* Pods-CCCUIKit-frameworks.sh */,
+				A182AECB92E5E485DB2938CF72976719 /* Pods-CCCUIKit-resources.sh */,
+				14556851CB1946E29AE9CF12FBD63AEC /* Pods-CCCUIKit.debug.xcconfig */,
+				2BE54FD6FB30D00396B6F4811E2E193E /* Pods-CCCUIKit.release.xcconfig */,
+			);
+			name = "Pods-CCCUIKit";
+			path = "Target Support Files/Pods-CCCUIKit";
+			sourceTree = "<group>";
+		};
+		D1150900ABA6787910952A4559269D9F /* CCCAssetsModel */ = {
+			isa = PBXGroup;
+			children = (
+				9EE57F168A78F49743990ED773AD363A /* Classes */,
+			);
+			name = CCCAssetsModel;
+			sourceTree = "<group>";
+		};
+		D78CE8C14FE669A9F764253930D99C5B /* XYPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				01C5B43EDF8EA76E3703CE4967ACF38F /* Classes */,
+			);
+			name = XYPieChart;
+			sourceTree = "<group>";
+		};
+		D86DB1277BE1BCBF02BE7ECEDBF9E3A5 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5C43D1D917FF95F826C00E321B2221C3 /* CCCSlider */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		DE40969255926C2AFD3EDF8A1D3CF505 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6CB248FDE087FE64D83B9E1341090E32 /* CCCSwitch */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E45569AF5CE2C22A5D78B7452AEBAC74 /* CCCAssetsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B6FD7A115FD57E590F5E2F3A76BC86AB /* CCCAssetsModel */,
+			);
+			name = CCCAssetsViewController;
+			path = CCCAssetsViewController;
+			sourceTree = "<group>";
+		};
+		E6BD4CBB24017EFF10D8CD23F1CE0213 /* CCCAssetsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F7B2F154508652A9D4308C15B342A56B /* ChildrenViewControllers */,
+			);
+			name = CCCAssetsViewController;
+			path = CCCAssetsViewController;
+			sourceTree = "<group>";
+		};
+		E85E16A9016EF9520EFF8C9A0BDD16D1 /* UIKit+CCCAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				0E8A5E172DD2EE39510F6CA52064C1FF /* Classes */,
+			);
+			name = "UIKit+CCCAdditions";
+			sourceTree = "<group>";
+		};
+		EB57DDB3388FBC701046A1E93218737F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29F2619D9A16E128FD44E2B01B5E275B /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EDFAAE12B80C410F827B3CDCB04D237C /* CCCCycleView */ = {
+			isa = PBXGroup;
+			children = (
+				B0F164B66B8416E9D30B5235576D2E2E /* XYPieChart */,
+			);
+			name = CCCCycleView;
+			path = CCCCycleView;
+			sourceTree = "<group>";
+		};
+		EF51931E7569329FE5989CE1A61CE6FD /* UIKit+CCCAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				0F2B289232A33D2DD11EECD413B69F4F /* UIKit+CCCAdditions.h */,
+				29FC60CD33C00478175B6B1D76D4FF91 /* UIKit+CCCAdditions.m */,
+			);
+			name = "UIKit+CCCAdditions";
+			path = "UIKit+CCCAdditions";
+			sourceTree = "<group>";
+		};
+		F088869CC0EE5859CD8C611D4430D3D7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F93B778B70D840EB486FFDF7224CEE52 /* CCCAssetsViewController */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F10BB058A98B15E3984548F178748CE9 /* CCCRatingControl */ = {
+			isa = PBXGroup;
+			children = (
+				66CD68376A8A18150E8208936A938534 /* Classes */,
+			);
+			name = CCCRatingControl;
+			sourceTree = "<group>";
+		};
+		F5094B4FAFD4C7D0DA28EEECAEC5AD78 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4B9F48EBE3BECFA412ACA5CB142B41A2 /* CCCAssetsViewController */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F5AEC6F33391A620DCCC7317B1680D3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F14A61658C95CFDF0B57F7116197C64 /* libCCCUIKit.a */,
+				3042DCF82A222EB574C6858661B1A340 /* libPods-CCCUIKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F6DD79839AA335E740746D07F5DD3AB7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B0F7428E648CD01F85B17A1387590DB2 /* CCCCanvas */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F7B2F154508652A9D4308C15B342A56B /* ChildrenViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A9AEE7AB84D5FA5B7C5A022E16CA599 /* CCCAllAssetsViewController.xib */,
+				74A2CB4E5393FC1387A740EFA32787F7 /* CCCAssetsGroupsViewController.xib */,
+			);
+			name = ChildrenViewControllers;
+			path = ChildrenViewControllers;
+			sourceTree = "<group>";
+		};
+		F93B778B70D840EB486FFDF7224CEE52 /* CCCAssetsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1E822A848F10D67656C8068F27C40EB9 /* CCCAssetsViewController.xib */,
+			);
+			name = CCCAssetsViewController;
+			path = CCCAssetsViewController;
+			sourceTree = "<group>";
+		};
+		FDDED61BFDA399FE2F3C09204E6C6A09 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1247F30D30B6E95C4D8D68031749CACC /* CCCUIKit */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2D777D2869E2B1313B9C4590DF283175 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23EF6EA83FD27FAB9464F18561FEA554 /* CCCAllAssetsViewController.h in Headers */,
+				60ADE82014ACEA77AD3813C6055CAD94 /* CCCAsset.h in Headers */,
+				7C5EB8B1F2FCE4E43215286A425682AE /* CCCAssetPreviewView.h in Headers */,
+				AE7CF7C9B230C28A174EE433D1588EC3 /* CCCAssetsGroup.h in Headers */,
+				E48BCAA87E926A52A5459592B2BA2F32 /* CCCAssetsGroupsViewController.h in Headers */,
+				74DD4D2B0C40E350A2A384C9A8A8A7C1 /* CCCAssetsModel.h in Headers */,
+				BE105D1699D5F42F0840E3767BF422D1 /* CCCAssetsViewController.h in Headers */,
+				399241707D8CBF3DCCF9362F22896C63 /* CCCCamera.h in Headers */,
+				70E5035E8B1CC6AE68428A73143F4C08 /* CCCCameraConstants.h in Headers */,
+				2BD88B622A0CCFC792816033934029F4 /* CCCCameraSession.h in Headers */,
+				76D987461AC011AF10CC29B76BED0178 /* CCCCameraView.h in Headers */,
+				CED690BF5F9D9EECEB6395A7C1ABE1E6 /* CCCCanvas.h in Headers */,
+				CAEF7E4412794A03A639CAB65C712BE3 /* CCCCanvasLineWidthSelectionView.h in Headers */,
+				7F30C8EF2FAEB90DCE15EC06D25B7A25 /* CCCCanvasPaletteView.h in Headers */,
+				C88CC4187118D7362968C7E33B024AAF /* CCCCycleView.h in Headers */,
+				305F3779A21A7487CA046CBB029A4409 /* CCCDevice.h in Headers */,
+				173B0E05D3A88004878493762E4F98BC /* CCCFloatRange.h in Headers */,
+				FA6699C2C237DE9C102E06C26F35521C /* CCCMaskedLabel.h in Headers */,
+				4777EF3FFCAF01B58C9FDB4186AD2289 /* CCCPageControl.h in Headers */,
+				75F6BFDC714D300DCBD8778C3E553CE2 /* CCCRatingControl.h in Headers */,
+				B8493FC1C463D82D8DCF6C8AEEFB0BEA /* CCCRecycleScrollView.h in Headers */,
+				8A1763D2D7E006BA27F8ECA35B510977 /* CCCSlider.h in Headers */,
+				DD6EF01AA920E435528A183F48FB8EAF /* CCCSlidingViewController.h in Headers */,
+				D0679587C62A6E8362901C6CFABCFA4C /* CCCSwitch.h in Headers */,
+				3B98E131673A722997A44F3ECD75C90E /* CCCUIKit.h in Headers */,
+				CE07E2D81078966CF9FA7E0EC79D86E7 /* UIImage+CCCProcessor.h in Headers */,
+				17689EE925E72468FC579C46B66B56B8 /* UIKit+CCCAdditions.h in Headers */,
+				53E8B789E088C3BFC091052DA0323299 /* XYPieChart.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0D748140CDFA5CB79BD7C84CBB939C07 /* Pods-CCCUIKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B661E33245A65D1F7F0E99BEBEE08F8F /* Build configuration list for PBXNativeTarget "Pods-CCCUIKit" */;
+			buildPhases = (
+				40937A950DD345A3A2D03917E636034B /* Sources */,
+				91A9481BC0242198FBC247C43B473AAE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FBA810258AD93D7C2282569BC0CC397F /* PBXTargetDependency */,
+			);
+			name = "Pods-CCCUIKit";
+			productName = "Pods-CCCUIKit";
+			productReference = 3042DCF82A222EB574C6858661B1A340 /* libPods-CCCUIKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F086D702C2A87CF684AE32E0BAEAB30B /* CCCUIKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55AC8FB2267D5A35D24203B92639F311 /* Build configuration list for PBXNativeTarget "CCCUIKit" */;
+			buildPhases = (
+				3C78F17B98BFAEEEC01CBFB5E2E1D5B6 /* Sources */,
+				6B1920042902B0F0E85E86FDFF13F2A7 /* Frameworks */,
+				2D777D2869E2B1313B9C4590DF283175 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CCCUIKit;
+			productName = CCCUIKit;
+			productReference = 2F14A61658C95CFDF0B57F7116197C64 /* libCCCUIKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = F5AEC6F33391A620DCCC7317B1680D3C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F086D702C2A87CF684AE32E0BAEAB30B /* CCCUIKit */,
+				0D748140CDFA5CB79BD7C84CBB939C07 /* Pods-CCCUIKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3C78F17B98BFAEEEC01CBFB5E2E1D5B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C3B1EE7AF965DF2B3D3F5D597F9AFF7 /* CCCAllAssetsViewController.m in Sources */,
+				AE1BC4344AA281A53235D04D2042D5C5 /* CCCAsset.m in Sources */,
+				314182E5EB911C101043E84399C489CA /* CCCAssetPreviewView.m in Sources */,
+				36835D9A5EFDF73F1B2A72807B1B8CA6 /* CCCAssetsGroup.m in Sources */,
+				97BADC642898B61E7AEB4908FCBF9A9E /* CCCAssetsGroupsViewController.m in Sources */,
+				05FFE46F0D0011E9B3928AFA19ED98AC /* CCCAssetsModel.m in Sources */,
+				930D77F2E47B7CB4CCAD8A43313FA823 /* CCCAssetsViewController.m in Sources */,
+				A428F0588A6B7D12F5D30E3A05BC0BD6 /* CCCCameraSession.m in Sources */,
+				4F99F09FFD2E2F549D09A67B36290ADE /* CCCCameraView.m in Sources */,
+				ACA98D369B78F685DE6E9357D4AF621E /* CCCCanvas.m in Sources */,
+				443633E9983B115A77DC83E763D3F3A9 /* CCCCanvasLineWidthSelectionView.m in Sources */,
+				56B227C85966F95A5D72CACC42E79907 /* CCCCanvasPaletteView.m in Sources */,
+				5ECC0E9C2DDBF978C4C19409FB416AFB /* CCCCycleView.m in Sources */,
+				B295BFA08DE26639EC81D7D080A5AD81 /* CCCDevice.m in Sources */,
+				E4F6AA7747A227174626E5084C914C41 /* CCCFloatRange.m in Sources */,
+				2AF483A60E59E071E721861F244C0095 /* CCCMaskedLabel.m in Sources */,
+				CB52367596ECC484DD1BC9A7E722BFA2 /* CCCPageControl.m in Sources */,
+				D005F897231A97BBE26557E2FB3BEA6F /* CCCRatingControl.m in Sources */,
+				73D6BFF7EE5C9C679586E9442593AAA5 /* CCCRecycleScrollView.m in Sources */,
+				9DFFD7809873D1B41C60693400C5D99E /* CCCSlider.m in Sources */,
+				5B1A1621DD57349F04CBF98276B836B9 /* CCCSlidingViewController.m in Sources */,
+				703280DD048BF76AD988DD60177B759F /* CCCSwitch.m in Sources */,
+				0B249FD431CD55358E58FA54119FBED3 /* CCCUIKit-dummy.m in Sources */,
+				E1CFC022A3E1AFEC4E50E1AE4925D9FA /* UIImage+CCCProcessor.m in Sources */,
+				3198477C6A99FDDDE1B5CEDE837EFEA3 /* UIKit+CCCAdditions.m in Sources */,
+				BF56B521421E94C65AEC5BDC189D39FD /* XYPieChart.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40937A950DD345A3A2D03917E636034B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0373BCFC86F65811395122992A45501 /* Pods-CCCUIKit-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FBA810258AD93D7C2282569BC0CC397F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CCCUIKit;
+			target = F086D702C2A87CF684AE32E0BAEAB30B /* CCCUIKit */;
+			targetProxy = 8EA7BD3698B4A9D5616A95398EBCDCB8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8A62831E0320608A5F2EF6640BB60EF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53F68E4CCCFE113199823051284539A4 /* CCCUIKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CCCUIKit/CCCUIKit-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B6898F9F8E20F75BC6DDEBF427239D39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BE54FD6FB30D00396B6F4811E2E193E /* Pods-CCCUIKit.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		BDCA5CBC568C5D6B3189403EB0302662 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53F68E4CCCFE113199823051284539A4 /* CCCUIKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CCCUIKit/CCCUIKit-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		FC7BEFEECE4DE756AB40166A6D184D94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14556851CB1946E29AE9CF12FBD63AEC /* Pods-CCCUIKit.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				015A368F878AC3E2CEAE21DDE8026304 /* Debug */,
+				44CDBB6D11DE06DB64D6268622BDC47E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55AC8FB2267D5A35D24203B92639F311 /* Build configuration list for PBXNativeTarget "CCCUIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A62831E0320608A5F2EF6640BB60EF5 /* Debug */,
+				BDCA5CBC568C5D6B3189403EB0302662 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B661E33245A65D1F7F0E99BEBEE08F8F /* Build configuration list for PBXNativeTarget "Pods-CCCUIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC7BEFEECE4DE756AB40166A6D184D94 /* Debug */,
+				B6898F9F8E20F75BC6DDEBF427239D39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

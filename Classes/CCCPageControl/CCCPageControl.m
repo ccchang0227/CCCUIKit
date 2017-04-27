@@ -138,6 +138,7 @@ UIImage *customPageImageWithColor(UIColor *strokeColor, UIColor *fillColor) {
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    [self setupPageLayers];
 }
 
 - (void)setFrame:(CGRect)frame {
@@ -244,7 +245,7 @@ UIImage *customPageImageWithColor(UIColor *strokeColor, UIColor *fillColor) {
 }
 
 - (void)setupPageLayers {
-    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+//    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
     CGSize size = [self sizeForNumberOfPages:self.numberOfPages];

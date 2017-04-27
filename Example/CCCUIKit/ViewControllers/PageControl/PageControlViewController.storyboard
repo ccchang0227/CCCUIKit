@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cUk-SH-VCK">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Page Control View Controller-->
+        <scene sceneID="GKq-kU-riL">
+            <objects>
+                <viewController id="cUk-SH-VCK" customClass="PageControlViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NC4-d7-B3l"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Wy-bN-BIf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5zg-C2-sUg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1e0-5W-Qyq" customClass="CCCPageControl">
+                                <rect key="frame" x="20" y="500" width="335" height="40"/>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="d4z-hB-7s0"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3i-WW-yFV">
+                                <rect key="frame" x="20" y="28" width="335" height="467"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1e0-5W-Qyq" firstAttribute="top" secondItem="Z3i-WW-yFV" secondAttribute="bottom" constant="5" id="0yl-I1-bGB"/>
+                            <constraint firstItem="1e0-5W-Qyq" firstAttribute="leading" secondItem="5zg-C2-sUg" secondAttribute="leadingMargin" constant="4" id="It8-7p-8Df"/>
+                            <constraint firstItem="Z3i-WW-yFV" firstAttribute="top" secondItem="NC4-d7-B3l" secondAttribute="bottom" constant="8" id="Mg0-Iu-wW2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1e0-5W-Qyq" secondAttribute="trailing" constant="4" id="Wn1-pB-TON"/>
+                            <constraint firstItem="Z3i-WW-yFV" firstAttribute="leading" secondItem="5zg-C2-sUg" secondAttribute="leadingMargin" constant="4" id="Xnl-kG-jwe"/>
+                            <constraint firstItem="Z3i-WW-yFV" firstAttribute="height" secondItem="5zg-C2-sUg" secondAttribute="height" multiplier="0.7" id="Y7h-dt-Df5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Z3i-WW-yFV" secondAttribute="trailing" constant="4" id="lC8-pj-68P"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pageControl" destination="1e0-5W-Qyq" id="ZaI-Hi-vBA"/>
+                        <outlet property="scrollView" destination="Z3i-WW-yFV" id="gGN-W0-gOB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ve0-AZ-1d9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="-1212"/>
+        </scene>
+    </scenes>
+</document>

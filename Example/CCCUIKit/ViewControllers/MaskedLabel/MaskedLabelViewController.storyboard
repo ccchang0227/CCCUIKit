@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="u7J-Fk-xRF">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Masked Label View Controller-->
+        <scene sceneID="el2-tF-QK4">
+            <objects>
+                <viewController id="u7J-Fk-xRF" customClass="MaskedLabelViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jlK-43-EBc"/>
+                        <viewControllerLayoutGuide type="bottom" id="o8X-Kh-zVa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eQo-dQ-gja">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1nm-6D-FjW">
+                                <rect key="frame" x="47.5" y="28" width="120" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="IIX-Vj-p3s"/>
+                                    <constraint firstAttribute="width" constant="120" id="tVE-ZZ-Gal"/>
+                                </constraints>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetAction:" destination="u7J-Fk-xRF" eventType="touchUpInside" id="73u-Nw-uuL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBO-vy-W1A">
+                                <rect key="frame" x="207.5" y="28" width="120" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="6Ux-Px-pxt"/>
+                                    <constraint firstAttribute="height" constant="60" id="JID-n6-4TR"/>
+                                </constraints>
+                                <state key="normal" title="Insert">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeDisplay:" destination="u7J-Fk-xRF" eventType="touchUpInside" id="QPz-oX-szW"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFD-M5-pFy" customClass="CCCMaskedLabel">
+                                <rect key="frame" x="107.5" y="293.5" width="160" height="80"/>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="SVu-Zt-EhT"/>
+                                    <constraint firstAttribute="width" constant="160" id="lUf-u9-dNJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerXWithinMargins" secondItem="1nm-6D-FjW" secondAttribute="trailing" constant="20" id="Nlc-NI-9Ts"/>
+                            <constraint firstItem="1nm-6D-FjW" firstAttribute="top" secondItem="jlK-43-EBc" secondAttribute="bottom" constant="8" id="fiv-tl-rGm"/>
+                            <constraint firstItem="yBO-vy-W1A" firstAttribute="leading" secondItem="eQo-dQ-gja" secondAttribute="centerXWithinMargins" constant="20" id="gAb-NP-Mmg"/>
+                            <constraint firstItem="yBO-vy-W1A" firstAttribute="top" secondItem="jlK-43-EBc" secondAttribute="bottom" constant="8" id="n7Q-Np-szy"/>
+                            <constraint firstAttribute="centerX" secondItem="wFD-M5-pFy" secondAttribute="centerX" id="vL6-a2-hjM"/>
+                            <constraint firstAttribute="centerY" secondItem="wFD-M5-pFy" secondAttribute="centerY" id="vo4-Mc-TA3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnInsert" destination="yBO-vy-W1A" id="uZC-ag-ocu"/>
+                        <outlet property="labelCenterXConstraint" destination="vL6-a2-hjM" id="iQm-Dh-xcb"/>
+                        <outlet property="labelCenterYConstraint" destination="vo4-Mc-TA3" id="xoc-KM-Hib"/>
+                        <outlet property="maskedLabel" destination="wFD-M5-pFy" id="jqa-km-O1f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ek-BN-bUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-387" y="1500"/>
+        </scene>
+    </scenes>
+</document>
