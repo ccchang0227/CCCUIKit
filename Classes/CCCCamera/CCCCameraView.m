@@ -16,16 +16,28 @@
 #pragma mark ****** CCCCameraFocusAreaLayer ******
 
 @interface CCCCameraFocusAreaLayer : CALayer {
-@private
+@package
     CGSize _size;
     CGFloat _sight;
     CFTimeInterval _delay;
     BOOL _canDraw;
+    
+    BOOL _fadeOut;
+    
+    BOOL _subjectAreaChanged;
 }
 
 @property (nonatomic) CGPoint focusPoint;
 
+@property (readonly, getter=isExposureBiasAdjustable) BOOL exposureBiasAdjustable;
+
 - (void)clearFocusPoint;
+
+- (void)fadeInFocusArea;
+@property (nonatomic) CGFloat scaleValue;
+- (void)fadeOutFocusArea;
+
+- (void)focusAtSubjectChanged;
 
 @end
 
@@ -40,80 +52,193 @@
     if (self) {
         _size = CGSizeMake(76, 76);
         _sight = 6.0f;
-        _delay = 1;
+        _delay = 5;
         _canDraw = NO;
+        _fadeOut = NO;
+        _subjectAreaChanged = NO;
         
         _focusPoint = CGPointZero;
+        _scaleValue = 0.5;
     }
     return self;
 }
 
 - (void)setFocusPoint:(CGPoint)focusPoint {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearFocusPoint) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutFocusArea) object:nil];
+    
     _focusPoint = focusPoint;
+    _scaleValue = 0.5;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         _canDraw = YES;
+        _fadeOut = NO;
+        _subjectAreaChanged = NO;
         [self setNeedsDisplay];
     });
     
-    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, _delay*NSEC_PER_SEC);
-    dispatch_after(time, dispatch_get_main_queue(), ^{
-        _canDraw = NO;
-        [self setNeedsDisplay];
-    });
+    [self performSelector:@selector(clearFocusPoint) withObject:nil afterDelay:_delay];
+    
 }
 
 - (void)clearFocusPoint {
     dispatch_async(dispatch_get_main_queue(), ^{
         _canDraw = NO;
+        _fadeOut = NO;
+        _subjectAreaChanged = NO;
         [self setNeedsDisplay];
     });
+}
+
+- (void)fadeInFocusArea {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _fadeOut = NO;
+        _subjectAreaChanged = NO;
+        [self setNeedsDisplay];
+    });
+}
+
+- (void)setScaleValue:(CGFloat)scaleValue {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearFocusPoint) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutFocusArea) object:nil];
+    
+    _scaleValue = MAX(0.0, MIN(1.0, scaleValue));
+    
+    [self fadeInFocusArea];
+    
+}
+
+- (void)fadeOutFocusArea {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _fadeOut = YES;
+        _subjectAreaChanged = NO;
+        [self setNeedsDisplay];
+    });
+}
+
+- (BOOL)isExposureBiasAdjustable {
+    return _canDraw;
+}
+
+- (void)focusAtSubjectChanged {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearFocusPoint) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutFocusArea) object:nil];
+    
+    _focusPoint = CGPointMake(CGRectGetWidth(self.frame)/2.0, CGRectGetHeight(self.frame)/2.0);
+    _scaleValue = 0.5;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _canDraw = NO;
+        _fadeOut = NO;
+        _subjectAreaChanged = YES;
+        [self setNeedsDisplay];
+    });
+    
+    [self performSelector:@selector(clearFocusPoint) withObject:nil afterDelay:2];
 }
 
 - (void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     
-    if (!_canDraw) return;
-    
-    CGContextSaveGState(ctx);
-    
-    CGContextSetShouldAntialias(ctx, YES);
-    CGContextSetAllowsAntialiasing(ctx, YES);
-    CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000].CGColor);
-    CGContextSetLineWidth(ctx, 1.0);
-    
-    // Rect
-    CGContextStrokeRect(ctx, CGRectMake(_focusPoint.x-_size.width/2.0, _focusPoint.y-_size.height/2.0, _size.width, _size.height));
-    
-    // Focus
-    for (int i = 0; i < 4; i ++) {
-        CGPoint endPoint = CGPointZero;
-        switch (i) {
-            case 0:
-                CGContextMoveToPoint(ctx, _focusPoint.x, _focusPoint.y-_size.height/2.0);
-                endPoint = CGPointMake(_focusPoint.x, _focusPoint.y-_size.height/2.0+_sight);
-                break;
-            case 1:
-                CGContextMoveToPoint(ctx, _focusPoint.x, _focusPoint.y+_size.height/2.0);
-                endPoint = CGPointMake(_focusPoint.x, _focusPoint.y+_size.height/2.0-_sight);
-                break;
-            case 2:
-                CGContextMoveToPoint(ctx, _focusPoint.x-_size.width/2.0, _focusPoint.y);
-                endPoint = CGPointMake(_focusPoint.x-_size.width/2.0+_sight, _focusPoint.y);
-                break;
-            case 3:
-                CGContextMoveToPoint(ctx, _focusPoint.x+_size.width/2.0, _focusPoint.y);
-                endPoint = CGPointMake(_focusPoint.x+_size.width/2.0-_sight, _focusPoint.y);
-                break;
-            default:
-                break;
+    if (_subjectAreaChanged) {
+        @synchronized (self) {
+            CGContextSaveGState(ctx);
+            
+            CGSize size = {100, 100};
+            
+            CGContextSetShouldAntialias(ctx, true);
+            CGContextSetAllowsAntialiasing(ctx, true);
+            CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
+            CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000].CGColor);
+            CGContextSetLineWidth(ctx, 1.0);
+            CGContextSetAlpha(ctx, 1);
+            
+            // Rect
+            CGContextStrokeRect(ctx, CGRectMake(_focusPoint.x-size.width/2.0, _focusPoint.y-size.height/2.0, size.width, size.height));
+            
+            CGContextRestoreGState(ctx);
         }
-        CGContextAddLineToPoint(ctx, endPoint.x, endPoint.y);
+        
+        return;
     }
-    CGContextDrawPath(ctx, kCGPathStroke);
     
-    CGContextRestoreGState(ctx);
+    if (!_canDraw) {
+        return;
+    }
+    
+    @synchronized(self) {
+        CGContextSaveGState(ctx);
+        
+        CGContextSetShouldAntialias(ctx, true);
+        CGContextSetAllowsAntialiasing(ctx, true);
+        CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
+        CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000].CGColor);
+        CGContextSetLineWidth(ctx, 1.0);
+        if (_fadeOut) {
+            CGContextSetAlpha(ctx, 0.3);
+        }
+        else {
+            CGContextSetAlpha(ctx, 1);
+        }
+        
+        // Rect
+        CGContextStrokeRect(ctx, CGRectMake(_focusPoint.x-_size.width/2.0, _focusPoint.y-_size.height/2.0, _size.width, _size.height));
+        
+        // Focus
+        for (int i = 0; i < 4; i ++) {
+            CGPoint endPoint = CGPointZero;
+            switch (i) {
+                case 0:
+                    CGContextMoveToPoint(ctx, _focusPoint.x, _focusPoint.y-_size.height/2.0);
+                    endPoint = CGPointMake(_focusPoint.x, _focusPoint.y-_size.height/2.0+_sight);
+                    break;
+                case 1:
+                    CGContextMoveToPoint(ctx, _focusPoint.x, _focusPoint.y+_size.height/2.0);
+                    endPoint = CGPointMake(_focusPoint.x, _focusPoint.y+_size.height/2.0-_sight);
+                    break;
+                case 2:
+                    CGContextMoveToPoint(ctx, _focusPoint.x-_size.width/2.0, _focusPoint.y);
+                    endPoint = CGPointMake(_focusPoint.x-_size.width/2.0+_sight, _focusPoint.y);
+                    break;
+                case 3:
+                    CGContextMoveToPoint(ctx, _focusPoint.x+_size.width/2.0, _focusPoint.y);
+                    endPoint = CGPointMake(_focusPoint.x+_size.width/2.0-_sight, _focusPoint.y);
+                    break;
+                default:
+                    break;
+            }
+            CGContextAddLineToPoint(ctx, endPoint.x, endPoint.y);
+        }
+        CGContextDrawPath(ctx, kCGPathStroke);
+        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+            CGFloat convertScale = (_scaleValue-0.5) * 2;
+            CGFloat yPosition = _focusPoint.y - convertScale*(_size.height/2.0+5);
+            
+//            CGRect imageRect = CGRectMake(_focusPoint.x+_size.width/2.0+2, _focusPoint.y-15, 30, 30);
+            CGRect imageRect = CGRectMake(_focusPoint.x+_size.width/2.0+2, yPosition-15, 30, 30);
+            UIImage *lightImage = [UIImage imageNamed:@"CCCCamera_Light.png"];
+            CGContextSetShouldAntialias(ctx, true);
+            CGContextSetAllowsAntialiasing(ctx, true);
+            CGContextSetInterpolationQuality(ctx, kCGInterpolationDefault);
+            CGContextSetRenderingIntent(ctx, CGImageGetRenderingIntent(lightImage.CGImage));
+            CGContextDrawImage(ctx, imageRect, lightImage.CGImage);
+            
+//            CGContextMoveToPoint(ctx, _focusPoint.x+_size.width/2.0+17, _focusPoint.y-16);
+            CGContextMoveToPoint(ctx, _focusPoint.x+_size.width/2.0+17, yPosition-15);
+            CGContextAddLineToPoint(ctx, _focusPoint.x+_size.width/2.0+17, _focusPoint.y-_size.height/2.0-20);
+            
+//            CGContextMoveToPoint(ctx, _focusPoint.x+_size.width/2.0+17, _focusPoint.y+16);
+            CGContextMoveToPoint(ctx, _focusPoint.x+_size.width/2.0+17, yPosition+15);
+            CGContextAddLineToPoint(ctx, _focusPoint.x+_size.width/2.0+17, _focusPoint.y+_size.height/2.0+20);
+            
+            CGContextDrawPath(ctx, kCGPathStroke);
+        }
+        
+        CGContextRestoreGState(ctx);
+        
+    }
+    
 }
 
 @end
@@ -282,12 +407,16 @@
     
     BOOL _lockPictureOrientation;
     UIInterfaceOrientation _pictureOrientation;
+    
 }
 
 @property (retain, nonatomic) CCCCameraPreviewView *preview;
 @property (readonly) AVCaptureVideoPreviewLayer *previewLayer;
 
 @property (retain, nonatomic) CCCCameraFocusAreaLayer *focusAreaLayer;
+
+@property (retain, nonatomic) UISlider *exposureBiasSlider;
+@property (retain, nonatomic) UILabel *exposureBiasLabel;
 
 @property (retain, nonatomic) CMMotionManager *motionManager;
 @property (retain, nonatomic) NSOperationQueue *motionQueue;
@@ -337,6 +466,8 @@
     [_cameraSession release];
     [_preview release];
     [_focusAreaLayer release];
+    [_exposureBiasLabel release];
+    [_exposureBiasSlider release];
     [_motionManager release];
     [_motionQueue release];
     [super dealloc];
@@ -379,6 +510,31 @@
     return (AVCaptureVideoPreviewLayer*)self.preview.layer;
 }
 
+- (UILabel *)exposureBiasLabel {
+    if (_exposureBiasLabel == nil) {
+        _exposureBiasLabel = [[UILabel alloc] init];
+        _exposureBiasLabel.backgroundColor = [UIColor clearColor];
+        _exposureBiasLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
+        _exposureBiasLabel.textAlignment = NSTextAlignmentCenter;
+        _exposureBiasLabel.textColor = [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000];
+        _exposureBiasLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_exposureBiasLabel];
+        
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_exposureBiasLabel]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_exposureBiasLabel)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_exposureBiasLabel]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_exposureBiasLabel)]];
+    }
+    
+    return _exposureBiasLabel;
+}
+
+- (UISlider *)exposureBiasSlider {
+    if (_exposureBiasSlider == nil) {
+        
+    }
+    
+    return _exposureBiasSlider;
+}
+
 - (CMMotionManager*)motionManager {
     if (_motionManager == nil) {
         _motionManager = [[CMMotionManager alloc] init];
@@ -399,7 +555,7 @@
 - (void)setScaleType:(CCCCameraPreviewScaleType)scaleType {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.preview.cornersLayer.cornersArray = nil;
-        [self.focusAreaLayer clearFocusPoint];
+        [self _clearFocus];
     });
     
     _scaleType = scaleType;
@@ -430,7 +586,7 @@
 - (void)setCameraDevice:(CCCCameraDevice)cameraDevice {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.preview.cornersLayer.cornersArray = nil;
-        [self.focusAreaLayer clearFocusPoint];
+        [self _clearFocus];
     });
     
     _cameraSession.cameraDevice = cameraDevice;
@@ -459,7 +615,7 @@
 - (void)setFaceDetectEnabled:(BOOL)faceDetectEnabled {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.preview.cornersLayer.cornersArray = nil;
-        [self.focusAreaLayer clearFocusPoint];
+        [self _clearFocus];
     });
     
     _cameraSession.faceDetectEnabled = faceDetectEnabled;
@@ -472,7 +628,7 @@
 - (void)setBarcodeScanEnabled:(BOOL)barcodeScanEnabled {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.preview.cornersLayer.cornersArray = nil;
-        [self.focusAreaLayer clearFocusPoint];
+        [self _clearFocus];
     });
     
     _cameraSession.barcodeScanEnabled = barcodeScanEnabled;
@@ -524,6 +680,12 @@
     UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(_pinchGesture:)];
     [self addGestureRecognizer:pinchGestureRecognizer];
     [pinchGestureRecognizer release];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(_panGesture:)];
+        [self addGestureRecognizer:panGestureRecognizer];
+        [panGestureRecognizer release];
+    }
     
     _oldOrientation = UIInterfaceOrientationUnknown;
     
@@ -735,7 +897,7 @@
 - (void)startCameraRunning {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.preview.cornersLayer.cornersArray = nil;
-        [self.focusAreaLayer clearFocusPoint];
+        [self _clearFocus];
     });
     
     [self.cameraSession startCameraRunning];
@@ -746,7 +908,7 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.preview.cornersLayer.cornersArray = nil;
-        [self.focusAreaLayer clearFocusPoint];
+        [self _clearFocus];
     });
 }
 
@@ -968,15 +1130,68 @@
 }
 
 - (void)_changeVideoOrientationWithOrientation:(AVCaptureVideoOrientation)videoOrientation {
-    if (![CCCCameraSession isCameraAccess]) return;
+    if (![CCCCameraSession isCameraAccess]) {
+        return;
+    }
     
     [_cameraSession setCameraVideoOrientation:videoOrientation];
+}
+
+#pragma mark - Subject Changed
+
+- (void)_startSubjectChangedObserver {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_subjectMonitorChanged:)
+                                                 name:AVCaptureDeviceSubjectAreaDidChangeNotification
+                                               object:nil];
+}
+
+- (void)_stopSubjectChangedObserver {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AVCaptureDeviceSubjectAreaDidChangeNotification
+                                                  object:nil];
+}
+
+- (void)_subjectMonitorChanged:(NSNotification *)notification {
+    [self _cancelClearFocus];
+    
+    [self.focusAreaLayer focusAtSubjectChanged];
+    self.exposureBiasLabel.alpha = 0;
+    
+}
+
+#pragma mark - Focus & Exposure Control
+
+- (void)_clearFocus {
+    [self _cancelClearFocus];
+    
+    [self.focusAreaLayer clearFocusPoint];
+    self.exposureBiasLabel.alpha = 0;
+}
+
+- (void)_cancelClearFocus {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self.focusAreaLayer selector:@selector(clearFocusPoint) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self.focusAreaLayer selector:@selector(fadeOutFocusArea) object:nil];
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_fadeOutExposureLabel) object:nil];
+}
+
+- (void)_fadeOutExposure {
+    [self.focusAreaLayer performSelector:@selector(fadeOutFocusArea) withObject:nil afterDelay:self.focusAreaLayer->_delay];
+    
+    [self performSelector:@selector(_fadeOutExposureLabel) withObject:nil afterDelay:self.focusAreaLayer->_delay];
+}
+
+- (void)_fadeOutExposureLabel {
+    self.exposureBiasLabel.alpha = 0.3;
 }
 
 #pragma mark - Tap Gesture
 
 - (void)_tapGesture:(UITapGestureRecognizer*)gestureRecognizer {
-    if (![CCCCameraSession isCameraAccess]) return;
+    if (![CCCCameraSession isCameraAccess]) {
+        return;
+    }
     
     // real location in self
     CGPoint touchPoint = [gestureRecognizer locationInView:self];
@@ -987,20 +1202,82 @@
     
     // did touch in preview
     if (CGRectContainsPoint(CGRectMake(0, 0, 1, 1), transformedPoint)) {
+        [self _cancelClearFocus];
+        
         [_cameraSession setCameraFocusPoint:transformedPoint];
         
         self.focusAreaLayer.focusPoint = touchPoint;
+        self.exposureBiasLabel.alpha = 0;
     }
+    
 }
 
 #pragma mark - Pinch Gesture
 
 - (void)_pinchGesture:(UIPinchGestureRecognizer*)gestureRecognizer {
-    if (![CCCCameraSession isCameraAccess]) return;
+    if (![CCCCameraSession isCameraAccess]) {
+        return;
+    }
     
     CGFloat scale = [_cameraSession zoomWithPinchGesture:gestureRecognizer];
     
     self.preview.layer.affineTransform = CGAffineTransformMakeScale(scale, scale);
+}
+
+#pragma mark -
+
+- (void)_panGesture:(UIPanGestureRecognizer *)gestureRecognizer {
+    if (![CCCCameraSession isCameraAccess]) {
+        return;
+    }
+    if (!self.focusAreaLayer.isExposureBiasAdjustable) {
+        return;
+    }
+    
+    [self _cancelClearFocus];
+    
+    CGPoint offset = gestureRecognizer.view.bounds.origin;
+    offset.x -= [gestureRecognizer translationInView:gestureRecognizer.view].x;
+    offset.y -= [gestureRecognizer translationInView:gestureRecognizer.view].y;
+    
+    CGPoint location = [gestureRecognizer locationInView:gestureRecognizer.view];
+    if (!CGRectContainsPoint(self.bounds, location)) {
+    }
+    
+    switch (gestureRecognizer.state) {
+        case UIGestureRecognizerStateBegan: {
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            float bias = _cameraSession.currentExposureBias + offset.y/200.0;
+            [_cameraSession setCameraExposureBias:bias];
+            
+            bias = _cameraSession.currentExposureBias;
+            
+            float min = _cameraSession.minExposureBias;
+            float max = _cameraSession.maxExposureBias;
+            CGFloat scale = (bias-min) / (max-min);
+            
+            self.focusAreaLayer.scaleValue = scale;
+            
+            self.exposureBiasLabel.alpha = 1;
+            self.exposureBiasLabel.text = [NSString stringWithFormat:@"%@%.2f", (bias<0?@"-":@"+"), fabsf(bias)];
+            
+            break;
+        }
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateFailed:
+        case UIGestureRecognizerStateCancelled: {
+            
+            [self _fadeOutExposure];
+            
+            break;
+        }
+        default:
+            break;
+    }
+    [gestureRecognizer setTranslation:CGPointZero inView:gestureRecognizer.view];
+    
 }
 
 #pragma mark - CCCCameraSessionDelegate
@@ -1011,6 +1288,7 @@
         AVCaptureVideoOrientation videoOrientation = [self videoOrientationFromDeviceOrientation:(UIDeviceOrientation)_oldOrientation];
         [self _changeVideoOrientationWithOrientation:videoOrientation];
     }
+    [self _startSubjectChangedObserver];
     
     if (_delegate && [_delegate respondsToSelector:@selector(cccCameraViewCameraDidStart:)]) {
         [_delegate cccCameraViewCameraDidStart:self];
@@ -1019,6 +1297,7 @@
 
 - (void)cccCameraSessionDidStop:(CCCCameraSession *)cameraSession {
     [self stopOrientationObserver];
+    [self _stopSubjectChangedObserver];
     
     if (_delegate && [_delegate respondsToSelector:@selector(cccCameraViewCameraDidStop:)]) {
         [_delegate cccCameraViewCameraDidStop:self];

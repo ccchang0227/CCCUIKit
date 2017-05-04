@@ -10,4 +10,12 @@
 
 @interface BaseViewController : UIViewController
 
+- (void)showAlertWithTitle:(NSString *)title
+                   message:(NSString *)message
+                   actions:(UIAlertAction *)actions, ... NS_REQUIRES_NIL_TERMINATION;
+
+- (void)showAlertWithTitle:(NSString *)title
+                   message:(NSString *)message
+              actionsArray:(NSArray<UIAlertAction *> *)actionsArray;
+
 @end

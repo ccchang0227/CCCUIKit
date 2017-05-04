@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
     # current version: 1.0.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCAssetsViewController/*.{h,m}'
-    ss.resources = 'Classes/CCCAssetsViewController/*.xib', 'Assets/*.png'
+    ss.resources = 'Classes/CCCAssetsViewController/*.xib', 'Assets/CCCAssets_*.png'
     ss.frameworks = 'AssetsLibrary', 'MediaPlayer'
     ss.weak_frameworks = 'Photos'
 
@@ -44,6 +44,7 @@ Pod::Spec.new do |s|
     # current version: 1.1.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCamera/**/*.{h,m}'
+    ss.resources = 'Assets/CCCCamera_*.png'
     ss.frameworks = 'AVFoundation', 'ImageIO', 'MobileCoreServices', 'CoreMotion'
   end
 

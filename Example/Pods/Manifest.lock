@@ -1,4 +1,5 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.2.0)
   - CCCUIKit (1.0.3):
     - CCCUIKit/CCCAssetsViewController (= 1.0.3)
     - CCCUIKit/CCCCamera (= 1.0.3)
@@ -36,6 +37,7 @@ PODS:
   - CCCUIKit/UIKit+CCCAdditions (1.0.3)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0
   - CCCUIKit (from `../`)
 
 EXTERNAL SOURCES:
@@ -43,8 +45,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CCCUIKit: 4dd8c037405dc47dfd99bc7e850ffd97ebcf5452
+  ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
+  CCCUIKit: bbfc5d88c2b93743d7926699b886485bef6c8761
 
-PODFILE CHECKSUM: 95cc187a81c58049fe4ab1b72bca62437636456a
+PODFILE CHECKSUM: 31517dcf8c6ddd965eeb72d24ab4fb97d3d1c3c6
 
 COCOAPODS: 1.2.0

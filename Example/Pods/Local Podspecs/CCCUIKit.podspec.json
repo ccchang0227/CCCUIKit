@@ -35,7 +35,7 @@
       "source_files": "Classes/CCCAssetsViewController/*.{h,m}",
       "resources": [
         "Classes/CCCAssetsViewController/*.xib",
-        "Assets/*.png"
+        "Assets/CCCAssets_*.png"
       ],
       "frameworks": [
         "AssetsLibrary",
@@ -63,6 +63,7 @@
       "name": "CCCCamera",
       "requires_arc": false,
       "source_files": "Classes/CCCCamera/**/*.{h,m}",
+      "resources": "Assets/CCCCamera_*.png",
       "frameworks": [
         "AVFoundation",
         "ImageIO",

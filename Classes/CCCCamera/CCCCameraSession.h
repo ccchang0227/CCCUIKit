@@ -31,7 +31,14 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 - (instancetype)initWithVideoPreviewLayer:(AVCaptureVideoPreviewLayer* _Nullable)previewLayer NS_DESIGNATED_INITIALIZER;
 
 - (void)setCameraFocusPoint:(CGPoint)point;
+
+@property (readonly, nonatomic) float maxExposureBias NS_AVAILABLE_IOS(8_0);
+@property (readonly, nonatomic) float minExposureBias NS_AVAILABLE_IOS(8_0);
+@property (readonly, nonatomic) float currentExposureBias NS_AVAILABLE_IOS(8_0);
+- (void)setCameraExposureBias:(float)bias NS_AVAILABLE_IOS(8_0);
+
 - (CGFloat)zoomWithPinchGesture:(UIPinchGestureRecognizer*)gestureRecognizer;
+
 - (void)setCameraVideoOrientation:(AVCaptureVideoOrientation)orientation;
 
 @property (assign, nonatomic) CGFloat videoSizeRatio; // w / h

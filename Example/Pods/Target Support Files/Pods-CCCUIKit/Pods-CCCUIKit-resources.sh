@@ -92,6 +92,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "../../Assets/CCCAssets_VideoIcon@2x.png"
   install_resource "../../Classes/CCCAssetsViewController/ChildrenViewControllers/CCCAllAssetsViewController.xib"
   install_resource "../../Classes/CCCAssetsViewController/ChildrenViewControllers/CCCAssetsGroupsViewController.xib"
+  install_resource "../../Assets/CCCCamera_Light.png"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "../../Classes/CCCAssetsViewController/CCCAssetsViewController.xib"
@@ -109,6 +110,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "../../Assets/CCCAssets_VideoIcon@2x.png"
   install_resource "../../Classes/CCCAssetsViewController/ChildrenViewControllers/CCCAllAssetsViewController.xib"
   install_resource "../../Classes/CCCAssetsViewController/ChildrenViewControllers/CCCAssetsGroupsViewController.xib"
+  install_resource "../../Assets/CCCCamera_Light.png"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

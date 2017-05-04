@@ -8,6 +8,8 @@
 
 #import "CameraViewController.h"
 #import <CCCUIKit/CCCCamera.h>
+#import <ActionSheetPicker-3.0/ActionSheetPicker.h>
+#import "DisplayImageViewController.h"
 
 @interface CameraViewController () <CCCCameraViewDelegate>
 
@@ -198,6 +200,7 @@
         }
     }
     [self configureFlash];
+    [self configureQuality];
     
 }
 
@@ -249,17 +252,65 @@
 - (IBAction)takePicture:(id)sender {
     __weak typeof(self) tempSelf = self;
     if (tempSelf.cameraView.cameraCaptureMode == CCCCameraCaptureModePhoto) {
-        [tempSelf.cameraView takePictureWithCompletionHandler:^(UIImage *picture, NSDictionary *pictureMetadata) {
+        
+        NSDate *timeStarted = [NSDate date];
+        
+        void(^completion)(UIImage *, NSDictionary *) = ^(UIImage *picture, NSDictionary *pictureMetadata) {
             
             NSLog(@"%@", pictureMetadata);
             NSLog(@"picture size=%@", NSStringFromCGSize(picture.size));
             
-        }];
+            NSDate *timeEnded = [NSDate date];
+            NSTimeInterval executionTime = [timeEnded timeIntervalSinceDate:timeStarted];
+            
+            __strong typeof(tempSelf) strongSelf = tempSelf;
+            
+            DisplayImageViewController *imageViewController = [strongSelf.storyboard instantiateViewControllerWithIdentifier:@"DisplayImageViewController"];
+            imageViewController.executionTime = executionTime;
+            imageViewController.image = picture;
+            [strongSelf.navigationController pushViewController:imageViewController animated:YES];
+            
+        };
+        
+#if 0
+        [tempSelf.cameraView.cameraSession takePictureWithCompletionHandler:completion];
+#else
+        [tempSelf.cameraView takePictureWithCompletionHandler:completion];
+#endif
+        
     }
     
 }
 
 - (IBAction)selectQuality:(id)sender {
+    NSArray *qualityKeys = @[@(CCCCameraVideoQualityLow),
+                             @(CCCCameraVideoQualityMedium),
+                             @(CCCCameraVideoQualityHigh),
+                             @(CCCCameraVideoQuality352x288),
+                             @(CCCCameraVideoQuality640x480),
+                             @(CCCCameraVideoQuality960x540),
+                             @(CCCCameraVideoQuality1280x720),
+                             @(CCCCameraVideoQuality1920x1080),
+                             @(CCCCameraVideoQualityPhoto)];
+    NSArray *qualityStrings = @[@"Low",
+                                @"Medium",
+                                @"High",
+                                @"352x288",
+                                @"640x480",
+                                @"960x540",
+                                @"1280x720",
+                                @"1920x1080",
+                                @"Photo"];
+    NSInteger index = [qualityKeys indexOfObject:@(self.cameraView.videoQuality)];
+    
+    [ActionSheetStringPicker showPickerWithTitle:@"Select video quality" rows:qualityStrings initialSelection:index doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+        
+        self.cameraView.videoQuality = [qualityKeys[selectedIndex] integerValue];
+        [self configureQuality];
+        
+    }cancelBlock:^(ActionSheetStringPicker *picker) {
+        
+    }origin:sender];
     
 }
 
@@ -267,6 +318,9 @@
 
 - (void)cccCameraViewCameraDidStart:(CCCCameraView *)view {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self configureFlash];
+    [self configureQuality];
     
 }
 

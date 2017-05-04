@@ -9,6 +9,8 @@ target 'CCCUIKit' do
 
   platform :ios, '8.0'
 
+  pod 'ActionSheetPicker-3.0'
+
   # Pods for CCCUIKit
   pod 'CCCUIKit', :path => '../'
 

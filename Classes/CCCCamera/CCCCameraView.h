@@ -12,6 +12,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, CCCCameraExposureControlMode) {
+    CCCCameraExposureControlModeSystem = 0,
+    CCCCameraExposureControlModeSlider
+} NS_ENUM_AVAILABLE_IOS(8_0);
+
 @protocol CCCCameraViewDelegate;
 
 NS_CLASS_AVAILABLE_IOS(6_0)
@@ -27,6 +32,8 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 
 - (void)lockPictureOrientationWithOrientation:(UIInterfaceOrientation)orientation;
 - (void)unlockPictureOrientation;
+
+@property (assign, nonatomic) CCCCameraExposureControlMode exposureControlMode;
 
 @end
 

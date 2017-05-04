@@ -10,4 +10,7 @@
 
 @interface DisplayImageViewController : BaseViewController
 
+@property (nonatomic) NSTimeInterval executionTime;
+@property (strong, nonatomic) UIImage *image;
+
 @end

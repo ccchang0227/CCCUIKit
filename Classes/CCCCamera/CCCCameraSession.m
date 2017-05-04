@@ -13,6 +13,8 @@
 
 @interface CCCCameraSession () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate> {
     
+    float _exposureBias;
+    
     CGFloat _currentZoomScale;
     CGFloat _maximumZoomScale;
     
@@ -464,6 +466,7 @@
     
     [self _setupVideoQuality:_videoQuality forCaptureDevice:captureDevice];
     
+    _exposureBias = 0.0f;
     _currentZoomScale = 1.0f;
     
     __block BOOL addInputSuccess = NO;
@@ -572,14 +575,20 @@
                             if ([captureDevice isFlashModeSupported:AVCaptureFlashModeAuto]) {
                                 captureDevice.flashMode = AVCaptureFlashModeAuto;
                             }
+                            
+                            /*
                             if ([captureDevice isTorchModeSupported:AVCaptureTorchModeAuto]) {
                                 captureDevice.torchMode = AVCaptureTorchModeAuto;
                             }
+                            */
                         }
                         else if (_cameraCaptureMode == CCCCameraCaptureModeVideo) {
+                            /*
                             if ([captureDevice isFlashModeSupported:AVCaptureFlashModeAuto]) {
                                 captureDevice.flashMode = AVCaptureFlashModeAuto;
                             }
+                            */
+                            
                             if ([captureDevice isTorchModeSupported:AVCaptureTorchModeAuto]) {
                                 captureDevice.torchMode = AVCaptureTorchModeAuto;
                             }
@@ -596,8 +605,8 @@
                             }
                         }
                         else if (_cameraCaptureMode == CCCCameraCaptureModeVideo) {
-                            if ([captureDevice isTorchModeSupported:AVCaptureTorchModeOff]) {
-                                captureDevice.torchMode = AVCaptureTorchModeOff;
+                            if ([captureDevice isFlashModeSupported:AVCaptureFlashModeOn]) {
+                                captureDevice.flashMode = AVCaptureFlashModeOn;
                             }
                             if ([captureDevice isTorchModeSupported:AVCaptureTorchModeOn]) {
                                 captureDevice.torchMode = AVCaptureTorchModeOn;
@@ -839,8 +848,12 @@
     if (_videoQuality <= CCCCameraVideoQualityLow) {
 //        size = CGSizeApplyAffineTransform(size, CGAffineTransformMakeScale(2.0, 2.0));
     }
-    if ((int)size.width%2 != 0) size.width += 1;
-    if ((int)size.height%2 != 0) size.height += 1;
+    if ((int)size.width%2 != 0) {
+        size.width += 1;
+    }
+    if ((int)size.height%2 != 0) {
+        size.height += 1;
+    }
     
     NSString *betaCompressionDirectory = [NSTemporaryDirectory() stringByAppendingPathComponent:kCCCCameraDefaultVideoFileName];
     NSError *error = nil;
@@ -990,14 +1003,18 @@
 - (void)_appendSampleBuffer:(CMSampleBufferRef)sampleBuffer fromCaptureOutout:(AVCaptureOutput*)captureOutput {
     
     if (captureOutput == _videoDataOutput) {
-        if (_videoFileWriter.status > AVAssetWriterStatusWriting) return;
+        if (_videoFileWriter.status > AVAssetWriterStatusWriting) {
+            return;
+        }
         
         if ([_videoWriterInput isReadyForMoreMediaData]) {
             [_videoWriterInput appendSampleBuffer:sampleBuffer];
         }
     }
     else if (captureOutput == _audioDataOutput && !_muteVideo) {
-        if (_videoFileWriter.status > AVAssetWriterStatusWriting) return;
+        if (_videoFileWriter.status > AVAssetWriterStatusWriting) {
+            return;
+        }
         
         if ([_audioWriterInput isReadyForMoreMediaData]) {
             [_audioWriterInput appendSampleBuffer:sampleBuffer];
@@ -1035,7 +1052,9 @@
 #pragma mark - Focus
 
 - (void)setCameraFocusPoint:(CGPoint)point {
-    if (!_videoInput) return;
+    if (!_videoInput) {
+        return;
+    }
     
     AVCaptureDevice *captureDevice = _videoInput.device;
     __block typeof(self) tempSelf = self;
@@ -1048,11 +1067,13 @@
 }
 
 - (void)_captureDevice:(AVCaptureDevice*)captureDevice focusAtPoint:(CGPoint)point {
+    /*
     if ([captureDevice respondsToSelector:@selector(isSmoothAutoFocusSupported)]) {
         if (captureDevice.isSmoothAutoFocusSupported) {
             captureDevice.smoothAutoFocusEnabled = YES;
         }
     }
+    */
     
     if (captureDevice.isFocusPointOfInterestSupported) {
         [captureDevice setFocusPointOfInterest:point];
@@ -1074,12 +1095,93 @@
     if (captureDevice.isExposurePointOfInterestSupported) {
         captureDevice.exposurePointOfInterest = point;
     }
+    _exposureBias = 0.0f;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        [captureDevice setExposureTargetBias:_exposureBias completionHandler:nil];
+    }
+    
     if ([captureDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
         captureDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
     }
     else if ([captureDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
         captureDevice.exposureMode = AVCaptureExposureModeAutoExpose;
     }
+    
+}
+
+- (float)minExposureBias {
+    if (!_videoInput) {
+        return 0;
+    }
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+        return 0;
+    }
+    
+    AVCaptureDevice *captureDevice = _videoInput.device;
+    //return captureDevice.minExposureTargetBias;
+    return MAX(captureDevice.minExposureTargetBias, -3);
+}
+
+- (float)maxExposureBias {
+    if (!_videoInput) {
+        return 0;
+    }
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+        return 0;
+    }
+    
+    AVCaptureDevice *captureDevice = _videoInput.device;
+    //return captureDevice.maxExposureTargetBias;
+    return MIN(captureDevice.maxExposureTargetBias, 3);
+}
+
+- (float)currentExposureBias {
+    if (!_videoInput) {
+        return 0;
+    }
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+        return 0;
+    }
+    
+    return _exposureBias;
+}
+
+- (void)setCameraExposureBias:(float)bias {
+    if (!_videoInput) {
+        return;
+    }
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+        return;
+    }
+    
+    AVCaptureDevice *captureDevice = _videoInput.device;
+    float max = self.maxExposureBias;
+    float min = self.minExposureBias;
+    
+    __block typeof(self) tempSelf = self;
+    [tempSelf _onSessionConfigurationChanged:^ {
+        [tempSelf _captureDevice:captureDevice onConfigurationChanged:^ {
+            
+            float exposureTargetBias = MIN(max, MAX(min, bias));
+            _exposureBias = exposureTargetBias;
+            
+            [captureDevice setExposureTargetBias:_exposureBias completionHandler:nil];
+            
+            if ([captureDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+                captureDevice.focusMode = AVCaptureFocusModeContinuousAutoFocus;
+            }
+            else if ([captureDevice isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
+                captureDevice.focusMode = AVCaptureFocusModeAutoFocus;
+            }
+            if ([captureDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
+                captureDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
+            }
+            else if ([captureDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
+                captureDevice.exposureMode = AVCaptureExposureModeAutoExpose;
+            }
+            
+        }];
+    }];
 }
 
 #pragma mark - Zoom
@@ -1209,6 +1311,7 @@
     [self _startSubjectChangedObserver];
     
     [self _resetPreviewSize];
+    _exposureBias = 0.0f;
     _currentZoomScale = 1.0f;
     
     if (![CCCCameraSession _checkCameraAccess]) return;
