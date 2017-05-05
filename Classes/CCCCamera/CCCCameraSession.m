@@ -424,6 +424,8 @@
     _faceDetectEnabled = YES;
     _barcodeScanEnabled = YES;
     
+    _lockExposure = NO;
+    
     _currentPreviewSize = CGSizeZero;
     
     _videoInput = nil;
@@ -437,6 +439,8 @@
 }
 
 - (BOOL)_setupCameraDevice {
+    __block typeof(self) tempSelf = self;
+    
     NSDictionary *cameraDeviceMap = @{@(CCCCameraDeviceFront):@(AVCaptureDevicePositionFront),
                                       @(CCCCameraDeviceRear):@(AVCaptureDevicePositionBack)};
     
@@ -444,6 +448,12 @@
     if (_videoInput && [_session.inputs containsObject:_videoInput]) {
         AVCaptureDevice *currentCaptureDevice = _videoInput.device;
         if (currentCaptureDevice.position == position) {
+            [tempSelf _onSessionConfigurationChanged:^ {
+                [tempSelf _captureDevice:currentCaptureDevice onConfigurationChanged:^ {
+                    [tempSelf _captureDevice:currentCaptureDevice focusAtPoint:CGPointMake(0.5, 0.5)];
+                }];
+            }];
+            
             return NO;
         }
     }
@@ -466,11 +476,12 @@
     
     [self _setupVideoQuality:_videoQuality forCaptureDevice:captureDevice];
     
-    _exposureBias = 0.0f;
+    if (!_lockExposure) {
+        _exposureBias = 0.0f;
+    }
     _currentZoomScale = 1.0f;
     
     __block BOOL addInputSuccess = NO;
-    __block typeof(self) tempSelf = self;
     [tempSelf _onSessionConfigurationChanged:^ {
         
         if (_videoInput) {
@@ -661,6 +672,7 @@
     if (/* DISABLES CODE */ (YES)) {
         return;
     }
+    
     // 直接設定之後出來的照片顏色不正常
     __block typeof(self) tempSelf = self;
     [tempSelf _onSessionConfigurationChanged:^ {
@@ -1092,10 +1104,17 @@
         }
     }
     
+    if ([captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance]) {
+        captureDevice.whiteBalanceMode = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
+    }
+    
     if (captureDevice.isExposurePointOfInterestSupported) {
         captureDevice.exposurePointOfInterest = point;
     }
-    _exposureBias = 0.0f;
+    
+    if (!_lockExposure) {
+        _exposureBias = 0.0f;
+    }
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         [captureDevice setExposureTargetBias:_exposureBias completionHandler:nil];
     }
@@ -1167,16 +1186,11 @@
             
             [captureDevice setExposureTargetBias:_exposureBias completionHandler:nil];
             
-            if ([captureDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
-                captureDevice.focusMode = AVCaptureFocusModeContinuousAutoFocus;
+            if ([captureDevice isFocusModeSupported:AVCaptureFocusModeLocked]) {
+                captureDevice.focusMode = AVCaptureFocusModeLocked;
             }
-            else if ([captureDevice isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
-                captureDevice.focusMode = AVCaptureFocusModeAutoFocus;
-            }
-            if ([captureDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
-                captureDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
-            }
-            else if ([captureDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
+            
+            if ([captureDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
                 captureDevice.exposureMode = AVCaptureExposureModeAutoExpose;
             }
             

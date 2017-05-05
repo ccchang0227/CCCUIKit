@@ -36,7 +36,7 @@
                                     </barButtonItem>
                                     <barButtonItem image="aspect_fit" id="CwO-2S-zCy">
                                         <connections>
-                                            <action selector="starAction:" destination="Zg3-lu-40A" id="UQc-33-afH"/>
+                                            <action selector="changeScaleTypeAction:" destination="Zg3-lu-40A" id="oLo-gH-r23"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Asb-t7-Flz"/>
@@ -46,6 +46,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cCc-pz-e9G"/>
+                                    <barButtonItem image="star" id="L7C-Hc-9Ok">
+                                        <connections>
+                                            <action selector="starAction:" destination="Zg3-lu-40A" id="hgk-2g-VVb"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="640x480" id="scF-zi-5tb">
                                         <connections>
                                             <action selector="selectQuality:" destination="Zg3-lu-40A" id="Nns-Yl-CfY"/>
@@ -93,6 +98,7 @@
                         <outlet property="qrCodeButton" destination="l3r-St-4SQ" id="Nbk-dE-GnY"/>
                         <outlet property="qualityButton" destination="scF-zi-5tb" id="vQ2-pu-eg9"/>
                         <outlet property="scaleTypeButton" destination="CwO-2S-zCy" id="1FB-v5-x0p"/>
+                        <outlet property="starButton" destination="L7C-Hc-9Ok" id="wyk-3Z-kcw"/>
                         <outlet property="switchButton" destination="pLg-wr-Hfd" id="6bA-Gw-6n2"/>
                     </connections>
                 </viewController>
@@ -162,6 +168,7 @@
         <image name="aspect_fit" width="40" height="40"/>
         <image name="flash_auto" width="40" height="40"/>
         <image name="qrcode_symbol" width="40" height="40"/>
+        <image name="star" width="40" height="40"/>
         <image name="switch" width="40" height="40"/>
     </resources>
 </document>

@@ -25,7 +25,12 @@
     BOOL _fadeOut;
     
     BOOL _subjectAreaChanged;
+    
+    float _bias, _min, _max;
+    BOOL _shouldDrawBiasText;
 }
+
+@property (nonatomic) BOOL shouldDrawExposure;
 
 @property (nonatomic) CGPoint focusPoint;
 
@@ -34,7 +39,7 @@
 - (void)clearFocusPoint;
 
 - (void)fadeInFocusArea;
-@property (nonatomic) CGFloat scaleValue;
+- (void)setExposureBias:(float)bias min:(float)min max:(float)max;
 - (void)fadeOutFocusArea;
 
 - (void)focusAtSubjectChanged;
@@ -57,8 +62,14 @@
         _fadeOut = NO;
         _subjectAreaChanged = NO;
         
+        _shouldDrawExposure = YES;
+        
         _focusPoint = CGPointZero;
-        _scaleValue = 0.5;
+        
+        _bias = 0;
+        _min = -1;
+        _max = 1;
+        _shouldDrawBiasText = NO;
     }
     return self;
 }
@@ -68,7 +79,10 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutFocusArea) object:nil];
     
     _focusPoint = focusPoint;
-    _scaleValue = 0.5;
+    _bias = 0;
+    _min = -1;
+    _max = 1;
+    _shouldDrawBiasText = NO;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         _canDraw = YES;
@@ -98,11 +112,14 @@
     });
 }
 
-- (void)setScaleValue:(CGFloat)scaleValue {
+- (void)setExposureBias:(float)bias min:(float)min max:(float)max {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearFocusPoint) object:nil];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutFocusArea) object:nil];
     
-    _scaleValue = MAX(0.0, MIN(1.0, scaleValue));
+    _bias = bias;
+    _min = min;
+    _max = max;
+    _shouldDrawBiasText = YES;
     
     [self fadeInFocusArea];
     
@@ -125,7 +142,10 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutFocusArea) object:nil];
     
     _focusPoint = CGPointMake(CGRectGetWidth(self.frame)/2.0, CGRectGetHeight(self.frame)/2.0);
-    _scaleValue = 0.5;
+    _bias = 0;
+    _min = -1;
+    _max = 1;
+    _shouldDrawBiasText = NO;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         _canDraw = NO;
@@ -140,6 +160,8 @@
 - (void)drawInContext:(CGContextRef)ctx {
     [super drawInContext:ctx];
     
+    UIColor *color = [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000];
+    
     if (_subjectAreaChanged) {
         @synchronized (self) {
             CGContextSaveGState(ctx);
@@ -149,7 +171,7 @@
             CGContextSetShouldAntialias(ctx, true);
             CGContextSetAllowsAntialiasing(ctx, true);
             CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
-            CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000].CGColor);
+            CGContextSetStrokeColorWithColor(ctx, color.CGColor);
             CGContextSetLineWidth(ctx, 1.0);
             CGContextSetAlpha(ctx, 1);
             
@@ -172,7 +194,7 @@
         CGContextSetShouldAntialias(ctx, true);
         CGContextSetAllowsAntialiasing(ctx, true);
         CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
-        CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000].CGColor);
+        CGContextSetStrokeColorWithColor(ctx, color.CGColor);
         CGContextSetLineWidth(ctx, 1.0);
         if (_fadeOut) {
             CGContextSetAlpha(ctx, 0.3);
@@ -211,8 +233,11 @@
         }
         CGContextDrawPath(ctx, kCGPathStroke);
         
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-            CGFloat convertScale = (_scaleValue-0.5) * 2;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && _shouldDrawExposure) {
+            // draw slider bar
+            CGFloat scaleValue = (_bias-_min) / (_max-_min); // convert to 0~1
+            
+            CGFloat convertScale = (scaleValue-0.5) * 2; // convert to -1~1
             CGFloat yPosition = _focusPoint.y - convertScale*(_size.height/2.0+5);
             
 //            CGRect imageRect = CGRectMake(_focusPoint.x+_size.width/2.0+2, _focusPoint.y-15, 30, 30);
@@ -233,6 +258,27 @@
             CGContextAddLineToPoint(ctx, _focusPoint.x+_size.width/2.0+17, _focusPoint.y+_size.height/2.0+20);
             
             CGContextDrawPath(ctx, kCGPathStroke);
+            
+            if (_shouldDrawBiasText) {
+                // Draw exposure value text
+                NSString *sign = (_bias<0? @"-": @"+");
+                NSString *biasString = [NSString stringWithFormat:@"%.2f", fabsf(_bias)];
+                if ([biasString isEqualToString:@"0.00"]) {
+                    sign = @"";
+                }
+                biasString = [NSString stringWithFormat:@"%@%@", sign, biasString];
+                
+                UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+                NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyle];
+                NSDictionary *attribute = @{NSForegroundColorAttributeName:color, NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle};
+                CGSize sizeOfText = [biasString sizeWithAttributes:attribute];
+                CGPoint textPosition = CGPointMake(_focusPoint.x-sizeOfText.width/2.0, _focusPoint.y-_size.height/2.0-font.lineHeight);
+                
+                UIGraphicsPushContext(ctx);
+                [biasString drawAtPoint:textPosition withAttributes:attribute];
+                UIGraphicsPopContext();
+            }
+            
         }
         
         CGContextRestoreGState(ctx);
@@ -479,21 +525,24 @@
     [super drawRect:rect];
     
     _focusAreaLayer.frame = self.bounds;
+    _exposureBiasSlider.frame = CGRectMake(CGRectGetWidth(self.bounds)-48, CGRectGetHeight(self.bounds)*0.1, 50, CGRectGetHeight(self.bounds)*0.8);
 }
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     
     _focusAreaLayer.frame = self.bounds;
+    _exposureBiasSlider.frame = CGRectMake(CGRectGetWidth(self.bounds)-48, CGRectGetHeight(self.bounds)*0.1, 50, CGRectGetHeight(self.bounds)*0.8);
 }
 
 - (void)layoutSubviews {
     _focusAreaLayer.frame = self.bounds;
+    _exposureBiasSlider.frame = CGRectMake(CGRectGetWidth(self.bounds)-48, CGRectGetHeight(self.bounds)*0.1, 50, CGRectGetHeight(self.bounds)*0.8);
     
     [super layoutSubviews];
 }
 
-- (CCCCameraPreviewView*)preview {
+- (CCCCameraPreviewView *)preview {
     if (_preview == nil) {
         _preview = [[CCCCameraPreviewView alloc] init];
         _preview.translatesAutoresizingMaskIntoConstraints = NO;
@@ -506,22 +555,13 @@
     return _preview;
 }
 
-- (AVCaptureVideoPreviewLayer*)previewLayer {
-    return (AVCaptureVideoPreviewLayer*)self.preview.layer;
+- (AVCaptureVideoPreviewLayer *)previewLayer {
+    return (AVCaptureVideoPreviewLayer *)self.preview.layer;
 }
 
 - (UILabel *)exposureBiasLabel {
     if (_exposureBiasLabel == nil) {
-        _exposureBiasLabel = [[UILabel alloc] init];
-        _exposureBiasLabel.backgroundColor = [UIColor clearColor];
-        _exposureBiasLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
-        _exposureBiasLabel.textAlignment = NSTextAlignmentCenter;
-        _exposureBiasLabel.textColor = [UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.000];
-        _exposureBiasLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_exposureBiasLabel];
         
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_exposureBiasLabel]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_exposureBiasLabel)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_exposureBiasLabel]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_exposureBiasLabel)]];
     }
     
     return _exposureBiasLabel;
@@ -529,7 +569,18 @@
 
 - (UISlider *)exposureBiasSlider {
     if (_exposureBiasSlider == nil) {
+        _exposureBiasSlider = [[UISlider alloc] init];
+        _exposureBiasSlider.backgroundColor = [UIColor clearColor];
+        _exposureBiasSlider.maximumTrackTintColor = [UIColor whiteColor];
+        _exposureBiasSlider.minimumTrackTintColor = [UIColor whiteColor];
+        _exposureBiasSlider.minimumValue = -1;
+        _exposureBiasSlider.maximumValue = 1;
+        _exposureBiasSlider.value = 0;
+        [_exposureBiasSlider addTarget:self action:@selector(_exposureSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [self addSubview:_exposureBiasSlider];
         
+        _exposureBiasSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
+        _exposureBiasSlider.frame = CGRectMake(CGRectGetWidth(self.bounds)-48, CGRectGetHeight(self.bounds)*0.1, 50, CGRectGetHeight(self.bounds)*0.8);
     }
     
     return _exposureBiasSlider;
@@ -564,6 +615,30 @@
                                    @(CCCCameraPreviewScaleTypeScaleAspectFill):AVLayerVideoGravityResizeAspectFill
                                    };
     self.previewLayer.videoGravity = [scaleTypeMap objectForKey:@(scaleType)];
+    
+}
+
+- (void)setExposureControlMode:(CCCCameraExposureControlMode)exposureControlMode {
+    _exposureControlMode = exposureControlMode;
+    
+    [self _clearFocus];
+    
+    switch (_exposureControlMode) {
+        case CCCCameraExposureControlModeSlider: {
+            self.cameraSession.lockExposure = YES;
+            self.exposureBiasSlider.hidden = NO;
+            self.focusAreaLayer.shouldDrawExposure = NO;
+            
+            break;
+        }
+        default: {
+            self.cameraSession.lockExposure = NO;
+            self.exposureBiasSlider.hidden = YES;
+            self.focusAreaLayer.shouldDrawExposure = YES;
+            
+            break;
+        }
+    }
     
 }
 
@@ -682,6 +757,8 @@
     [pinchGestureRecognizer release];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        self.exposureControlMode = CCCCameraExposureControlModeSystem;
+        
         UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(_panGesture:)];
         [self addGestureRecognizer:panGestureRecognizer];
         [panGestureRecognizer release];
@@ -1186,6 +1263,21 @@
     self.exposureBiasLabel.alpha = 0.3;
 }
 
+- (void)_exposureSliderValueChanged:(UISlider *)sender {
+    if (![CCCCameraSession isCameraAccess]) {
+        return;
+    }
+    if (!self.isCameraRunning) {
+        return;
+    }
+    if (self.exposureControlMode != CCCCameraExposureControlModeSlider) {
+        return;
+    }
+    
+    [_cameraSession setCameraExposureBias:sender.value];
+    
+}
+
 #pragma mark - Tap Gesture
 
 - (void)_tapGesture:(UITapGestureRecognizer*)gestureRecognizer {
@@ -1224,13 +1316,16 @@
     self.preview.layer.affineTransform = CGAffineTransformMakeScale(scale, scale);
 }
 
-#pragma mark -
+#pragma mark - Pan Gesture
 
 - (void)_panGesture:(UIPanGestureRecognizer *)gestureRecognizer {
     if (![CCCCameraSession isCameraAccess]) {
         return;
     }
     if (!self.focusAreaLayer.isExposureBiasAdjustable) {
+        return;
+    }
+    if (self.exposureControlMode != CCCCameraExposureControlModeSystem) {
         return;
     }
     
@@ -1256,9 +1351,8 @@
             
             float min = _cameraSession.minExposureBias;
             float max = _cameraSession.maxExposureBias;
-            CGFloat scale = (bias-min) / (max-min);
             
-            self.focusAreaLayer.scaleValue = scale;
+            [self.focusAreaLayer setExposureBias:bias min:min max:max];
             
             self.exposureBiasLabel.alpha = 1;
             self.exposureBiasLabel.text = [NSString stringWithFormat:@"%@%.2f", (bias<0?@"-":@"+"), fabsf(bias)];
@@ -1289,6 +1383,12 @@
         [self _changeVideoOrientationWithOrientation:videoOrientation];
     }
     [self _startSubjectChangedObserver];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        self.exposureBiasSlider.minimumValue = cameraSession.minExposureBias;
+        self.exposureBiasSlider.maximumValue = cameraSession.maxExposureBias;
+        self.exposureBiasSlider.value = cameraSession.currentExposureBias;
+    }
     
     if (_delegate && [_delegate respondsToSelector:@selector(cccCameraViewCameraDidStart:)]) {
         [_delegate cccCameraViewCameraDidStart:self];

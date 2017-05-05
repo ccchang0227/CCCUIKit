@@ -35,6 +35,7 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 @property (readonly, nonatomic) float maxExposureBias NS_AVAILABLE_IOS(8_0);
 @property (readonly, nonatomic) float minExposureBias NS_AVAILABLE_IOS(8_0);
 @property (readonly, nonatomic) float currentExposureBias NS_AVAILABLE_IOS(8_0);
+@property (nonatomic) BOOL lockExposure NS_AVAILABLE_IOS(8_0); // controls whether exposureBias value should reset to original when focus changed, default is NO.
 - (void)setCameraExposureBias:(float)bias NS_AVAILABLE_IOS(8_0);
 
 - (CGFloat)zoomWithPinchGesture:(UIPinchGestureRecognizer*)gestureRecognizer;

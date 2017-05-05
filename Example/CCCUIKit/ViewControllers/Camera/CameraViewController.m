@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *qualityButton;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *starButton;
+
 @end
 
 @implementation CameraViewController
@@ -35,6 +37,7 @@
     self.title = @"Camera";
     
     self.cameraView.delegate = self;
+    self.cameraView.videoQuality = CCCCameraVideoQualityPhoto;
     
 }
 
@@ -235,6 +238,24 @@
 }
 
 - (IBAction)starAction:(id)sender {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
+        return;
+    }
+    
+    switch (self.cameraView.exposureControlMode) {
+        case CCCCameraExposureControlModeSystem:
+            self.cameraView.exposureControlMode = CCCCameraExposureControlModeSlider;
+            break;
+            
+        default: {
+            self.cameraView.exposureControlMode = CCCCameraExposureControlModeSystem;
+            break;
+        }
+    }
+    
+}
+
+- (IBAction)changeScaleTypeAction:(id)sender {
     switch (self.cameraView.scaleType) {
         case CCCCameraPreviewScaleTypeScaleAspectFit: {
             self.cameraView.scaleType = CCCCameraPreviewScaleTypeScaleAspectFill;

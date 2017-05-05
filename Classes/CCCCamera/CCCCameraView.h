@@ -33,7 +33,7 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 - (void)lockPictureOrientationWithOrientation:(UIInterfaceOrientation)orientation;
 - (void)unlockPictureOrientation;
 
-@property (assign, nonatomic) CCCCameraExposureControlMode exposureControlMode;
+@property (assign, nonatomic) CCCCameraExposureControlMode exposureControlMode NS_AVAILABLE_IOS(8_0);
 
 @end
 

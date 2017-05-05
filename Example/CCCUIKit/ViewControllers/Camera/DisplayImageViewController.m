@@ -118,12 +118,41 @@
 
 #pragma mark -
 
-- (IBAction)share:(id)sender {
+- (IBAction)share:(UIBarButtonItem *)sender {
     if (!self.image) {
         return;
     }
     
+    UIImage *image = self.image;
     
+    NSMutableArray *activityItems = [NSMutableArray array];
+    if (image) {
+        [activityItems addObject:image];
+    }
+    
+    NSMutableArray *arrayExcludedTypes = [NSMutableArray arrayWithArray:@[UIActivityTypePrint, UIActivityTypeAssignToContact]];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        [arrayExcludedTypes addObject:UIActivityTypeAddToReadingList];
+    }
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
+        [arrayExcludedTypes addObject:UIActivityTypeOpenInIBooks];
+    }
+    
+    UIActivityViewController *viewCtrlActivity = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    
+    viewCtrlActivity.excludedActivityTypes = arrayExcludedTypes;
+    
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+        [self presentViewController:viewCtrlActivity
+                           animated:YES
+                         completion:nil];
+    }
+    else {
+        UIPopoverController *popoverCtrl = [[UIPopoverController alloc] initWithContentViewController:viewCtrlActivity];
+        [popoverCtrl presentPopoverFromBarButtonItem:sender
+                            permittedArrowDirections:UIPopoverArrowDirectionAny
+                                            animated:YES];
+    }
     
 }
 
