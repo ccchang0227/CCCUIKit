@@ -23,17 +23,17 @@ typedef NS_ENUM(NSUInteger, CCCImageCombineScaleType) {
 
 @interface UIImage (CCCProcessor)
 
-- (UIImage*)rotatedImageWithCorrectOrientation;
+- (UIImage*)cg_rotatedImageWithCorrectOrientation;
 
-- (UIImage*)rotatedImageByRotation:(CCCImageRotation)rotation;
+- (UIImage*)cg_rotatedImageByRotation:(CCCImageRotation)rotation;
 
-- (UIImage*)croppedImageInRect:(CGRect)rect;
+- (UIImage*)cg_croppedImageInRect:(CGRect)rect;
 
-- (UIImage*)scaledImageWithScale:(CGFloat)scale;
+- (UIImage*)cg_scaledImageWithScale:(CGFloat)scale;
 
-- (UIImage*)scaledImageToFitBoundingSize:(CGSize)boundingSize;
+- (UIImage*)cg_scaledImageToFitBoundingSize:(CGSize)boundingSize;
 
-- (UIImage*)scaledImageToFillBoundingSize:(CGSize)boundingSize;
+- (UIImage*)cg_scaledImageToFillBoundingSize:(CGSize)boundingSize;
 
 @end
 
@@ -43,5 +43,21 @@ typedef NS_ENUM(NSUInteger, CCCImageCombineScaleType) {
 + (UIImage *)animatedImageWithGIFData:(NSData *)data;
 
 + (UIImage *)animatedImageWithGIFURL:(NSURL *)URL;
+
+@end
+
+@interface UIImage (CIProcessor)
+
+- (UIImage *)ci_rotatedImageWithCorrectOrientation;
+
+- (UIImage *)ci_rotatedImageByRotation:(CCCImageRotation)rotation;
+
+- (UIImage *)ci_croppedImageInRect:(CGRect)rect;
+
+- (UIImage *)ci_scaledImageWithScale:(CGFloat)scale;
+
+- (UIImage *)ci_scaledImageToFitBoundingSize:(CGSize)boundingSize;
+
+- (UIImage *)ci_scaledImageToFillBoundingSize:(CGSize)boundingSize;
 
 @end

@@ -45,7 +45,7 @@ Pod::Spec.new do |s|
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCamera/**/*.{h,m}'
     ss.resources = 'Assets/CCCCamera_*.png'
-    ss.frameworks = 'AVFoundation', 'ImageIO', 'MobileCoreServices', 'CoreMotion'
+    ss.frameworks = 'AVFoundation', 'ImageIO', 'MobileCoreServices', 'CoreMotion', 'CoreImage'
   end
 
   s.subspec 'CCCCanvas' do |ss|

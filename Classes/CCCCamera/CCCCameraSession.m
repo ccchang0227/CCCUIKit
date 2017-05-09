@@ -1063,6 +1063,16 @@
 
 #pragma mark - Focus
 
+- (void)setLockExposure:(BOOL)lockExposure {
+    _lockExposure = lockExposure;
+    
+    if (self.isCameraRunning && _videoInput) {
+        AVCaptureDevice *captureDevice = _videoInput.device;
+        [self setCameraFocusPoint:captureDevice.focusPointOfInterest];
+    }
+    
+}
+
 - (void)setCameraFocusPoint:(CGPoint)point {
     if (!_videoInput) {
         return;
@@ -1584,6 +1594,8 @@
 }
 
 - (void)_cameraStarted:(NSNotification*)notification {
+    [self _subjectMonitorChanged:nil];
+    
     [CCCCameraSession _executeOnMainThread:^ {
         if (_delegate && [_delegate respondsToSelector:@selector(cccCameraSessionDidStart:)]) {
             [_delegate cccCameraSessionDidStart:self];

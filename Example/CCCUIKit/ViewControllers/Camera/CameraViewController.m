@@ -243,10 +243,10 @@
     }
     
     switch (self.cameraView.exposureControlMode) {
-        case CCCCameraExposureControlModeSystem:
+        case CCCCameraExposureControlModeSystem: {
             self.cameraView.exposureControlMode = CCCCameraExposureControlModeSlider;
             break;
-            
+        }
         default: {
             self.cameraView.exposureControlMode = CCCCameraExposureControlModeSystem;
             break;
