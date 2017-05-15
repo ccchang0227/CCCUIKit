@@ -1269,7 +1269,7 @@
 - (void)_fadeOutExposure {
     [self.focusAreaLayer performSelector:@selector(fadeOutFocusArea) withObject:nil afterDelay:self.focusAreaLayer->_delay];
     
-    [self performSelector:@selector(_fadeOutExposureComponents) withObject:nil afterDelay:self.focusAreaLayer->_delay];
+//        [self performSelector:@selector(_fadeOutExposureComponents) withObject:nil afterDelay:self.focusAreaLayer->_delay];
 }
 
 - (void)_fadeOutExposureComponents {
