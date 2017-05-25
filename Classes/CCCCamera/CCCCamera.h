@@ -14,7 +14,7 @@
  *
  * @version 1.1.1
  * @author Chih-chieh Chang
- * @date 2017-04-27
+ * @date 2017-05-25
  */
 
 #import "CCCCameraConstants.h"

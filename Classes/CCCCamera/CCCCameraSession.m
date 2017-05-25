@@ -1140,10 +1140,10 @@
 
 - (float)minExposureBias {
     if (!_videoInput) {
-        return 0;
+        return -3;
     }
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
-        return 0;
+        return -3;
     }
     
     AVCaptureDevice *captureDevice = _videoInput.device;
@@ -1153,10 +1153,10 @@
 
 - (float)maxExposureBias {
     if (!_videoInput) {
-        return 0;
+        return 3;
     }
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
-        return 0;
+        return 3;
     }
     
     AVCaptureDevice *captureDevice = _videoInput.device;
@@ -1196,11 +1196,14 @@
             
             [captureDevice setExposureTargetBias:_exposureBias completionHandler:nil];
             
-            if ([captureDevice isFocusModeSupported:AVCaptureFocusModeLocked]) {
-                captureDevice.focusMode = AVCaptureFocusModeLocked;
-            }
+//            if ([captureDevice isFocusModeSupported:AVCaptureFocusModeLocked]) {
+//                captureDevice.focusMode = AVCaptureFocusModeLocked;
+//            }
             
-            if ([captureDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
+            if ([captureDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
+                captureDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
+            }
+            else if ([captureDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
                 captureDevice.exposureMode = AVCaptureExposureModeAutoExpose;
             }
             

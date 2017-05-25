@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, CCCCameraExposureControlMode) {
     CCCCameraExposureControlModeSystem = 0,
-    CCCCameraExposureControlModeSlider
+    CCCCameraExposureControlModeSlider,
+    CCCCameraExposureControlModeCustom
 } NS_ENUM_AVAILABLE_IOS(8_0);
 
 @protocol CCCCameraViewDelegate;
