@@ -11,7 +11,7 @@ tvOS 9.0以上 (部分支援)
 
 * UIKit+CCCAdditions (1.0.1)<br>
 * CCCAssetsViewController (1.0.1)<br>
-* CCCCamera (1.1.1)<br>
+* CCCCamera (1.2.0-beta)<br>
 * CCCCanvas (1.0.1)<br>
 * CCCCycleView (1.0.1)<br>
 * CCCDevice (1.0.1)<br>

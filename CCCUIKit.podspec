@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CCCUIKit'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4-beta'
   s.summary          = "C.C.Chang's custom UIKit."
 
   s.homepage         = 'https://github.com/ccchang0227/CCCUIKit'
@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCCamera' do |ss|
-    # current version: 1.1.1
+    # current version: 1.2.0-beta
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCamera/**/*.{h,m}'
     ss.resources = 'Assets/CCCCamera_*.png'

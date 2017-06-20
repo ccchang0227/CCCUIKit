@@ -60,6 +60,8 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 // barcodesArray will be nil or an array contains CCCCameraBarcodeData.
 - (void)cccCameraSession:(CCCCameraSession*)cameraSession didDetectBarcodes:(NSSet<CCCCameraBarcodeData*>* _Nullable)barcodeSet NS_AVAILABLE_IOS(7_0);
 
+- (void)cccCameraSession:(CCCCameraSession*)cameraSession didReceiveSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection*)connection;
+
 @end
 
 

@@ -1743,6 +1743,10 @@
 
 - (void)captureOutput:(AVCaptureOutput*)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection*)connection {
     
+    if (_delegate && [_delegate respondsToSelector:@selector(cccCameraSession:didReceiveSampleBuffer:fromConnection:)]) {
+        [_delegate cccCameraSession:self didReceiveSampleBuffer:sampleBuffer fromConnection:connection];
+    }
+    
     if (captureOutput == _videoDataOutput) {
         size_t width = 0;
         size_t height = 0;
@@ -1755,7 +1759,9 @@
         }
     }
     
-    if (_cameraCaptureMode == CCCCameraCaptureModePhoto) return;
+    if (_cameraCaptureMode == CCCCameraCaptureModePhoto) {
+        return;
+    }
     
     CMTime sampleTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
     if (_isVideoRecording && _videoFileWriter) {
