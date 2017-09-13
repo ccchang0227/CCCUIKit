@@ -82,6 +82,8 @@ typedef NS_ENUM(NSInteger, CCCRecycleScrollAnimateDirections) {
 // pass -1 to index to scroll infinitely, only works when animated is YES.
 - (void)scrollToIndex:(NSInteger)index direction:(CCCRecycleScrollAnimateDirections)direction animated:(BOOL)animated;
 - (void)decelerate;
+- (void)decelerateToIndex:(NSInteger)index;
+- (void)stopScrollAtIndex:(NSInteger)index;
 - (void)stopScroll;
 
 @end
