@@ -9,6 +9,10 @@
 #import "CCCRecycleScrollView.h"
 
 
+#define kCCCRecycleScrollViewTimerInterval 0.03
+#define kCCCRecycleScrollViewFrameDicFrameKey @"frame"
+#define kCCCRecycleScrollViewFrameDicIndexKey @"index"
+
 @interface NSThread (MainThreadExecute)
 
 + (void)_executeOnMainThread:(void (^)(void))block;
@@ -28,6 +32,24 @@
             block();
         });
     }
+}
+
+@end
+
+
+@interface CCCRecycleFrame : NSObject
+
++ (instancetype)frame;
+
+@property (nonatomic) NSInteger subviewIndex;
+@property (nonatomic) CGRect frame;
+
+@end
+
+@implementation CCCRecycleFrame
+
++ (instancetype)frame {
+    return [[[self alloc] init] autorelease];
 }
 
 @end
@@ -114,7 +136,6 @@
     CGFloat _accuracy;           // 加速度
     dispatch_source_t _decelerateTimer;
     id _userInfo;
-//    NSTimer *_decelerateTimer;
     
     CGFloat _minimumEdge;        // 最小邊界 (在reloadData時重新計算)
     CGFloat _maximumEdge;        // 最大邊界 (在reloadData時重新計算)
@@ -126,21 +147,25 @@
     NSLock *_lock;
     
     BOOL _threadShouldStart;
+    
+    CGRect _currentBounds;
 }
 
 // inner variables.
 
 @property (assign, nonatomic) NSInteger numberOfSubViews;       // 全部的view總數
-@property (retain, nonatomic) NSMutableSet *viewSet;            // 存放未使用的view
-@property (retain, nonatomic) NSMutableArray *arrayViewFrames;  // 存放畫面上view的frame
-@property (retain, nonatomic) NSMutableArray *arraySubViews;    // 存放實際在畫面上的view (按位置從左而右/從上而下 <-> 0~N-1)
+@property (retain, nonatomic) NSMutableSet<CCCRecycleView *> *viewSet;            // 存放未使用的view
+@property (retain, nonatomic) NSMutableArray<CCCRecycleFrame *> *arrayViewFrames;  // 存放畫面上view的frame
+@property (retain, nonatomic) NSMutableArray<CCCRecycleView *> *arraySubViews;    // 存放實際在畫面上的view (按位置從左而右/從上而下 <-> 0~N-1)
 
+/// Deprecated
 + (NSThread *)timerThread;
 
 @end
 
 @implementation CCCRecycleScrollView
 
+/// Deprecated
 + (NSThread *)timerThread {
     static dispatch_once_t pred;
     static NSThread *timerThread = nil;
@@ -153,6 +178,7 @@
     return timerThread;
 }
 
+/// Deprecated
 + (void)_runThread {
     @autoreleasepool {
         CFRunLoopRun();
@@ -197,6 +223,8 @@
     _lock = [[NSLock alloc] init];
     
     _threadShouldStart = NO;
+    
+    _currentBounds = self.bounds;
 }
 
 - (instancetype)init {
@@ -227,9 +255,6 @@
 }
 
 - (void)dealloc {
-//    if (_decelerateTimer) {
-//        [_decelerateTimer invalidate];
-//    }
     if (_decelerateTimer != NULL) {
         dispatch_source_cancel(_decelerateTimer);
         dispatch_release(_decelerateTimer);
@@ -267,10 +292,15 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if ([_lock tryLock]) {
-        [self _resizeSubViews];
-        [_lock unlock];
+    if (!CGRectEqualToRect(self.bounds, _currentBounds) && CGRectEqualToRect(self.bounds, CGRectZero)) {
+        _currentBounds = self.bounds;
+        
+        if ([_lock tryLock]) {
+            [self _resizeSubViews];
+            [_lock unlock];
+        }
     }
+    
 }
 
 - (void)setFrame:(CGRect)frame {
@@ -282,6 +312,10 @@
     if (CGRectEqualToRect(frame, CGRectZero)) {
         return;
     }
+    if (CGRectEqualToRect(self.bounds, _currentBounds)) {
+        return;
+    }
+    _currentBounds = self.bounds;
     
     id userInfo = nil;
     BOOL isTimerActive = NO;
@@ -303,6 +337,7 @@
             [self _startScrollWithDirection:[userInfo integerValue]];
         }
     }
+    
 }
 
 - (void)setScrollDirection:(CCCRecycleScrollDirections)scrollDirection {
@@ -485,6 +520,7 @@
     [array enumerateObjectsUsingBlock:actionsBlock];
 }
 
+/// Deprecated
 - (void)_relocateSubViewsWithOffset:(CGPoint)offset {
     __block typeof(self) tempSelf = self;
     [tempSelf _enumerateObjectsInArray:tempSelf.arraySubViews withActions:^(CCCRecycleView *subView, NSUInteger idx, BOOL *stop) {
@@ -530,7 +566,11 @@
             rect.size.width = tempSelf.bounds.size.width-2*rect.origin.x;
         }
         subView.frame = rect;
-        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:[NSValue valueWithCGRect:rect]];
+        
+        CCCRecycleFrame *frameData = [CCCRecycleFrame frame];
+        frameData.subviewIndex = subView.index;
+        frameData.frame = rect;
+        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:frameData];
         
         if (tempSelf.scrollDirection == CCCRecycleScrollDirectionHorizontal) {
             if (idx == 0) {
@@ -641,12 +681,12 @@
     return [self.arraySubViews indexOfObject:subView];
 }
 
-- (NSValue *)_frameValueAtIndex:(NSInteger)index {
+- (CGRect)_frameValueAtIndex:(NSInteger)index {
     if (index < 0 || index >= self.arrayViewFrames.count) {
-        return [NSValue valueWithCGRect:CGRectZero];
+        return CGRectZero;
     }
     
-    return [self.arrayViewFrames objectAtIndex:index];
+    return [self.arrayViewFrames objectAtIndex:index].frame;
 }
 
 - (NSArray *)_indexesListFromCentralIndex:(NSInteger)centralIndex withIndexLength:(NSInteger)length {
@@ -833,9 +873,8 @@
         }
         
         NSInteger neighborIndex = (index-1<0)? ((index+1>=self.numberOfSubViews)? -1: index+1): index-1;
-        NSValue *frameValue = [self _frameValueAtIndex:neighborIndex];
-        if (!CGRectEqualToRect([frameValue CGRectValue], CGRectZero)) {
-            CGRect neighborFrame = [frameValue CGRectValue];
+        CGRect neighborFrame = [self _frameValueAtIndex:neighborIndex];
+        if (!CGRectEqualToRect(neighborFrame, CGRectZero)) {
             if (self.scrollDirection == CCCRecycleScrollDirectionHorizontal) {
                 if (neighborIndex < index) {
                     frame.origin = CGPointMake(CGRectGetMaxX(neighborFrame)+_edge, (self.bounds.size.height-frame.size.height)/2.0);
@@ -854,14 +893,17 @@
             }
         }
         
+        CCCRecycleFrame *frameData = [CCCRecycleFrame frame];
+        frameData.subviewIndex = subViewIndex;
+        frameData.frame = frame;
         if (index < self.arrayViewFrames.count && index >= 0) {
-            [self.arrayViewFrames insertObject:[NSValue valueWithCGRect:frame] atIndex:index];
+            [self.arrayViewFrames insertObject:frameData atIndex:index];
         }
         else if (index < 0) {
-            [self.arrayViewFrames insertObject:[NSValue valueWithCGRect:frame] atIndex:0];
+            [self.arrayViewFrames insertObject:frameData atIndex:0];
         }
         else {
-            [self.arrayViewFrames addObject:[NSValue valueWithCGRect:frame]];
+            [self.arrayViewFrames addObject:frameData];
         }
         
         return frame;
@@ -952,9 +994,8 @@
     }
     
     NSInteger neighborIndex = (index-1<0)? ((index+1>=self.numberOfSubViews)? -1: index+1): index-1;
-    NSValue *frameValue = [self _frameValueAtIndex:neighborIndex];
-    if (!CGRectEqualToRect([frameValue CGRectValue], CGRectZero)) {
-        CGRect neighborFrame = [frameValue CGRectValue];
+    CGRect neighborFrame = [self _frameValueAtIndex:neighborIndex];
+    if (!CGRectEqualToRect(neighborFrame, CGRectZero)) {
         if (self.scrollDirection == CCCRecycleScrollDirectionHorizontal) {
             if (neighborIndex < index) {
                 frame.origin = CGPointMake(CGRectGetMaxX(neighborFrame)+_edge, (self.bounds.size.height-frame.size.height)/2.0);
@@ -974,14 +1015,17 @@
         }
     }
     
+    CCCRecycleFrame *frameData = [CCCRecycleFrame frame];
+    frameData.subviewIndex = subViewIndex;
+    frameData.frame = frame;
     if (index < self.arrayViewFrames.count && index >= 0) {
-        [self.arrayViewFrames insertObject:[NSValue valueWithCGRect:frame] atIndex:index];
+        [self.arrayViewFrames insertObject:frameData atIndex:index];
     }
     else if (index < 0) {
-        [self.arrayViewFrames insertObject:[NSValue valueWithCGRect:frame] atIndex:0];
+        [self.arrayViewFrames insertObject:frameData atIndex:0];
     }
     else {
-        [self.arrayViewFrames addObject:[NSValue valueWithCGRect:frame]];
+        [self.arrayViewFrames addObject:frameData];
     }
     
     __block CCCRecycleView *subView = nil;
@@ -1114,11 +1158,12 @@
         //*/
         //*
         dispatch_apply(tempSelf.arrayViewFrames.count, dispatch_get_main_queue(), ^(size_t i) {
-            NSValue *frameValue = [tempSelf.arrayViewFrames objectAtIndex:i];
+            CGRect frame = [tempSelf.arrayViewFrames objectAtIndex:i].frame;
+            NSValue *frameValue = [NSValue valueWithCGRect:frame];
             NSArray *filteredArray = [tempSelf.arraySubViews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.frame=%@", frameValue]];
             if (filteredArray.count == 0) {
                 NSInteger subViewIndex = [[indexesList objectAtIndex:i] integerValue];
-                [tempSelf _loadSubViewWithSubViewIndex:subViewIndex frame:[frameValue CGRectValue] atIndex:i];
+                [tempSelf _loadSubViewWithSubViewIndex:subViewIndex frame:frame atIndex:i];
             }
         });
         //*/
@@ -1159,24 +1204,26 @@
     __block CGFloat minimumDelta = CGFLOAT_MAX;
     __block typeof(self) tempSelf = self;
     NSMutableArray *arrayFramesTemp = [NSMutableArray arrayWithArray:self.arrayViewFrames];
-    [self _enumerateObjectsInArray:arrayFramesTemp withActions:^(NSValue *frameValue, NSUInteger idx, BOOL *stop) {
+    [self _enumerateObjectsInArray:arrayFramesTemp withActions:^(CCCRecycleFrame *frameData, NSUInteger idx, BOOL *stop) {
         
-        CGRect frame = [frameValue CGRectValue];
+        CGRect frame = frameData.frame;
         if (tempSelf.scrollDirection == CCCRecycleScrollDirectionHorizontal) {
             frame.origin.x -= offset.x;
         }
         else if (tempSelf.scrollDirection == CCCRecycleScrollDirectionVertical) {
             frame.origin.y -= offset.y;
         }
-        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:[NSValue valueWithCGRect:frame]];
+        frameData.frame = frame;
+        
+        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:frameData];
         
     }];
     NSMutableArray *arraySubViewsTemp = [NSMutableArray arrayWithArray:self.arraySubViews];
     [self _enumerateObjectsInArray:arraySubViewsTemp withActions:^(CCCRecycleView *subView, NSUInteger idx, BOOL *stop) {
         
-        NSValue *frameValue = [NSValue valueWithCGRect:[[tempSelf _frameValueAtIndex:idx] CGRectValue]];
-        [tempSelf _relocateSubView:subView usingFrame:[frameValue CGRectValue]];
-        [tempSelf _reloadSubView:frameValue withIndex:idx];
+        CGRect frame = [tempSelf _frameValueAtIndex:idx];
+        [tempSelf _relocateSubView:subView usingFrame:frame];
+        [tempSelf _reloadSubView:[NSValue valueWithCGRect:frame] withIndex:idx];
         
         [tempSelf _estimateCentralIndexWithSubView:subView minimumOffset:&minimumDelta estimatedIndex:&estimateIndex];
         
@@ -1223,7 +1270,7 @@
     _userInfo = [@(direction) retain];
     
     _decelerateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-    dispatch_source_set_timer(_decelerateTimer, DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC, 0.005 * NSEC_PER_SEC);
+    dispatch_source_set_timer(_decelerateTimer, DISPATCH_TIME_NOW, kCCCRecycleScrollViewTimerInterval * NSEC_PER_SEC, 0.005 * NSEC_PER_SEC);
     dispatch_source_set_event_handler(_decelerateTimer, ^{
         [self _scrollAnimation:direction];
     });
@@ -1306,20 +1353,24 @@
             _accuracy -= 0.1;
     }
     
-    if (CGPointEqualToPoint(relocateOffset, CGPointZero)) return;
+    if (CGPointEqualToPoint(relocateOffset, CGPointZero)) {
+        return;
+    }
     
     __block typeof(self) tempSelf = self;
     NSMutableArray *arrayFramesTemp = [NSMutableArray arrayWithArray:self.arrayViewFrames];
-    [self _enumerateObjectsInArray:arrayFramesTemp withActions:^(NSValue *frameValue, NSUInteger idx, BOOL *stop) {
+    [self _enumerateObjectsInArray:arrayFramesTemp withActions:^(CCCRecycleFrame *frameData, NSUInteger idx, BOOL *stop) {
         
-        CGRect frame = [frameValue CGRectValue];
+        CGRect frame = frameData.frame;
         if (tempSelf.scrollDirection == CCCRecycleScrollDirectionHorizontal) {
             frame.origin.x -= relocateOffset.x;
         }
         else if (tempSelf.scrollDirection == CCCRecycleScrollDirectionVertical) {
             frame.origin.y -= relocateOffset.y;
         }
-        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:[NSValue valueWithCGRect:frame]];
+        frameData.frame = frame;
+        
+        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:frameData];
         
     }];
     
@@ -1331,9 +1382,9 @@
         estimateIndex = tempSelf.currentIndex;
         [tempSelf _enumerateObjectsInArray:arraySubViewsTemp withActions:^(CCCRecycleView *subView, NSUInteger idx, BOOL *stop) {
             
-            NSValue *frameValue = [NSValue valueWithCGRect:[[tempSelf _frameValueAtIndex:idx] CGRectValue]];
-            [tempSelf _relocateSubView:subView usingFrame:[frameValue CGRectValue]];
-            //[tempSelf _reloadSubView:frameValue withIndex:idx];
+            CGRect frame = [tempSelf _frameValueAtIndex:idx];
+            [tempSelf _relocateSubView:subView usingFrame:frame];
+            //[tempSelf _reloadSubView:[NSValue valueWithCGRect:frame] withIndex:idx];
             
             [tempSelf _subViewDisplay:subView withIndex:subView.index];
             
@@ -1367,25 +1418,27 @@
     offset.y -= [gestureRecognizer translationInView:self].y;
     
     NSMutableArray *arrayFramesTemp = [NSMutableArray arrayWithArray:self.arrayViewFrames];
-    [self _enumerateObjectsInArray:arrayFramesTemp withActions:^(NSValue *frameValue, NSUInteger idx, BOOL *stop) {
+    [self _enumerateObjectsInArray:arrayFramesTemp withActions:^(CCCRecycleFrame *frameData, NSUInteger idx, BOOL *stop) {
         
-        CGRect frame = [frameValue CGRectValue];
+        CGRect frame = frameData.frame;
         if (tempSelf.scrollDirection == CCCRecycleScrollDirectionHorizontal) {
             frame.origin.x -= offset.x;
         }
         else if (tempSelf.scrollDirection == CCCRecycleScrollDirectionVertical) {
             frame.origin.y -= offset.y;
         }
-        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:[NSValue valueWithCGRect:frame]];
+        frameData.frame = frame;
+        
+        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:frameData];
         
     }];
     
     NSMutableArray *arraySubViewsTemp = [NSMutableArray arrayWithArray:self.arraySubViews];
     [self _enumerateObjectsInArray:arraySubViewsTemp withActions:^(CCCRecycleView *subView, NSUInteger idx, BOOL *stop) {
         
-        NSValue *frameValue = [NSValue valueWithCGRect:[[tempSelf _frameValueAtIndex:idx] CGRectValue]];
-        [tempSelf _relocateSubView:subView usingFrame:[frameValue CGRectValue]];
-        //[tempSelf _reloadSubView:frameValue withIndex:idx];
+        CGRect frame = [tempSelf _frameValueAtIndex:idx];
+        [tempSelf _relocateSubView:subView usingFrame:frame];
+        //[tempSelf _reloadSubView:[NSValue valueWithCGRect:frame] withIndex:idx];
         
         [tempSelf _estimateCentralIndexWithSubView:subView minimumOffset:&minimumDelta estimatedIndex:&estimateIndex];
         
@@ -1393,7 +1446,7 @@
     _centerIndex = estimateIndex;
     _currentIndex = _centerIndex;
     
-//    [self _reloadSubViews];
+    [self _reloadSubViews];
     
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStatePossible: {
@@ -1423,8 +1476,6 @@
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed: {
             _endPoint = [gestureRecognizer locationInView:self];
-            
-            NSLog(@"_scrollVelocity: %@", NSStringFromCGPoint(_scrollVelocity));
             
             [self _startDecelerate];
             break;
@@ -1468,10 +1519,10 @@
         BOOL willDecelerate = YES;
         
         // 若是很快速的滑動，則直接切換到上/下一頁 (增加靈敏度)
-        NSValue *rectValue = [self.arrayViewFrames objectAtIndex:self.arrayViewFrames.count/2];
+        CCCRecycleFrame *frameData = [self.arrayViewFrames objectAtIndex:self.arrayViewFrames.count/2];
         CGRect centerFrame = CGRectZero;
-        if ((NSNull*)rectValue != [NSNull null]) {
-            centerFrame = [rectValue CGRectValue];
+        if ((NSNull *)frameData != [NSNull null]) {
+            centerFrame = frameData.frame;
         }
         
         if (self.scrollDirection == CCCRecycleScrollDirectionHorizontal) {
@@ -1549,7 +1600,7 @@
     _userInfo = nil;
     
     _decelerateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-    dispatch_source_set_timer(_decelerateTimer, DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC, 0.005 * NSEC_PER_SEC);
+    dispatch_source_set_timer(_decelerateTimer, DISPATCH_TIME_NOW, kCCCRecycleScrollViewTimerInterval * NSEC_PER_SEC, 0.005 * NSEC_PER_SEC);
     dispatch_source_set_event_handler(_decelerateTimer, ^{
         [self _decelerate];
     });
@@ -1669,16 +1720,18 @@
     }
     __block typeof(self) tempSelf = self;
     NSMutableArray *arrayFramesTemp = [NSMutableArray arrayWithArray:self.arrayViewFrames];
-    [tempSelf _enumerateObjectsInArray:arrayFramesTemp withActions:^(NSValue *frameValue, NSUInteger idx, BOOL *stop) {
+    [tempSelf _enumerateObjectsInArray:arrayFramesTemp withActions:^(CCCRecycleFrame *frameData, NSUInteger idx, BOOL *stop) {
         
-        CGRect frame = [frameValue CGRectValue];
+        CGRect frame = frameData.frame;
         if (tempSelf.scrollDirection == CCCRecycleScrollDirectionHorizontal) {
             frame.origin.x -= relocateOffset.x;
         }
         else if (tempSelf.scrollDirection == CCCRecycleScrollDirectionVertical) {
             frame.origin.y -= relocateOffset.y;
         }
-        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:[NSValue valueWithCGRect:frame]];
+        frameData.frame = frame;
+        
+        [tempSelf.arrayViewFrames replaceObjectAtIndex:idx withObject:frameData];
         
     }];
     
@@ -1692,9 +1745,9 @@
         }
         [tempSelf _enumerateObjectsInArray:arraySubViewsTemp withActions:^(CCCRecycleView *subView, NSUInteger idx, BOOL *stop) {
             
-            NSValue *frameValue = [NSValue valueWithCGRect:[[tempSelf _frameValueAtIndex:idx] CGRectValue]];
-            [tempSelf _relocateSubView:subView usingFrame:[frameValue CGRectValue]];
-            //[tempSelf _reloadSubView:frameValue withIndex:idx];
+            CGRect frame = [tempSelf _frameValueAtIndex:idx];
+            [tempSelf _relocateSubView:subView usingFrame:frame];
+            //[tempSelf _reloadSubView:[NSValue valueWithCGRect:frame] withIndex:idx];
             
             [tempSelf _subViewDisplay:subView withIndex:subView.index];
             
@@ -1707,7 +1760,7 @@
         _currentIndex = _centerIndex;
         
         [tempSelf _reloadSubViews];
-        
+    
         if (tempSelf.delegate && [tempSelf.delegate respondsToSelector:@selector(recycleScrollViewDidScroll:)]) {
             [tempSelf.delegate recycleScrollViewDidScroll:tempSelf];
         }

@@ -34,9 +34,9 @@ typedef NS_ENUM(NSInteger, CCCRecycleScrollAnimateDirections) {
 /**
  * A double sided scrollView
  *
- * @version 1.0.1
+ * @version 1.1.0-beta
  * @author Chih-chieh Chang
- * @date 2017-02-20
+ * @date 2017-09-13
  */
 @interface CCCRecycleScrollView : UIView
 
