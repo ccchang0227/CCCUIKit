@@ -112,7 +112,9 @@
     CGPoint _scrollVelocity;     // 用來判斷拉動方向
     CGPoint _lastScrollOffset;   // 拉動速度
     CGFloat _accuracy;           // 加速度
-    NSTimer *_decelerateTimer;
+    dispatch_source_t _decelerateTimer;
+    id _userInfo;
+//    NSTimer *_decelerateTimer;
     
     CGFloat _minimumEdge;        // 最小邊界 (在reloadData時重新計算)
     CGFloat _maximumEdge;        // 最大邊界 (在reloadData時重新計算)
@@ -225,15 +227,21 @@
 }
 
 - (void)dealloc {
-    if (_decelerateTimer) {
-        [_decelerateTimer invalidate];
+//    if (_decelerateTimer) {
+//        [_decelerateTimer invalidate];
+//    }
+    if (_decelerateTimer != NULL) {
+        dispatch_source_cancel(_decelerateTimer);
+        dispatch_release(_decelerateTimer);
     }
+    _decelerateTimer = NULL;
     
     [_arrayViewFrames removeAllObjects];
     [_arraySubViews removeAllObjects];
     [_viewSet removeAllObjects];
     
 #if !__has_feature(objc_arc)
+    [_userInfo release];
     [_arrayViewFrames release];
     [_arraySubViews release];
     [_viewSet release];
@@ -1128,13 +1136,14 @@
     _decelerating = NO;
     _scrolling = NO;
     
-    id userInfo = nil;
-    if (_decelerateTimer) {
-        userInfo = [_decelerateTimer userInfo];
+    id userInfo = _userInfo;
+    if (_decelerateTimer != NULL) {
+        //userInfo = [_decelerateTimer userInfo];
         
-        [_decelerateTimer invalidate];
-        _decelerateTimer = nil;
+        dispatch_source_cancel(_decelerateTimer);
+        dispatch_release(_decelerateTimer);
     }
+    _decelerateTimer = NULL;
     
     _threadShouldStart = NO;
     
@@ -1208,6 +1217,18 @@
     _accuracy = self.decelerateRate;
     _shouldDecelerate = NO;
     
+    if (_userInfo) {
+        [_userInfo release];
+    }
+    _userInfo = [@(direction) retain];
+    
+    _decelerateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    dispatch_source_set_timer(_decelerateTimer, DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC, 0.005 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(_decelerateTimer, ^{
+        [self _scrollAnimation:direction];
+    });
+    dispatch_resume(_decelerateTimer);
+    /*
     NSThread *thread = CCCRecycleScrollView.timerThread;
     [self performSelector:@selector(_startScrollAnimationTimer:) onThread:thread withObject:@(direction) waitUntilDone:NO];
     if (!_threadShouldStart) {
@@ -1217,11 +1238,12 @@
     if (!thread.isExecuting && !thread.isFinished) {
         [thread start];
     }
+    */
 }
 
 - (void)_startScrollAnimationTimer:(NSNumber *)direction {
     @autoreleasepool {
-        _decelerateTimer = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(_scrollAnimation:) userInfo:direction repeats:YES];
+//        _decelerateTimer = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(_scrollAnimation:) userInfo:direction repeats:YES];
         
 //        CFRunLoopRun();
 //        [[NSRunLoop currentRunLoop] run];
@@ -1255,12 +1277,12 @@
     _shouldDecelerate = YES;
 }
 
-- (void)_scrollAnimation:(NSTimer *)theTimer {
-    if (_decelerateTimer == nil) {
+- (void)_scrollAnimation:(CCCRecycleScrollAnimateDirections)direction {
+    if (_decelerateTimer == NULL) {
         return;
     }
     
-    CCCRecycleScrollAnimateDirections direction = [_decelerateTimer.userInfo integerValue];
+//    CCCRecycleScrollAnimateDirections direction = [_decelerateTimer.userInfo integerValue];
     
     CCCRecycleView *targetSubView = [self _subViewWithIndex:self.currentIndex searchDirection:direction];
     CGFloat delta = targetSubView.center.x-self.bounds.size.width/2.0;
@@ -1301,7 +1323,7 @@
         
     }];
     
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    //dispatch_async(dispatch_get_main_queue(), ^ {
         __block NSInteger estimateIndex = 0;
         __block CGFloat minimumDelta = CGFLOAT_MAX;
         NSMutableArray *arraySubViewsTemp = [NSMutableArray arrayWithArray:self.arraySubViews];
@@ -1325,7 +1347,7 @@
         if (tempSelf.delegate && [tempSelf.delegate respondsToSelector:@selector(recycleScrollViewDidScroll:)]) {
             [tempSelf.delegate recycleScrollViewDidScroll:tempSelf];
         }
-    });
+    //});
 }
 
 #pragma mark - PanGestureRecognizer
@@ -1371,7 +1393,7 @@
     _centerIndex = estimateIndex;
     _currentIndex = _centerIndex;
     
-    [self _reloadSubViews];
+//    [self _reloadSubViews];
     
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStatePossible: {
@@ -1401,6 +1423,9 @@
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed: {
             _endPoint = [gestureRecognizer locationInView:self];
+            
+            NSLog(@"_scrollVelocity: %@", NSStringFromCGPoint(_scrollVelocity));
+            
             [self _startDecelerate];
             break;
         }
@@ -1518,6 +1543,18 @@
         }
     }
     
+    if (_userInfo) {
+        [_userInfo release];
+    }
+    _userInfo = nil;
+    
+    _decelerateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    dispatch_source_set_timer(_decelerateTimer, DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC, 0.005 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(_decelerateTimer, ^{
+        [self _decelerate];
+    });
+    dispatch_resume(_decelerateTimer);
+    /*
     NSThread *thread = CCCRecycleScrollView.timerThread;
     [self performSelector:@selector(_startDecelerateTimer) onThread:thread withObject:nil waitUntilDone:NO];
     if (!_threadShouldStart) {
@@ -1527,11 +1564,12 @@
     if (!thread.isExecuting && !thread.isFinished) {
         [thread start];
     }
+    */
 }
 
 - (void)_startDecelerateTimer {
     @autoreleasepool {
-        _decelerateTimer = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(_decelerate:) userInfo:nil repeats:YES];
+        //_decelerateTimer = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(_decelerate:) userInfo:nil repeats:YES];
         
 //        CFRunLoopRun();
 //        [[NSRunLoop currentRunLoop] run];
@@ -1549,8 +1587,8 @@
     }];
 }
 
-- (void)_decelerate:(NSTimer *)theTimer {
-    if (_decelerateTimer == nil) {
+- (void)_decelerate {
+    if (_decelerateTimer == NULL) {
         return;
     }
     
@@ -1644,7 +1682,7 @@
         
     }];
     
-    dispatch_async(dispatch_get_main_queue(), ^ {
+    //dispatch_async(dispatch_get_main_queue(), ^ {
         __block NSInteger estimateIndex = 0;
         __block CGFloat minimumDelta = CGFLOAT_MAX;
         NSMutableArray *arraySubViewsTemp = [NSMutableArray arrayWithArray:tempSelf.arraySubViews];
@@ -1673,7 +1711,7 @@
         if (tempSelf.delegate && [tempSelf.delegate respondsToSelector:@selector(recycleScrollViewDidScroll:)]) {
             [tempSelf.delegate recycleScrollViewDidScroll:tempSelf];
         }
-    });
+    //});
 }
 
 @end
