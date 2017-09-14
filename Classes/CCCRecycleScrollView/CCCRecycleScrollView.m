@@ -1322,8 +1322,6 @@
 
 - (void)stopScrollAtIndex:(NSInteger)index {
     _currentIndex = MIN(self.numberOfSubViews, MAX(0, index));
-    
-    _shouldDecelerate = YES;
 }
 
 - (void)decelerate {

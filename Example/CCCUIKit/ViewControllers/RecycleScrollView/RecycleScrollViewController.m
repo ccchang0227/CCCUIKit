@@ -44,8 +44,10 @@
     self.scrollViewVer.delegate = self;
     self.scrollViewVer.dataSource = self;
     
+    self.scrollViewVer.decelerateRate = 80;
+    
     self.arrayItems = [NSMutableArray arrayWithCapacity:0];
-    for (int i = 0; i < 30; i ++) {
+    for (int i = 0; i < 300; i ++) {
         [self.arrayItems addObject:@1];
     }
     
@@ -140,7 +142,7 @@
     }
     
     NSInteger index = arc4random()%self.arrayItems.count;
-    self.hintLabelHor.text = [NSString stringWithFormat:@"Will decelerate to %ld", (long)index];
+    self.hintLabelHor.text = [NSString stringWithFormat:@"Will stop at %ld", (long)index];
     
     [self.scrollViewHor stopScrollAtIndex:index];
 }
@@ -175,7 +177,7 @@
     }
     
     NSInteger index = arc4random()%self.arrayItems.count;
-    self.hintLabelVer.text = [NSString stringWithFormat:@"Will decelerate to %ld", (long)index];
+    self.hintLabelVer.text = [NSString stringWithFormat:@"Will stop at %ld", (long)index];
     
     [self.scrollViewVer stopScrollAtIndex:index];
 }
