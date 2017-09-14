@@ -34,9 +34,9 @@ typedef NS_ENUM(NSInteger, CCCRecycleScrollAnimateDirections) {
 /**
  * A double sided scrollView
  *
- * @version 1.0.1
+ * @version 1.1.0-beta
  * @author Chih-chieh Chang
- * @date 2017-02-20
+ * @date 2017-09-13
  */
 @interface CCCRecycleScrollView : UIView
 
@@ -82,6 +82,8 @@ typedef NS_ENUM(NSInteger, CCCRecycleScrollAnimateDirections) {
 // pass -1 to index to scroll infinitely, only works when animated is YES.
 - (void)scrollToIndex:(NSInteger)index direction:(CCCRecycleScrollAnimateDirections)direction animated:(BOOL)animated;
 - (void)decelerate;
+- (void)decelerateToIndex:(NSInteger)index;
+- (void)stopScrollAtIndex:(NSInteger)index;
 - (void)stopScroll;
 
 @end
