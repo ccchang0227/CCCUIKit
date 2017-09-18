@@ -1321,7 +1321,7 @@
 }
 
 - (void)stopScrollAtIndex:(NSInteger)index {
-    _currentIndex = MIN(self.numberOfSubViews, MAX(0, index));
+    _currentIndex = index;
 }
 
 - (void)decelerate {
@@ -1329,7 +1329,7 @@
 }
 
 - (void)decelerateToIndex:(NSInteger)index {
-    _currentIndex = MIN(self.numberOfSubViews, MAX(0, index));
+    _currentIndex = index;
     
     _shouldDecelerate = YES;
 }
@@ -1347,8 +1347,30 @@
         delta = targetSubView.center.y-self.bounds.size.height/2.0;
     }
     
+    BOOL shouldStopScroll = NO;
     CGPoint relocateOffset = CGPointZero;
-    if (fabs(delta) < _accuracy || _accuracy < 0.1) {
+    if (!_shouldDecelerate) {
+        if (_currentIndex >= 0 && _currentIndex < self.numberOfSubViews) {
+            if (fabs(delta) < _accuracy/2.0) {
+                shouldStopScroll = YES;
+            }
+        }
+    }
+    else if (_shouldDecelerate) {
+        if (_currentIndex >= 0 && _currentIndex < self.numberOfSubViews) {
+            if (fabs(delta) < _accuracy) {
+                shouldStopScroll = YES;
+            }
+            else {
+//                _accuracy = MAX(_accuracy, 1);
+            }
+        }
+        else if (_accuracy < 0.1) {
+            shouldStopScroll = YES;
+        }
+    }
+    
+    if (shouldStopScroll) {
         [self stopScroll];
     }
     else {

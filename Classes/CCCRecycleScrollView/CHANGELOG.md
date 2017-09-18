@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### 修改
 - NSTimer改成dispatch_source_t，原本在另一個執行緒做的動作拉回到主執行緒做
 
+### 新增
+- 方法 -decelerateToIndex 和 -stopScrollAtIndex 用於停止/減速至特定index
+
 ## [1.0.1] - 2017-02-20
 ### Added
 - CHANGLOG.md file.

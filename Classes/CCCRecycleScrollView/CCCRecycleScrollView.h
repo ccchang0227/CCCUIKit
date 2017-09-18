@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, CCCRecycleScrollAnimateDirections) {
  *
  * @version 1.1.0-beta
  * @author Chih-chieh Chang
- * @date 2017-09-13
+ * @date 2017-09-18
  */
 @interface CCCRecycleScrollView : UIView
 
