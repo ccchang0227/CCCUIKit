@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) <br>
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.2.0] - 2017-09-18
 ### Changed
 - `CCCCameraSessionDelegate`新增方法:`-cccCameraSession:didReceiveSampleBuffer:fromConnection:`
 
