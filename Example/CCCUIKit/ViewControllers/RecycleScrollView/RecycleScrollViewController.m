@@ -10,6 +10,7 @@
 #import <CCCUIKit/CCCRecycleScrollView.h>
 #import <CCCUIKit/UIKit+CCCAdditions.h>
 
+
 @interface RecycleScrollViewController () <CCCRecycleScrollViewDelegate, CCCRecycleScrollViewDataSource>
 
 @property (weak, nonatomic) IBOutlet CCCRecycleScrollView *scrollViewHor;
@@ -18,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPagingEnabled;
 @property (weak, nonatomic) IBOutlet UIButton *btnHorScroll;
 @property (weak, nonatomic) IBOutlet UIButton *btnVerScroll;
+
+@property (weak, nonatomic) IBOutlet UILabel *hintLabelHor;
+@property (weak, nonatomic) IBOutlet UILabel *hintLabelVer;
 
 @property (strong, nonatomic) NSMutableArray *arrayItems;
 
@@ -40,10 +44,13 @@
     self.scrollViewVer.delegate = self;
     self.scrollViewVer.dataSource = self;
     
+    self.scrollViewVer.decelerateRate = 80;
+    
     self.arrayItems = [NSMutableArray arrayWithCapacity:0];
-    for (int i = 0; i < 10; i ++) {
+    for (int i = 0; i < 30; i ++) {
         [self.arrayItems addObject:@1];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,6 +64,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    self.hintLabelHor.text = nil;
+    self.hintLabelVer.text = nil;
     
     self.scrollViewHor.pagingEnabled = YES;
     self.scrollViewVer.pagingEnabled = YES;
@@ -103,11 +113,15 @@
 }
 
 - (IBAction)horScrollAction:(id)sender {
-    if (self.scrollViewHor.isDecelerating) return;
+    if (self.scrollViewHor.isDecelerating) {
+        return;
+    }
+    
+    self.hintLabelHor.text = nil;
     
     if (!self.scrollViewHor.isScrolling) {
         self.scrollViewHor.scrollEnabled = NO;
-        [self.scrollViewHor scrollToIndex:-1 direction:CCCRecycleScrollAnimateDirectionAuto animated:YES];
+        [self.scrollViewHor scrollToIndex:-1 direction:CCCRecycleScrollAnimateDirectionDescending animated:YES];
         
         [self.btnHorScroll setTitle:@"Stop" forState:UIControlStateNormal];
     }
@@ -120,18 +134,30 @@
 }
 
 - (IBAction)horDecelerateAction:(id)sender {
-    if (!self.scrollViewHor.isScrolling) return;
-    if (self.scrollViewHor.isDecelerating) return;
+    if (!self.scrollViewHor.isScrolling) {
+        return;
+    }
+    if (self.scrollViewHor.isDecelerating) {
+        return;
+    }
     
-    [self.scrollViewHor decelerate];
+    NSInteger index = arc4random()%self.arrayItems.count;
+    self.hintLabelHor.text = [NSString stringWithFormat:@"Will stop at %ld", (long)index];
+    
+//    [self.scrollViewHor decelerateToIndex:index];
+    [self.scrollViewHor stopScrollAtIndex:index];
 }
 
 - (IBAction)verScrollAction:(id)sender {
-    if (self.scrollViewVer.isDecelerating) return;
+    if (self.scrollViewVer.isDecelerating) {
+        return;
+    }
+    
+    self.hintLabelVer.text = nil;
     
     if (!self.scrollViewVer.isScrolling) {
         self.scrollViewVer.scrollEnabled = NO;
-        [self.scrollViewVer scrollToIndex:-1 direction:CCCRecycleScrollAnimateDirectionAuto animated:YES];
+        [self.scrollViewVer scrollToIndex:-1 direction:CCCRecycleScrollAnimateDirectionDescending animated:YES];
         
         [self.btnVerScroll setTitle:@"Stop" forState:UIControlStateNormal];
     }
@@ -144,21 +170,32 @@
 }
 
 - (IBAction)verDecelerateAction:(id)sender {
-    if (!self.scrollViewVer.isScrolling) return;
-    if (self.scrollViewVer.isDecelerating) return;
+    if (!self.scrollViewVer.isScrolling) {
+        return;
+    }
+    if (self.scrollViewVer.isDecelerating) {
+        return;
+    }
     
-    [self.scrollViewVer decelerate];
+    NSInteger index = arc4random()%self.arrayItems.count;
+    self.hintLabelVer.text = [NSString stringWithFormat:@"Will stop at %ld", (long)index];
+    
+    [self.scrollViewVer stopScrollAtIndex:index];
 }
 
 - (void)subViewSelected:(UIButton*)sender {
     NSInteger index = [sender.currentTitle integerValue];
     if ([sender.layer.name isEqualToString:@"Hor"]) {
-        if (self.scrollViewHor.isScrolling) return;
+        if (self.scrollViewHor.isScrolling) {
+            return;
+        }
         
         [self.scrollViewHor scrollToIndex:index direction:CCCRecycleScrollAnimateDirectionAuto animated:YES];
     }
     else {
-        if (self.scrollViewVer.isScrolling) return;
+        if (self.scrollViewVer.isScrolling) {
+            return;
+        }
         
         [self.scrollViewVer scrollToIndex:index direction:CCCRecycleScrollAnimateDirectionAuto animated:YES];
     }
