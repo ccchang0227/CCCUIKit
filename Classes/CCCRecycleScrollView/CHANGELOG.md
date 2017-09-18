@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) <br>
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
+
+## [1.1.0] - 2017-09-18
 ### 修正
 - 滑動時subview錯位的問題
     - layoutSubviews的呼叫時機導致
