@@ -47,7 +47,7 @@
     self.scrollViewVer.decelerateRate = 80;
     
     self.arrayItems = [NSMutableArray arrayWithCapacity:0];
-    for (int i = 0; i < 300; i ++) {
+    for (int i = 0; i < 30; i ++) {
         [self.arrayItems addObject:@1];
     }
     
@@ -144,6 +144,7 @@
     NSInteger index = arc4random()%self.arrayItems.count;
     self.hintLabelHor.text = [NSString stringWithFormat:@"Will stop at %ld", (long)index];
     
+//    [self.scrollViewHor decelerateToIndex:index];
     [self.scrollViewHor stopScrollAtIndex:index];
 }
 
