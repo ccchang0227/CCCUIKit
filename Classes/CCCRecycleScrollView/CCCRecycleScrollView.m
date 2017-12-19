@@ -1104,9 +1104,16 @@
 }
 
 - (void)reloadData {
+    [self reloadDataWithCenterIndex:self.currentIndex];
+    
+}
+
+- (void)reloadDataWithCenterIndex:(NSUInteger)index {
     if (![_lock tryLock]) {
         return;
     }
+    
+    _currentIndex = index;
     
     [self _clearData];
     if (self.dataSource) {

@@ -64,6 +64,7 @@ typedef NS_ENUM(NSInteger, CCCRecycleScrollAnimateDirections) {
 @property (readonly, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
 - (void)reloadData;
+- (void)reloadDataWithCenterIndex:(NSUInteger)index;
 
 - (NSInteger)numberOfSubViews;
 - (CCCRecycleView *)subViewWithIndex:(NSInteger)index;
