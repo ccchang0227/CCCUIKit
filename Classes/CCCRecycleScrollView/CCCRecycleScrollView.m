@@ -1245,6 +1245,9 @@
             _currentIndex = _centerIndex;
         }
         else {
+            if (![_lock tryLock]) {
+                return;
+            }
             [self _removeAllSubViewsAnimated:self.displayAnimated];
             [self _loadSubViewLayouts];
             _centerIndex = index;

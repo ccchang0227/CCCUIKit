@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) <br>
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
+### 修正
+- `-scrollToIndex:direction:animated:`在animated是NO時，log出現NSLock的warning訊息
 
 ## [1.1.0] - 2017-09-18
 ### 修正
