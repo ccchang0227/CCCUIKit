@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CCCUIKit'
-  s.version          = '1.2.0'
+  s.version          = '1.3.0'
   s.summary          = "C.C.Chang's custom UIKit."
 
   s.homepage         = 'https://github.com/ccchang0227/CCCUIKit'
@@ -8,21 +8,21 @@ Pod::Spec.new do |s|
   s.authors          = { 'Chih-chieh Chang' => 'ccch.realtouch@gmail.com' }
   s.source           = { :git => 'https://github.com/ccchang0227/CCCUIKit.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '6.0'
+  s.ios.deployment_target = '7.0'
   s.source_files = 'Classes/CCCUIKit.h'
 
   s.frameworks = 'UIKit'
 
   s.subspec 'UIKit+CCCAdditions' do |ss|
-    # current version: 1.0.1
+    # current version: 1.1.0
     ss.requires_arc = false
-    ss.ios.deployment_target = '6.0'
+    ss.ios.deployment_target = '7.0'
     ss.tvos.deployment_target = '9.0'
     ss.source_files = 'Classes/UIKit+CCCAdditions/**/*.{h,m}'
   end
 
   s.subspec 'CCCAssetsViewController' do |ss|
-    # current version: 1.0.1
+    # current version: 1.1.0
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCAssetsViewController/*.{h,m}'
     ss.resources = 'Classes/CCCAssetsViewController/*.xib', 'Assets/CCCAssets_*.png'
@@ -57,7 +57,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCCycleView' do |ss|
-    # current version: 1.0.1
+    # current version: 1.1.0
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCycleView/*.{h,m}'
     ss.frameworks = 'GLKit', 'CoreGraphics', 'QuartzCore'
@@ -71,7 +71,7 @@ Pod::Spec.new do |s|
   s.subspec 'CCCDevice' do |ss|
     # current version: 1.1.0
     ss.requires_arc = false
-    ss.ios.deployment_target = '6.0'
+    ss.ios.deployment_target = '7.0'
     ss.tvos.deployment_target = '9.0'
     ss.source_files = 'Classes/CCCDevice/**/*.{h,m}'
   end
@@ -115,7 +115,7 @@ Pod::Spec.new do |s|
   s.subspec 'CCCSwitch' do |ss|
     # current version: 0.0.7
     ss.requires_arc = false
-    ss.ios.deployment_target = '6.0'
+    ss.ios.deployment_target = '7.0'
     ss.tvos.deployment_target = '9.0'
     ss.source_files = 'Classes/CCCSwitch/**/*.{h,m}'
   end

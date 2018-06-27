@@ -117,7 +117,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		036E4AA030E4B4DAD34D3E3578B14A89 /* CCCAssets_Pause@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_Pause@2x.png"; sourceTree = "<group>"; };
+		036E4AA030E4B4DAD34D3E3578B14A89 /* CCCAssets_Pause@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "CCCAssets_Pause@2x.png"; sourceTree = "<group>"; };
 		05359E7EEAA3C43846A0CA356C60D2B9 /* CCCAssetsModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetsModel.h; sourceTree = "<group>"; };
 		071E91D24FE2425E154452C606C1392D /* DistancePickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DistancePickerView.m; path = Pickers/DistancePickerView.m; sourceTree = "<group>"; };
 		0B7E9590C9DEBFA63DDF69A6CC089576 /* UIKit+CCCAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIKit+CCCAdditions.h"; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 		203B9289BB669F5358B3AC425D672A4D /* CCCUIKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CCCUIKit.xcconfig; sourceTree = "<group>"; };
 		23D0275C5717107E4621A8EF1C83C9AD /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
 		2462A3705F4E6FEB909292FF16F09CEE /* UIKit+CCCAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIKit+CCCAdditions.m"; sourceTree = "<group>"; };
-		2566A404E8D345D65B6CFFF6D553382F /* CCCAssets_Play.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_Play.png; sourceTree = "<group>"; };
+		2566A404E8D345D65B6CFFF6D553382F /* CCCAssets_Play.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = CCCAssets_Play.png; sourceTree = "<group>"; };
 		25FA22CF4787E2679DE4F95E35064D34 /* CCCCameraSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCameraSession.m; sourceTree = "<group>"; };
 		28CAB7740BB027CA1329F2428F32AD7F /* CCCDevice.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCDevice.h; sourceTree = "<group>"; };
 		2AED32DE27CE5D4750980C01CBF5A9C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -145,7 +145,7 @@
 		41C2B15AE47992013FA232CB7ED484E1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		427AB3B284BDE32117C6916C1D8F0640 /* CCCFloatRange.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCFloatRange.m; sourceTree = "<group>"; };
 		4368AC6E8CB429889865E7EB2D03EFFD /* Pods-CCCUIKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CCCUIKit-acknowledgements.plist"; sourceTree = "<group>"; };
-		43C42623E1B9BD774189661AA8885E83 /* CCCAssets_CloseWhite.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_CloseWhite.png; sourceTree = "<group>"; };
+		43C42623E1B9BD774189661AA8885E83 /* CCCAssets_CloseWhite.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = CCCAssets_CloseWhite.png; sourceTree = "<group>"; };
 		4C1DBD2C4BC5A17DE6AE55878CDF055D /* CCCCycleView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCycleView.m; sourceTree = "<group>"; };
 		4D22BD71DB3F0D1557AF0E892F3B9F03 /* CCCAllAssetsViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = CCCAllAssetsViewController.xib; sourceTree = "<group>"; };
 		4D3A66D48CC65AC7F8643CE202CEB043 /* CCCDevice.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCDevice.m; sourceTree = "<group>"; };
@@ -154,39 +154,39 @@
 		4FF9CDE3B64DAEB14BE617BF3E036A8C /* CCCCanvasLineWidthSelectionView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCanvasLineWidthSelectionView.m; sourceTree = "<group>"; };
 		50E9CC2C481BA34730D5A5A11246E949 /* CCCCanvas.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCanvas.m; sourceTree = "<group>"; };
 		551696AA00F91F351839FEDE14F6E0F7 /* CCCAssetsViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetsViewController.h; sourceTree = "<group>"; };
-		55E36C5F5F4AC8AD64F69AC00DB5DDAE /* CCCAssets_CloseWhite@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_CloseWhite@2x.png"; sourceTree = "<group>"; };
+		55E36C5F5F4AC8AD64F69AC00DB5DDAE /* CCCAssets_CloseWhite@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "CCCAssets_CloseWhite@2x.png"; sourceTree = "<group>"; };
 		576460A0588C5FB83866BE92CF8CA87E /* CCCAssetPreviewView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetPreviewView.h; sourceTree = "<group>"; };
-		58170DC97CCABBA5BABE5DE26DB22039 /* libCCCUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCCCUIKit.a; path = libCCCUIKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		58170DC97CCABBA5BABE5DE26DB22039 /* libCCCUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCCCUIKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D41FACDC7A34A0ABBB4F18EDE013459 /* CCCRatingControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCRatingControl.m; sourceTree = "<group>"; };
 		5F868B6689270B01645E3B8D1F2896EA /* CCCUIKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CCCUIKit-dummy.m"; sourceTree = "<group>"; };
 		657608A7F9275B47DC4A13795F8C80AE /* CCCMaskedLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCMaskedLabel.h; sourceTree = "<group>"; };
 		65B9B8598BE32E93BFCE910AA9005A56 /* Pods-CCCUIKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CCCUIKit-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6936D242462BC863960E0693AEFCB83B /* CCCUIKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCUIKit.h; sourceTree = "<group>"; };
 		6A7D8275C823EF7066026288DFB91F40 /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetCustomPickerDelegate.h; path = Pickers/ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
-		6CC4A5569F06DF67E15AC956B55B78C6 /* CCCCamera_Light.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCCamera_Light.png; sourceTree = "<group>"; };
+		6CC4A5569F06DF67E15AC956B55B78C6 /* CCCCamera_Light.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = CCCCamera_Light.png; sourceTree = "<group>"; };
 		6DA3F052F7330827C8E8219319300445 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetStringPicker.h; path = Pickers/ActionSheetStringPicker.h; sourceTree = "<group>"; };
 		6F5C03B67389CA025907CC1E753D1D46 /* SWActionSheet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWActionSheet.h; path = Pickers/SWActionSheet.h; sourceTree = "<group>"; };
 		6F8D64F63D707950AF690650676B7946 /* CCCSwitch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCSwitch.m; sourceTree = "<group>"; };
-		704FBC820BE2DEA66BBF5C318B075ED3 /* libActionSheetPicker-3.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libActionSheetPicker-3.0.a"; path = "libActionSheetPicker-3.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		704FBC820BE2DEA66BBF5C318B075ED3 /* libActionSheetPicker-3.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libActionSheetPicker-3.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73534BB44847E2582FD92C1E3E3AE41B /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AbstractActionSheetPicker.h; path = Pickers/AbstractActionSheetPicker.h; sourceTree = "<group>"; };
 		7510B60F9E5281D002D6AFD193C3C75C /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetDistancePicker.h; path = Pickers/ActionSheetDistancePicker.h; sourceTree = "<group>"; };
 		7E0F453786477A01FAFC6FBC7D5454E2 /* CCCAssetsViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = CCCAssetsViewController.xib; sourceTree = "<group>"; };
-		834F69E46B57847D2D29AB2B83CA6C5C /* CCCAssets_Play@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_Play@2x.png"; sourceTree = "<group>"; };
+		834F69E46B57847D2D29AB2B83CA6C5C /* CCCAssets_Play@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "CCCAssets_Play@2x.png"; sourceTree = "<group>"; };
 		841227F96B556961C43272DBD19EB43A /* CCCFloatRange.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCFloatRange.h; sourceTree = "<group>"; };
 		8425034F5F50BB10F6C7CB3C37FA1C88 /* CCCAsset.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAsset.h; sourceTree = "<group>"; };
 		8497C8F36667F2CFCDE375C36C5D22AE /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		889478CC961D16A44EF4EAB399C6A5B2 /* CCCAssetsGroupsViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetsGroupsViewController.h; sourceTree = "<group>"; };
-		8B6B045CA0A8A217F60A3DC33F18605F /* CCCAssets_BackWhite@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_BackWhite@2x.png"; sourceTree = "<group>"; };
+		8B6B045CA0A8A217F60A3DC33F18605F /* CCCAssets_BackWhite@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "CCCAssets_BackWhite@2x.png"; sourceTree = "<group>"; };
 		8B9765A7AC5E2F0E680D467AD82BAC7B /* CCCAssetsGroupsViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAssetsGroupsViewController.m; sourceTree = "<group>"; };
 		8C7B0F4F2C68099FAC780BA3A7BB8986 /* ActionSheetPicker-3.0-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ActionSheetPicker-3.0-dummy.m"; sourceTree = "<group>"; };
 		8CDDABE6A6C6FA0333A88C5874C305CA /* Pods-CCCUIKit-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CCCUIKit-frameworks.sh"; sourceTree = "<group>"; };
 		8EDB306643AF2BB06EE5E9384EA09A4B /* CCCAssetPreviewView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAssetPreviewView.m; sourceTree = "<group>"; };
 		8FBA7A8892497A11BACDA65858B46DCA /* CCCCameraView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCCameraView.m; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93C816AFD0E8C969FFB8A9D70F9C035C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		96F406BFC86E71D0422FACDFC334A59E /* CCCSlidingViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCSlidingViewController.m; sourceTree = "<group>"; };
 		9841FF6DE61D321E726E394E0623521B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
-		98AD55C44045F4B7DE5ACBE150C12363 /* CCCAssets_CloseRed@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_CloseRed@2x.png"; sourceTree = "<group>"; };
+		98AD55C44045F4B7DE5ACBE150C12363 /* CCCAssets_CloseRed@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "CCCAssets_CloseRed@2x.png"; sourceTree = "<group>"; };
 		98F71683F1301FD0D83055161F0DD194 /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ActionSheetDistancePicker.m; path = Pickers/ActionSheetDistancePicker.m; sourceTree = "<group>"; };
 		9A04B6C2282FB763593693B42D02CE7A /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetLocalePicker.h; path = Pickers/ActionSheetLocalePicker.h; sourceTree = "<group>"; };
 		A182AECB92E5E485DB2938CF72976719 /* Pods-CCCUIKit-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CCCUIKit-resources.sh"; sourceTree = "<group>"; };
@@ -194,8 +194,8 @@
 		A3E47CAAF147309025D30588AFAB5AA3 /* ActionSheetMultipleStringPicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ActionSheetMultipleStringPicker.m; path = Pickers/ActionSheetMultipleStringPicker.m; sourceTree = "<group>"; };
 		A52D597C992E56736E2C63F49AD0E51E /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
 		A531CF8371A85D11E1321D500470B215 /* CCCAssetsViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAssetsViewController.m; sourceTree = "<group>"; };
-		A6BC6E5A31FCE0A9FFB877BB39657ED6 /* CCCAssets_CloseRed.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_CloseRed.png; sourceTree = "<group>"; };
-		A71A9DF3DC5A0116165D5361E63D5F0B /* CCCAssets_VideoIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_VideoIcon.png; sourceTree = "<group>"; };
+		A6BC6E5A31FCE0A9FFB877BB39657ED6 /* CCCAssets_CloseRed.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = CCCAssets_CloseRed.png; sourceTree = "<group>"; };
+		A71A9DF3DC5A0116165D5361E63D5F0B /* CCCAssets_VideoIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = CCCAssets_VideoIcon.png; sourceTree = "<group>"; };
 		A793578A90B93A16D4B1A2D541192B02 /* CCCUIKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CCCUIKit-prefix.pch"; sourceTree = "<group>"; };
 		AC4CCB2ABDC547EA93E9213031E9A7BA /* CCCMaskedLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCMaskedLabel.m; sourceTree = "<group>"; };
 		AE8E1508339588626E082EDDABD2BF81 /* ActionSheetMultipleStringPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetMultipleStringPicker.h; path = Pickers/ActionSheetMultipleStringPicker.h; sourceTree = "<group>"; };
@@ -207,11 +207,11 @@
 		BC756923762E5D805D6AF84FB219A7D0 /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetDatePicker.h; path = Pickers/ActionSheetDatePicker.h; sourceTree = "<group>"; };
 		C344F290B4804A8425DE9AAF32D836D8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		C77CF4FA055A3F8E86E187B43B7AE60A /* CCCAssetsGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCAssetsGroup.h; sourceTree = "<group>"; };
-		C9D5142F4AC847AD96CAF49AC84D401D /* CCCAssets_VideoIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "CCCAssets_VideoIcon@2x.png"; sourceTree = "<group>"; };
+		C9D5142F4AC847AD96CAF49AC84D401D /* CCCAssets_VideoIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "CCCAssets_VideoIcon@2x.png"; sourceTree = "<group>"; };
 		C9D9D1CF1DC1DEDECE11BD3069629FEF /* CCCRecycleScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCRecycleScrollView.m; sourceTree = "<group>"; };
 		CDC4C8B046BAB5000A389D716C63DF62 /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ActionSheetCustomPicker.m; path = Pickers/ActionSheetCustomPicker.m; sourceTree = "<group>"; };
 		D05852DFC02A787412B658450860E976 /* SWActionSheet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWActionSheet.m; path = Pickers/SWActionSheet.m; sourceTree = "<group>"; };
-		D2C55F95F6E513B1CEA0579EECE92971 /* libPods-CCCUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-CCCUIKit.a"; path = "libPods-CCCUIKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2C55F95F6E513B1CEA0579EECE92971 /* libPods-CCCUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CCCUIKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C5BA24027CC89FF06B768F73518902 /* CCCPageControl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCPageControl.h; sourceTree = "<group>"; };
 		D3C74C154B3A6667D0EA8AD903018DD2 /* ActionSheetPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetPicker.h; path = Pickers/ActionSheetPicker.h; sourceTree = "<group>"; };
 		D440313C3562B5FDE7F8F983F1B0B466 /* CCCCameraView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCameraView.h; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 		DF2C538228DAD84050D619976E74EBE1 /* Pods-CCCUIKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CCCUIKit-dummy.m"; sourceTree = "<group>"; };
 		E1A1D7B1742AA2A0B2EFBA565B6EC125 /* CCCCanvasLineWidthSelectionView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCanvasLineWidthSelectionView.h; sourceTree = "<group>"; };
 		E9E6F45F4B911A22790CF07801382889 /* CCCRecycleScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCRecycleScrollView.h; sourceTree = "<group>"; };
-		ECBEA5A23F53A9C580126D076E4DDBB1 /* CCCAssets_BackWhite.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_BackWhite.png; sourceTree = "<group>"; };
+		ECBEA5A23F53A9C580126D076E4DDBB1 /* CCCAssets_BackWhite.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = CCCAssets_BackWhite.png; sourceTree = "<group>"; };
 		EF53BB3B0094F7C018FA67DD8C599ED4 /* CCCPageControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCPageControl.m; sourceTree = "<group>"; };
 		EFC8EB12089A8BFDB9B7B033AF471EB1 /* CCCAssetsGroupsViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = CCCAssetsGroupsViewController.xib; sourceTree = "<group>"; };
 		EFDEF00ED8DD64AEA2FCE2ABA408B010 /* CCCCanvasPaletteView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCanvasPaletteView.h; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 		F4FC071A6B00B70FC29E01294B0E619B /* CCCAssetsModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAssetsModel.m; sourceTree = "<group>"; };
 		F56FD5E60EA2582D372ED1F967195827 /* CCCCycleView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CCCCycleView.h; sourceTree = "<group>"; };
 		F615C66EB4CA569E6A2380544FD263D3 /* UIImage+CCCProcessor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CCCProcessor.m"; sourceTree = "<group>"; };
-		F7B5C7324E7EB1B5676BCF5F023621E3 /* CCCAssets_Pause.png */ = {isa = PBXFileReference; includeInIndex = 1; path = CCCAssets_Pause.png; sourceTree = "<group>"; };
+		F7B5C7324E7EB1B5676BCF5F023621E3 /* CCCAssets_Pause.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = CCCAssets_Pause.png; sourceTree = "<group>"; };
 		F98F33E266FE4C473723F06D0A15DB3F /* XYPieChart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
 		FEDACDB5934EFC8BFEC63ED835E3D86C /* CCCAsset.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CCCAsset.m; sourceTree = "<group>"; };
 		FFB15EB1A7D4EA651E19D28FA57E8111 /* UIImage+CCCProcessor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+CCCProcessor.h"; sourceTree = "<group>"; };
@@ -299,7 +299,6 @@
 			children = (
 				43BE3BEE88F21BAB14789184B1FA8D06 /* CCCRatingControl */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -309,7 +308,6 @@
 				DCE268D477971D639FCB5B22EDC90145 /* CCCSlidingViewController.h */,
 				96F406BFC86E71D0422FACDFC334A59E /* CCCSlidingViewController.m */,
 			);
-			name = CCCSlidingViewController;
 			path = CCCSlidingViewController;
 			sourceTree = "<group>";
 		};
@@ -335,7 +333,6 @@
 				D2C5BA24027CC89FF06B768F73518902 /* CCCPageControl.h */,
 				EF53BB3B0094F7C018FA67DD8C599ED4 /* CCCPageControl.m */,
 			);
-			name = CCCPageControl;
 			path = CCCPageControl;
 			sourceTree = "<group>";
 		};
@@ -344,7 +341,6 @@
 			children = (
 				D460EE273211201E3FBDBFDB6F959A59 /* CCCAssetsViewController */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -371,7 +367,6 @@
 			children = (
 				425DE6BAB79C87095C29FD74CD48B7EC /* CCCAssetsViewController */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -388,7 +383,6 @@
 			children = (
 				EAD0711C2A461C752D02F4694736F173 /* CCCDevice */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -417,7 +411,6 @@
 				D05852DFC02A787412B658450860E976 /* SWActionSheet.m */,
 				427AF36C5A558598973C162EA77D7016 /* Support Files */,
 			);
-			name = "ActionSheetPicker-3.0";
 			path = "ActionSheetPicker-3.0";
 			sourceTree = "<group>";
 		};
@@ -426,7 +419,6 @@
 			children = (
 				99B6B548D4A2140537E74DA365103480 /* UIKit+CCCAdditions */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -435,7 +427,6 @@
 			children = (
 				8B06838995C40734B4C59E1ECDDED101 /* ChildrenViewControllers */,
 			);
-			name = CCCAssetsViewController;
 			path = CCCAssetsViewController;
 			sourceTree = "<group>";
 		};
@@ -455,7 +446,6 @@
 			children = (
 				6CC4A5569F06DF67E15AC956B55B78C6 /* CCCCamera_Light.png */,
 			);
-			name = Assets;
 			path = Assets;
 			sourceTree = "<group>";
 		};
@@ -473,7 +463,6 @@
 				D94EE10A9D5FDA4D5705BF912BDAA9E9 /* CCCRatingControl.h */,
 				5D41FACDC7A34A0ABBB4F18EDE013459 /* CCCRatingControl.m */,
 			);
-			name = CCCRatingControl;
 			path = CCCRatingControl;
 			sourceTree = "<group>";
 		};
@@ -483,7 +472,6 @@
 				414B285FA88197715CBDE197C41F859D /* CCCSlider.h */,
 				DDD18DB92573F6FB361797186A4BC5BD /* CCCSlider.m */,
 			);
-			name = CCCSlider;
 			path = CCCSlider;
 			sourceTree = "<group>";
 		};
@@ -497,7 +485,6 @@
 				EFDEF00ED8DD64AEA2FCE2ABA408B010 /* CCCCanvasPaletteView.h */,
 				2BB7DCD0225A206B94CA41E20E403E13 /* CCCCanvasPaletteView.m */,
 			);
-			name = CCCCanvas;
 			path = CCCCanvas;
 			sourceTree = "<group>";
 		};
@@ -506,7 +493,6 @@
 			children = (
 				6C40ED60925F5398A1F5778607549222 /* CCCCycleView */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -515,7 +501,6 @@
 			children = (
 				F865E63C08F8C1C61FBDE6B732B28E8B /* CCCAssetsViewController */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -532,7 +517,6 @@
 			children = (
 				67EE04EA997BDB681294ED5D30ED63E1 /* CCCSwitch */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -542,7 +526,6 @@
 				BA5DBB73C5E2014C377FA6686CF5E28E /* CCCSwitch.h */,
 				6F8D64F63D707950AF690650676B7946 /* CCCSwitch.m */,
 			);
-			name = CCCSwitch;
 			path = CCCSwitch;
 			sourceTree = "<group>";
 		};
@@ -552,7 +535,6 @@
 				551696AA00F91F351839FEDE14F6E0F7 /* CCCAssetsViewController.h */,
 				A531CF8371A85D11E1321D500470B215 /* CCCAssetsViewController.m */,
 			);
-			name = CCCAssetsViewController;
 			path = CCCAssetsViewController;
 			sourceTree = "<group>";
 		};
@@ -564,7 +546,6 @@
 				841227F96B556961C43272DBD19EB43A /* CCCFloatRange.h */,
 				427AB3B284BDE32117C6916C1D8F0640 /* CCCFloatRange.m */,
 			);
-			name = CCCCycleView;
 			path = CCCCycleView;
 			sourceTree = "<group>";
 		};
@@ -573,7 +554,6 @@
 			children = (
 				6936D242462BC863960E0693AEFCB83B /* CCCUIKit.h */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -590,7 +570,6 @@
 			children = (
 				F6C36D18BB449E2436037CFBCD213263 /* CCCRecycleScrollView */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -599,7 +578,6 @@
 			children = (
 				74CD77EFCE647E5ABBDA30FEE3C5659B /* CCCCamera */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -608,7 +586,6 @@
 			children = (
 				8D9D0D785281C6437C5B5A9E0284A08C /* CCCAssetsViewController */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -617,7 +594,6 @@
 			children = (
 				483AA8815F831F87E68B55C6B431ACDD /* CCCSlider */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -633,7 +609,6 @@
 				FFB15EB1A7D4EA651E19D28FA57E8111 /* UIImage+CCCProcessor.h */,
 				F615C66EB4CA569E6A2380544FD263D3 /* UIImage+CCCProcessor.m */,
 			);
-			name = CCCCamera;
 			path = CCCCamera;
 			sourceTree = "<group>";
 		};
@@ -642,7 +617,6 @@
 			children = (
 				189BD9E53FA15D92EDF8C4DE75A055F1 /* CCCSlidingViewController */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -674,7 +648,6 @@
 				A71A9DF3DC5A0116165D5361E63D5F0B /* CCCAssets_VideoIcon.png */,
 				C9D5142F4AC847AD96CAF49AC84D401D /* CCCAssets_VideoIcon@2x.png */,
 			);
-			name = Assets;
 			path = Assets;
 			sourceTree = "<group>";
 		};
@@ -691,7 +664,6 @@
 			children = (
 				4A8723DFB6C0A7410CBB37747B39350E /* CCCCanvas */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -709,7 +681,6 @@
 				657608A7F9275B47DC4A13795F8C80AE /* CCCMaskedLabel.h */,
 				AC4CCB2ABDC547EA93E9213031E9A7BA /* CCCMaskedLabel.m */,
 			);
-			name = CCCMaskedLabel;
 			path = CCCMaskedLabel;
 			sourceTree = "<group>";
 		};
@@ -723,7 +694,6 @@
 				889478CC961D16A44EF4EAB399C6A5B2 /* CCCAssetsGroupsViewController.h */,
 				8B9765A7AC5E2F0E680D467AD82BAC7B /* CCCAssetsGroupsViewController.m */,
 			);
-			name = ChildrenViewControllers;
 			path = ChildrenViewControllers;
 			sourceTree = "<group>";
 		};
@@ -764,7 +734,6 @@
 			children = (
 				7E0F453786477A01FAFC6FBC7D5454E2 /* CCCAssetsViewController.xib */,
 			);
-			name = CCCAssetsViewController;
 			path = CCCAssetsViewController;
 			sourceTree = "<group>";
 		};
@@ -774,7 +743,6 @@
 				0B7E9590C9DEBFA63DDF69A6CC089576 /* UIKit+CCCAdditions.h */,
 				2462A3705F4E6FEB909292FF16F09CEE /* UIKit+CCCAdditions.m */,
 			);
-			name = "UIKit+CCCAdditions";
 			path = "UIKit+CCCAdditions";
 			sourceTree = "<group>";
 		};
@@ -783,7 +751,6 @@
 			children = (
 				F3BF2CA8490FE76669413DB34C68EC9E /* XYPieChart */,
 			);
-			name = CCCCycleView;
 			path = CCCCycleView;
 			sourceTree = "<group>";
 		};
@@ -797,7 +764,6 @@
 				05359E7EEAA3C43846A0CA356C60D2B9 /* CCCAssetsModel.h */,
 				F4FC071A6B00B70FC29E01294B0E619B /* CCCAssetsModel.m */,
 			);
-			name = CCCAssetsModel;
 			path = CCCAssetsModel;
 			sourceTree = "<group>";
 		};
@@ -825,7 +791,6 @@
 			children = (
 				A177E13CE9AE0FC6CBB97A409EF2EFC6 /* CCCCycleView */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -874,7 +839,6 @@
 			children = (
 				FD43739970E2F7001FEC1C94904E4192 /* ChildrenViewControllers */,
 			);
-			name = CCCAssetsViewController;
 			path = CCCAssetsViewController;
 			sourceTree = "<group>";
 		};
@@ -899,7 +863,6 @@
 			children = (
 				8A98AA5868D884EB1B05D78D03729A83 /* CCCMaskedLabel */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -917,7 +880,6 @@
 				28CAB7740BB027CA1329F2428F32AD7F /* CCCDevice.h */,
 				4D3A66D48CC65AC7F8643CE202CEB043 /* CCCDevice.m */,
 			);
-			name = CCCDevice;
 			path = CCCDevice;
 			sourceTree = "<group>";
 		};
@@ -934,7 +896,6 @@
 			children = (
 				694B15568687DBA53EB229BFA9F2FD5D /* CCCAssetsViewController */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -943,7 +904,6 @@
 			children = (
 				2033713B04F0A5DBA38139BEC49F7FB6 /* CCCPageControl */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -953,7 +913,6 @@
 				F98F33E266FE4C473723F06D0A15DB3F /* XYPieChart.h */,
 				377624AE26613C7AEDB0EB1B5847CB0D /* XYPieChart.m */,
 			);
-			name = XYPieChart;
 			path = XYPieChart;
 			sourceTree = "<group>";
 		};
@@ -971,7 +930,6 @@
 				E9E6F45F4B911A22790CF07801382889 /* CCCRecycleScrollView.h */,
 				C9D9D1CF1DC1DEDECE11BD3069629FEF /* CCCRecycleScrollView.m */,
 			);
-			name = CCCRecycleScrollView;
 			path = CCCRecycleScrollView;
 			sourceTree = "<group>";
 		};
@@ -980,7 +938,6 @@
 			children = (
 				A2E6B135750CB84679B550D03050D191 /* CCCAssetsModel */,
 			);
-			name = CCCAssetsViewController;
 			path = CCCAssetsViewController;
 			sourceTree = "<group>";
 		};
@@ -1018,7 +975,6 @@
 				4D22BD71DB3F0D1557AF0E892F3B9F03 /* CCCAllAssetsViewController.xib */,
 				EFC8EB12089A8BFDB9B7B033AF471EB1 /* CCCAssetsGroupsViewController.xib */,
 			);
-			name = ChildrenViewControllers;
 			path = ChildrenViewControllers;
 			sourceTree = "<group>";
 		};
@@ -1148,7 +1104,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0940;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1257,7 +1213,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -1278,20 +1234,32 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
@@ -1345,19 +1313,31 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
@@ -1387,7 +1367,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CCCUIKit/CCCUIKit-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -1410,7 +1390,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CCCUIKit/CCCUIKit-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -1433,7 +1413,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";

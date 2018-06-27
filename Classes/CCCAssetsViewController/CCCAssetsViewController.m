@@ -81,6 +81,7 @@
     [_titleViewHeightConstraint release];
     [_contentBottomSpaceConstraint release];
     [_selectedAssetsGroup release];
+    [_titleBgView release];
     [super dealloc];
 #endif
     
@@ -123,6 +124,7 @@
         
         if (tempSelf.isTopLibraryViewController) {
             if (assetsGroups && assetsGroups.count > 0) {
+                tempSelf.assetsGroupsViewController.assetsFetchType = tempSelf.assetsFetchType;
                 tempSelf.assetsGroupsViewController.assetsgGroupsArray = assetsGroups;
                 [tempSelf.assetsGroupsViewController reloadData];
             }
@@ -145,6 +147,7 @@
     [tempSelf.model loadAllAssetsFromGroup:tempSelf.selectedAssetsGroup withAssetFetchType:self.assetsFetchType handler:^(NSArray<CCCAsset *> *allAssets) {
         
         if (tempSelf.isTopLibraryViewController) {
+            tempSelf.allAssetsViewController.assetsFetchType = tempSelf.assetsFetchType;
             tempSelf.allAssetsViewController.allAssetsArray = allAssets;
             [tempSelf.libraryNavigationController pushViewController:tempSelf.allAssetsViewController animated:YES];
             

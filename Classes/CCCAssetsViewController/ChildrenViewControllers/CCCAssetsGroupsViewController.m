@@ -6,7 +6,6 @@
 //
 
 #import "CCCAssetsGroupsViewController.h"
-#import "CCCAssetsGroup.h"
 
 
 CGFloat const kAssetsGroupCellHeight = 88.0f;
@@ -239,7 +238,23 @@ CGFloat const kAssetsGroupCellHeight = 88.0f;
     CCCAssetsGroup *assetsGroup = [self.assetsgGroupsArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = assetsGroup.groupName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld %@, %ld %@", (unsigned long)assetsGroup.numberOfPhotoAssets, NSLocalizedString(@"Photos", nil), (unsigned long)assetsGroup.numberOfVideoAssets, NSLocalizedString(@"Videos", nil)];
+    
+    switch (_assetsFetchType) {
+        case CCCAssetsFetchTypeImage: {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld %@", (unsigned long)assetsGroup.numberOfPhotoAssets, NSLocalizedString(@"Photos", nil)];
+            break;
+        }
+        case CCCAssetsFetchTypeVideo: {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld %@", (unsigned long)assetsGroup.numberOfVideoAssets, NSLocalizedString(@"Videos", nil)];
+            break;
+        }
+        case CCCAssetsFetchTypeBoth: {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld %@, %ld %@", (unsigned long)assetsGroup.numberOfPhotoAssets, NSLocalizedString(@"Photos", nil), (unsigned long)assetsGroup.numberOfVideoAssets, NSLocalizedString(@"Videos", nil)];
+            break;
+        }
+        default:
+            break;
+    }
     
     cell.imageView.image = [assetsGroup loadGroupPosterImageInOperationQueue:self.operationQueue withHandler:^(UIImage *posterImage) {
         cell.imageView.image = posterImage;
