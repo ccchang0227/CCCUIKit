@@ -4,21 +4,21 @@ C.C.Chang's custom UIKit.<br>
 
 ## Requirements
 
-iOS 6.0 以上<br>
+iOS 7.0 以上<br>
 tvOS 9.0以上 (部分支援)
 
 ## Classes
 
-* UIKit+CCCAdditions (1.0.1)<br>
-* CCCAssetsViewController (1.0.1)<br>
+* UIKit+CCCAdditions (1.1.0)<br>
+* CCCAssetsViewController (1.1.0)<br>
 * CCCCamera (1.2.0)<br>
 * CCCCanvas (1.0.1)<br>
-* CCCCycleView (1.0.1)<br>
-* CCCDevice (1.0.1)<br>
+* CCCCycleView (1.1.0)<br>
+* CCCDevice (1.1.0)<br>
 * CCCMaskedLabel (0.0.6)<br>
 * CCCPageControl (1.0.2)<br>
 * CCCRatingControl (1.0.1)<br>
-* CCCRecycleScrollView (1.1.0)<br>
+* CCCRecycleScrollView (1.2.0)<br>
 * CCCSlider (1.1.0)<br>
 * CCCSlidingViewController (1.0.1)<br>
 * CCCSwitch (0.0.7)

@@ -559,7 +559,7 @@
                 [operationQueue addOperationWithBlock:^ {
                     PHImageManager *imageManager = [PHImageManager defaultManager];
                     PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                    imageRequestOptions.version = PHImageRequestOptionsVersionOriginal;
+                    imageRequestOptions.version = PHImageRequestOptionsVersionCurrent;//PHImageRequestOptionsVersionOriginal;
                     imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
                     imageRequestOptions.synchronous = YES;
                     
@@ -588,7 +588,7 @@
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
                     PHImageManager *imageManager = [PHImageManager defaultManager];
                     PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                    imageRequestOptions.version = PHImageRequestOptionsVersionOriginal;
+                    imageRequestOptions.version = PHImageRequestOptionsVersionCurrent;//PHImageRequestOptionsVersionOriginal;
                     imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
                     imageRequestOptions.synchronous = YES;
                     

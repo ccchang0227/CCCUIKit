@@ -15,9 +15,9 @@
 /**
  * A roulette view
  *
- * @version 1.0.1
+ * @version 1.1.0
  * @author Chih-chieh Chang
- * @date 2017-02-20
+ * @date 2018-06-27
  */
 @interface CCCCycleView : UIView <XYPieChartDelegate, XYPieChartDataSource>
 
