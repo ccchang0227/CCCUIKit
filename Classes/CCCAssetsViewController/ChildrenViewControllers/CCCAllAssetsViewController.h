@@ -6,16 +6,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCCAssetsModel.h"
 
 
-@class CCCAssetsGroup;
-@class CCCAsset;
 @class CCCAssetPreviewView;
 
 @protocol CCCAllAssetsViewControllerDelegate;
 @interface CCCAllAssetsViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (assign, nonatomic) id<CCCAllAssetsViewControllerDelegate> delegate;
+
+@property (assign, nonatomic) CCCAssetsFetchType assetsFetchType;
 
 @property (retain, nonatomic) NSArray<CCCAsset *> *allAssetsArray;
 @property (readonly, nonatomic) NSUInteger numberOfPhotos;

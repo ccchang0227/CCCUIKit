@@ -463,7 +463,7 @@
                 else if (type == CCCAssetsFetchTypeVideo) {
                     options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeVideo];
                 }
-                options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"modificationDate" ascending:YES]];
+                options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
                 
                 PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetsGroup.phAssetCollection options:options];
                 [fetchResult enumerateObjectsUsingBlock:^(PHAsset *phAsset, NSUInteger idx, BOOL *stop) {

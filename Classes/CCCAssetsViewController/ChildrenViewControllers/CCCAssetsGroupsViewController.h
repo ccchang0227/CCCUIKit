@@ -6,14 +6,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCCAssetsModel.h"
 
-
-@class CCCAssetsGroup;
 
 @protocol CCCAssetsGroupsViewControllerDelegate;
 @interface CCCAssetsGroupsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (assign, nonatomic) id<CCCAssetsGroupsViewControllerDelegate> delegate;
+
+@property (assign, nonatomic) CCCAssetsFetchType assetsFetchType;
 
 @property (retain, nonatomic) NSArray<CCCAssetsGroup *> *assetsgGroupsArray;
 

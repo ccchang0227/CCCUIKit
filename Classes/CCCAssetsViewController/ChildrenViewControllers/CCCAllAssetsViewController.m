@@ -6,12 +6,15 @@
 //
 
 #import "CCCAllAssetsViewController.h"
-#import "CCCAssetsGroup.h"
-#import "CCCAsset.h"
 #import "CCCAssetPreviewView.h"
 
 //#import "UIImageEffects.h"
 
+#import <objc/NSObject.h>
+
+#if TARGET_IPHONE_SIMULATOR
+@import ObjectiveC.objc;
+#endif
 
 CGFloat const allAssetsCollectionViewFooterHeight = 80.0;
 
@@ -204,6 +207,11 @@ CGFloat const allAssetsCollectionViewFooterHeight = 80.0;
                     cell.assetThumbImageView.image = image;
                     [cell adjustVideoSymbolPosition];
                 }
+                else {
+                    [self.assetsCollectionView performBatchUpdates:^ {
+                        [self.assetsCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+                    }completion:nil];
+                }
             }
             
         }];
@@ -216,6 +224,11 @@ CGFloat const allAssetsCollectionViewFooterHeight = 80.0;
                 if (cell && [cell isKindOfClass:[CCCAssetCollectionViewCell class]]) {
                     cell.assetThumbImageView.image = image;
                     [cell adjustVideoSymbolPosition];
+                }
+                else {
+                    [self.assetsCollectionView performBatchUpdates:^ {
+                        [self.assetsCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+                    }completion:nil];
                 }
             }
             
@@ -375,21 +388,26 @@ CGFloat const allAssetsCollectionViewFooterHeight = 80.0;
     
     static NSString *cellIdentifier = @"CCCAssetCollectionViewCell";
     CCCAssetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.delegate = self;
-    cell.indexPath = indexPath;
-    
-    cell.longPressGestureRecognizer.minimumPressDuration = _longPressDuration;
     
     if (indexPath.item >= self.allAssetsArray.count) {
         cell.assetThumbImageView.image = nil;
         return cell;
     }
     
-    CCCAsset *asset = [self.allAssetsArray objectAtIndex:indexPath.item];
-    cell.videoSymbolImageView.hidden = !(asset.assetType == CCCAssetTypeVideo);
-    
-    cell.assetThumbImageView.image = [self _loadThumbImageWithAsset:asset atIndexPath:indexPath];
-    [cell adjustVideoSymbolPosition];
+    if (![NSProtocolFromString(@"UICollectionViewDelegate") respondsToSelector:@selector(collectionView:willDisplayCell:forItemAtIndexPath:)]) {
+        
+        cell.delegate = self;
+        cell.indexPath = indexPath;
+        
+        cell.longPressGestureRecognizer.minimumPressDuration = _longPressDuration;
+        
+        CCCAsset *asset = [self.allAssetsArray objectAtIndex:indexPath.item];
+        cell.videoSymbolImageView.hidden = !(asset.assetType == CCCAssetTypeVideo);
+        
+        cell.assetThumbImageView.image = [self _loadThumbImageWithAsset:asset atIndexPath:indexPath];
+        [cell adjustVideoSymbolPosition];
+        
+    }
     
     return cell;
 }
@@ -412,6 +430,29 @@ CGFloat const allAssetsCollectionViewFooterHeight = 80.0;
     }
 }
 
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([cell isKindOfClass:[CCCAssetCollectionViewCell class]]) {
+        CCCAssetCollectionViewCell *assetCell = (CCCAssetCollectionViewCell*)cell;
+        assetCell.delegate = self;
+        assetCell.indexPath = indexPath;
+        
+        assetCell.longPressGestureRecognizer.minimumPressDuration = _longPressDuration;
+        
+        if (indexPath.item >= self.allAssetsArray.count) {
+            assetCell.assetThumbImageView.image = nil;
+            return;
+        }
+        
+        CCCAsset *asset = [self.allAssetsArray objectAtIndex:indexPath.item];
+        assetCell.videoSymbolImageView.hidden = !(asset.assetType == CCCAssetTypeVideo);
+        
+        assetCell.assetThumbImageView.image = [self _loadThumbImageWithAsset:asset atIndexPath:indexPath];
+        [assetCell adjustVideoSymbolPosition];
+    }
+    
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([cell isKindOfClass:[CCCAssetCollectionViewCell class]]) {
@@ -425,7 +466,22 @@ CGFloat const allAssetsCollectionViewFooterHeight = 80.0;
     if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
         CCCAllAssetsCollectionFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"CCCAllAssetsCollectionFooterView" forIndexPath:indexPath];
         
-        footerView.allAssetsInfoLabel.text = [NSString stringWithFormat:@"%ld %@, %ld %@", (unsigned long)_numberOfPhotos, NSLocalizedString(@"Photos", nil), (unsigned long)_numberOfVideos, NSLocalizedString(@"Videos", nil)];
+        switch (_assetsFetchType) {
+            case CCCAssetsFetchTypeImage: {
+                footerView.allAssetsInfoLabel.text = [NSString stringWithFormat:@"%ld %@", (unsigned long)_numberOfPhotos, NSLocalizedString(@"Photos", nil)];
+                break;
+            }
+            case CCCAssetsFetchTypeVideo: {
+                footerView.allAssetsInfoLabel.text = [NSString stringWithFormat:@"%ld %@", (unsigned long)_numberOfVideos, NSLocalizedString(@"Videos", nil)];
+                break;
+            }
+            case CCCAssetsFetchTypeBoth: {
+                footerView.allAssetsInfoLabel.text = [NSString stringWithFormat:@"%ld %@, %ld %@", (unsigned long)_numberOfPhotos, NSLocalizedString(@"Photos", nil), (unsigned long)_numberOfVideos, NSLocalizedString(@"Videos", nil)];
+                break;
+            }
+            default:
+                break;
+        }
         
         return footerView;
     }

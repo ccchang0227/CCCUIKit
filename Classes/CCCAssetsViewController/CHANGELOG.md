@@ -4,6 +4,13 @@ All notable changes to CCCAssetsViewController will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) <br>
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2018-06-27
+### Modified
+- change sort of assets
+- change photo source (original -> current)
+- change source of album cover
+- adjust view for iphoneX
+
 ## [1.0.1] - 2017-02-20
 ### Added
 - CHANGLOG.md file.

@@ -15,9 +15,9 @@
 /**
  * Custom ImagePickerViewController
  *
- * @version 1.0.1
+ * @version 1.1.0
  * @author Chih-chieh Chang
- * @date 2017-02-20
+ * @date 2018-06-27
  */
 @interface CCCAssetsViewController : UIViewController <UINavigationControllerDelegate, CCCAssetsGroupsViewControllerDelegate, CCCAllAssetsViewControllerDelegate>
 
@@ -32,6 +32,7 @@
 
 @property (retain, nonatomic) UIView *contentView;
 
+@property (retain, nonatomic) IBOutlet UIView *titleBgView;
 @property (readonly, nonatomic) UIView *titleView;
 @property (readonly, nonatomic) UILabel *titleLabel;
 @property (readonly, nonatomic) UIButton *closeButton;

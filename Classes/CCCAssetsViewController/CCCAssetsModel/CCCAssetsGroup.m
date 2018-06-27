@@ -228,6 +228,7 @@
             if (_isAllVideosGroup) {
                 options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeVideo];
             }
+            options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
             options.fetchLimit = 1;
             
             if (operationQueue) {
@@ -238,7 +239,7 @@
                 [operationQueue addOperationWithBlock:^ {
                     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:_phAssetCollection options:options];
                     if (fetchResult.count > 0) {
-                        PHAsset *phAsset = [fetchResult objectAtIndex:0];
+                        PHAsset *phAsset = [fetchResult lastObject];
                         if (phAsset) {
                             PHImageManager *imageManager = [PHImageManager defaultManager];
                             PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
@@ -267,7 +268,7 @@
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
                     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:_phAssetCollection options:options];
                     if (fetchResult.count > 0) {
-                        PHAsset *phAsset = [fetchResult objectAtIndex:0];
+                        PHAsset *phAsset = [fetchResult lastObject];
                         if (phAsset) {
                             PHImageManager *imageManager = [PHImageManager defaultManager];
                             PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
@@ -324,11 +325,12 @@
     if (_isAllVideosGroup) {
         options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeVideo];
     }
+    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
     options.fetchLimit = 1;
     
     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:options];
     if (fetchResult.count > 0) {
-        PHAsset *phAsset = [fetchResult objectAtIndex:0];
+        PHAsset *phAsset = [fetchResult lastObject];
         if (phAsset) {
             PHImageManager *imageManager = [PHImageManager defaultManager];
             PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
