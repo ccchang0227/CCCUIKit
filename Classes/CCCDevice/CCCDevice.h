@@ -13,7 +13,7 @@
  *
  * @version 1.1.0
  * @author Chih-chieh Chang
- * @date 2017-11-10
+ * @date 2018-06-27
  */
 NS_ROOT_CLASS
 @interface CCCDevice
