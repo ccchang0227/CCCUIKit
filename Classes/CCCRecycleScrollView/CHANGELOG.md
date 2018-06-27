@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [1.2.0] - 2018-06-27
+### 修正
+- `-scrollToIndex:direction:animated:`在animated是NO時，log出現NSLock的warning訊息
+
+### 新增
+- `-reloadDataWithCenterIndex:`方法，指定重載畫面時中間的index
+
 ## [1.1.0] - 2017-09-18
 ### 修正
 - 滑動時subview錯位的問題

@@ -1104,9 +1104,16 @@
 }
 
 - (void)reloadData {
+    [self reloadDataWithCenterIndex:self.currentIndex];
+    
+}
+
+- (void)reloadDataWithCenterIndex:(NSUInteger)index {
     if (![_lock tryLock]) {
         return;
     }
+    
+    _currentIndex = index;
     
     [self _clearData];
     if (self.dataSource) {
@@ -1245,6 +1252,9 @@
             _currentIndex = _centerIndex;
         }
         else {
+            if (![_lock tryLock]) {
+                return;
+            }
             [self _removeAllSubViewsAnimated:self.displayAnimated];
             [self _loadSubViewLayouts];
             _centerIndex = index;

@@ -34,9 +34,9 @@ typedef NS_ENUM(NSInteger, CCCRecycleScrollAnimateDirections) {
 /**
  * A double sided scrollView
  *
- * @version 1.1.0
+ * @version 1.2.0
  * @author Chih-chieh Chang
- * @date 2017-09-18
+ * @date 2018-06-27
  */
 @interface CCCRecycleScrollView : UIView
 
@@ -64,6 +64,7 @@ typedef NS_ENUM(NSInteger, CCCRecycleScrollAnimateDirections) {
 @property (readonly, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
 - (void)reloadData;
+- (void)reloadDataWithCenterIndex:(NSUInteger)index;
 
 - (NSInteger)numberOfSubViews;
 - (CCCRecycleView *)subViewWithIndex:(NSInteger)index;
