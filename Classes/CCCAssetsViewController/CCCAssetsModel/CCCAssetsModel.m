@@ -162,26 +162,28 @@
                 PHFetchResult<PHAssetCollection *> *fetchResult = [PHAssetCollection fetchAssetCollectionsWithType:collectionType subtype:PHAssetCollectionSubtypeAny options:nil];
                 [fetchResult enumerateObjectsUsingBlock:^(PHAssetCollection *collection, NSUInteger idx, BOOL *stop) {
                     if (collection) {
-                        if (!hasVideoGroup && (type & CCCAssetsFetchTypeVideo) && [CCCAssetsGroup collectionHasVideoAssets:collection]) {
-                            allVideoAssetsGroup = [CCCAssetsGroup cccAssetsGroupWithPHAssetCollection:collection isAllVideosGroup:YES];
-                            if (allVideoAssetsGroup) {
-                                [groupsArray addObject:allVideoAssetsGroup];
-                                hasVideoGroup = YES;
+                        if (@available(iOS 9.0, *)) {
+                            if (!hasVideoGroup && (type & CCCAssetsFetchTypeVideo) && [CCCAssetsGroup collectionHasVideoAssets:collection]) {
+                                allVideoAssetsGroup = [CCCAssetsGroup cccAssetsGroupWithPHAssetCollection:collection isAllVideosGroup:YES];
+                                if (allVideoAssetsGroup) {
+                                    [groupsArray addObject:allVideoAssetsGroup];
+                                    hasVideoGroup = YES;
+                                }
                             }
-                        }
-                        
-                        if (((type & CCCAssetsFetchTypeVideo) && [CCCAssetsGroup collectionHasVideoAssets:collection]) ||
-                            ((type & CCCAssetsFetchTypeImage) && [CCCAssetsGroup collectionHasImageAssets:collection])) {
-                            CCCAssetsGroup *assetsGroup = [CCCAssetsGroup cccAssetsGroupWithPHAssetCollection:collection isAllVideosGroup:NO];
-                            if (assetsGroup) {
-                                assetsGroup.shouldIncludePhotos = (type & CCCAssetsFetchTypeImage);
-                                assetsGroup.shouldIncludeVideos = (type & CCCAssetsFetchTypeVideo);
-                                [groupsArray addObject:assetsGroup];
-                                
-                                if (allVideoAssetsGroup &&
-                                    collectionType == PHAssetCollectionTypeSmartAlbum &&
-                                    collection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumVideos) {
-                                    allVideoAssetsGroup.numberOfVideoAssets += assetsGroup.numberOfVideoAssets;
+                            
+                            if (((type & CCCAssetsFetchTypeVideo) && [CCCAssetsGroup collectionHasVideoAssets:collection]) ||
+                                ((type & CCCAssetsFetchTypeImage) && [CCCAssetsGroup collectionHasImageAssets:collection])) {
+                                CCCAssetsGroup *assetsGroup = [CCCAssetsGroup cccAssetsGroupWithPHAssetCollection:collection isAllVideosGroup:NO];
+                                if (assetsGroup) {
+                                    assetsGroup.shouldIncludePhotos = (type & CCCAssetsFetchTypeImage);
+                                    assetsGroup.shouldIncludeVideos = (type & CCCAssetsFetchTypeVideo);
+                                    [groupsArray addObject:assetsGroup];
+                                    
+                                    if (allVideoAssetsGroup &&
+                                        collectionType == PHAssetCollectionTypeSmartAlbum &&
+                                        collection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumVideos) {
+                                        allVideoAssetsGroup.numberOfVideoAssets += assetsGroup.numberOfVideoAssets;
+                                    }
                                 }
                             }
                         }
@@ -455,28 +457,30 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
             
-            if (assetsGroup.phAssetCollection) {
-                PHFetchOptions *options = [[PHFetchOptions alloc] init];
-                if (type == CCCAssetsFetchTypeImage) {
-                    options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeImage];
-                }
-                else if (type == CCCAssetsFetchTypeVideo) {
-                    options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeVideo];
-                }
-                options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-                
-                PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetsGroup.phAssetCollection options:options];
-                [fetchResult enumerateObjectsUsingBlock:^(PHAsset *phAsset, NSUInteger idx, BOOL *stop) {
-                    if (phAsset) {
-                        CCCAsset *asset = [CCCAsset cccAssetWithPHAsset:phAsset];
-                        if (asset) {
-                            [allAssetsArray addObject:asset];
-                        }
+            if (@available(iOS 9.0, *)) {
+                if (assetsGroup.phAssetCollection) {
+                    PHFetchOptions *options = [[PHFetchOptions alloc] init];
+                    if (type == CCCAssetsFetchTypeImage) {
+                        options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeImage];
                     }
-                }];
+                    else if (type == CCCAssetsFetchTypeVideo) {
+                        options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeVideo];
+                    }
+                    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+                    
+                    PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetsGroup.phAssetCollection options:options];
+                    [fetchResult enumerateObjectsUsingBlock:^(PHAsset *phAsset, NSUInteger idx, BOOL *stop) {
+                        if (phAsset) {
+                            CCCAsset *asset = [CCCAsset cccAssetWithPHAsset:phAsset];
+                            if (asset) {
+                                [allAssetsArray addObject:asset];
+                            }
+                        }
+                    }];
 #if !__has_feature(objc_arc)
-                [options release];
+                    [options release];
 #endif
+                }
             }
             
             dispatch_group_leave(group);

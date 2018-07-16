@@ -229,7 +229,9 @@
                 options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeVideo];
             }
             options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-            options.fetchLimit = 1;
+            if (@available(iOS 9.0, *)) {
+                options.fetchLimit = 1;
+            }
             
             if (operationQueue) {
                 if (operationQueue.isSuspended) {
@@ -326,7 +328,9 @@
         options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeVideo];
     }
     options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-    options.fetchLimit = 1;
+    if (@available(iOS 9.0, *)) {
+        options.fetchLimit = 1;
+    }
     
     PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:options];
     if (fetchResult.count > 0) {

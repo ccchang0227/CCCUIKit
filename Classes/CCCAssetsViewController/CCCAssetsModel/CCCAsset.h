@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, CCCAssetType) {
 
 @property (readonly, strong, nonatomic, nullable) PHAsset *phAsset NS_AVAILABLE_IOS(9_0);
 
-+ (instancetype)cccAssetWithPHAsset:(PHAsset *)phAsset;
++ (instancetype)cccAssetWithPHAsset:(PHAsset *)phAsset NS_AVAILABLE_IOS(9_0);
 - (instancetype)initWithPHAsset:(PHAsset *)phAsset NS_DESIGNATED_INITIALIZER NS_AVAILABLE_IOS(9_0);
 
 #endif
