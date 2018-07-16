@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CCCUIKit'
-  s.version          = '1.3.0'
+  s.version          = '1.3.1'
   s.summary          = "C.C.Chang's custom UIKit."
 
   s.homepage         = 'https://github.com/ccchang0227/CCCUIKit'
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCAssetsViewController' do |ss|
-    # current version: 1.1.0
+    # current version: 1.1.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCAssetsViewController/*.{h,m}'
     ss.resources = 'Classes/CCCAssetsViewController/*.xib', 'Assets/CCCAssets_*.png'
@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCCamera' do |ss|
-    # current version: 1.2.0
+    # current version: 1.2.1
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCamera/**/*.{h,m}'
     ss.resources = 'Assets/CCCCamera_*.png'
@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCMaskedLabel' do |ss|
-    # current version: 0.0.6
+    # current version: 0.0.7
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCMaskedLabel/**/*.{h,m}'
   end

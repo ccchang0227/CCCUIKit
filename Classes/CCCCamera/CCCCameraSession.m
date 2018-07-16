@@ -125,7 +125,10 @@
         if ([_session.outputs containsObject:_stillImageOutput]) {
             [_session removeOutput:_stillImageOutput];
         }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
         _stillImageOutput.outputSettings = nil;
+#pragma clang diagnostic pop
     }
     if (_metadataOutput) {
         if ([_session.outputs containsObject:_metadataOutput]) {

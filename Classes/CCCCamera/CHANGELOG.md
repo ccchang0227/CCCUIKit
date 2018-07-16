@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.1] - 2018-07-16
+### Modified
+- 修掉部分Warning
+
 ## [1.2.0] - 2017-09-18
 ### Changed
 - `CCCCameraSessionDelegate`新增方法:`-cccCameraSession:didReceiveSampleBuffer:fromConnection:`

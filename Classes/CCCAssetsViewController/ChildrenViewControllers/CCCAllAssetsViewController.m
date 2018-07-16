@@ -64,8 +64,10 @@ CGFloat const allAssetsCollectionViewFooterHeight = 80.0;
     
     if ([self respondsToSelector:@selector(traitCollection)]) {
         if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)]) {
-            if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
-                [self registerForPreviewingWithDelegate:self sourceView:self.assetsCollectionView];
+            if (@available(iOS 9.0, *)) {
+                if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+                    [self registerForPreviewingWithDelegate:self sourceView:self.assetsCollectionView];
+                }
             }
         }
     }

@@ -10,12 +10,12 @@ tvOS 9.0以上 (部分支援)
 ## Classes
 
 * UIKit+CCCAdditions (1.1.0)<br>
-* CCCAssetsViewController (1.1.0)<br>
-* CCCCamera (1.2.0)<br>
+* CCCAssetsViewController (1.1.1)<br>
+* CCCCamera (1.2.1)<br>
 * CCCCanvas (1.0.1)<br>
 * CCCCycleView (1.1.0)<br>
 * CCCDevice (1.1.0)<br>
-* CCCMaskedLabel (0.0.6)<br>
+* CCCMaskedLabel (0.0.7)<br>
 * CCCPageControl (1.0.2)<br>
 * CCCRatingControl (1.0.1)<br>
 * CCCRecycleScrollView (1.2.0)<br>

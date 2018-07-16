@@ -167,8 +167,8 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // 儲存textColor/attributedString屬性 (textColor的r, g, b其中一個為1時才能產生字是透明的mask)
-    NSArray *attributions;
-    UIColor *textColor;
+    NSArray *attributions = nil;
+    UIColor *textColor = self.textColor;
     if (self.attributedText) {
         __block NSMutableArray *arrayAttrs = [NSMutableArray arrayWithCapacity:0];
         [self.attributedText enumerateAttributesInRange:NSMakeRange(0, self.attributedText.string.length) options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
@@ -186,7 +186,7 @@
     [self _drawTextInContext:context withDrawingMode:kCGTextFill];
     
     // 回復原來的textColor/attributedString屬性
-    if (self.attributedText) {
+    if (self.attributedText && attributions) {
         NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:self.attributedText.string];
         for (NSMutableDictionary *attrs in attributions) {
             NSRange range = [attrs[@"range"] rangeValue];
@@ -221,8 +221,8 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // 儲存textColor/attributedString屬性 (textColor的r, g, b其中一個為1時才能產生字是透明的mask)
-    NSArray *attributions;
-    UIColor *textColor;
+    NSArray *attributions = nil;
+    UIColor *textColor = self.textColor;
     if (self.attributedText) {
         __block NSMutableArray *arrayAttrs = [NSMutableArray arrayWithCapacity:0];
         [self.attributedText enumerateAttributesInRange:NSMakeRange(0, self.attributedText.string.length) options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
@@ -240,7 +240,7 @@
     [self _drawTextInContext:context withDrawingMode:kCGTextFill];
     
     // 回復原來的textColor/attributedString屬性
-    if (self.attributedText) {
+    if (self.attributedText && attributions) {
         NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:self.attributedText.string];
         for (NSMutableDictionary *attrs in attributions) {
             NSRange range = [attrs[@"range"] rangeValue];
