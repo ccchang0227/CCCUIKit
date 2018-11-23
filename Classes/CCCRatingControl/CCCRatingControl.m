@@ -284,9 +284,13 @@ UIImage *starImage(CGSize size, UIColor *strokeColor, UIColor *fillColor, BOOL f
     
     double intPart;
     double fracPart = modf(newValue, &intPart);
+    
     double newIntPart;
-    if (modf(fracPart*self.fractionNumber, &newIntPart) > 0.0) {
-        newValue = intPart+newIntPart/(CGFloat)self.fractionNumber;
+    double newFracPart = modf(fracPart*self.fractionNumber, &newIntPart);
+    
+    newIntPart = roundf(fracPart*self.fractionNumber);
+    if (newFracPart > 0.0) {
+        newValue = intPart + newIntPart/(CGFloat)self.fractionNumber;
     }
     _value = newValue;
     

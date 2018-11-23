@@ -21,9 +21,9 @@ UIKIT_EXTERN UIImage *starImage(CGSize size, UIColor *strokeColor, UIColor *fill
 /**
  * Custom RatingBar (Similar to RatingBar in Android SDK)
  *
- * @version 1.0.1
+ * @version 1.1.0
  * @author Chih-chieh Chang
- * @date 2017-02-20
+ * @date 2018-11-23
  */
 @interface CCCRatingControl : UIControl
 
