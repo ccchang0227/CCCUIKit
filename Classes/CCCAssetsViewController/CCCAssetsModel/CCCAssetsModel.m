@@ -339,37 +339,40 @@
         dispatch_group_enter(group);
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-            PHFetchOptions *options = [[PHFetchOptions alloc] init];
-            options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeVideo];
-            options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"modificationDate" ascending:YES]];
             
-            NSArray *collectionTypes = @[@(PHAssetCollectionTypeSmartAlbum), @(PHAssetCollectionTypeAlbum)];
-            for (NSNumber *collectionTypeNumer in collectionTypes) {
-                PHAssetCollectionType collectionType = [collectionTypeNumer integerValue];
+            if (@available(iOS 9.0, *)) {
+                PHFetchOptions *options = [[PHFetchOptions alloc] init];
+                options.predicate = [NSPredicate predicateWithFormat:@"mediaType=%ld", (long)PHAssetMediaTypeVideo];
+                options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"modificationDate" ascending:YES]];
                 
-                PHFetchResult<PHAssetCollection *> *fetchCollectionsResult = [PHAssetCollection fetchAssetCollectionsWithType:collectionType subtype:PHAssetCollectionSubtypeAny options:nil];
-                [fetchCollectionsResult enumerateObjectsUsingBlock:^(PHAssetCollection *collection, NSUInteger idx, BOOL *stop) {
-                    if (collection) {
-                        PHFetchResult<PHAsset *> *fetchAssetsResult = [PHAsset fetchAssetsInAssetCollection:collection options:options];
-                        [fetchAssetsResult enumerateObjectsUsingBlock:^(PHAsset *phAsset, NSUInteger idx, BOOL *stop) {
-                            if (phAsset) {
-                                CCCAsset *asset = [CCCAsset cccAssetWithPHAsset:phAsset];
-                                if (asset) {
-                                    if (![self _checkAssetIsAlreadyInArray:allAssetsArray asset:asset]) {
-                                        [allAssetsArray addObject:asset];
+                NSArray *collectionTypes = @[@(PHAssetCollectionTypeSmartAlbum), @(PHAssetCollectionTypeAlbum)];
+                for (NSNumber *collectionTypeNumer in collectionTypes) {
+                    PHAssetCollectionType collectionType = [collectionTypeNumer integerValue];
+                    
+                    PHFetchResult<PHAssetCollection *> *fetchCollectionsResult = [PHAssetCollection fetchAssetCollectionsWithType:collectionType subtype:PHAssetCollectionSubtypeAny options:nil];
+                    [fetchCollectionsResult enumerateObjectsUsingBlock:^(PHAssetCollection *collection, NSUInteger idx, BOOL *stop) {
+                        if (collection) {
+                            PHFetchResult<PHAsset *> *fetchAssetsResult = [PHAsset fetchAssetsInAssetCollection:collection options:options];
+                            [fetchAssetsResult enumerateObjectsUsingBlock:^(PHAsset *phAsset, NSUInteger idx, BOOL *stop) {
+                                if (phAsset) {
+                                    CCCAsset *asset = [CCCAsset cccAssetWithPHAsset:phAsset];
+                                    if (asset) {
+                                        if (![self _checkAssetIsAlreadyInArray:allAssetsArray asset:asset]) {
+                                            [allAssetsArray addObject:asset];
+                                        }
                                     }
                                 }
-                            }
-                        }];
-                    }
+                            }];
+                        }
+                        
+                    }];
                     
-                }];
+                }
                 
-            }
-            
 #if !__has_feature(objc_arc)
-            [options release];
+                [options release];
 #endif
+            }
             
             dispatch_group_leave(group);
         });

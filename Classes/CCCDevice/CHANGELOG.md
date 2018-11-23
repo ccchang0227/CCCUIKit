@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [1.2.0] - 2018-11-23
+### Modified
+- Add new device
+- Change device model display
+
 ## [1.1.0] - 2018-06-27
 ### Modified
 - Add new device
