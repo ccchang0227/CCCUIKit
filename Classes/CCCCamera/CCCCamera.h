@@ -12,9 +12,9 @@
 /**
  * A library for using camera.
  *
- * @version 1.2.1
+ * @version 1.2.2
  * @author Chih-chieh Chang
- * @date 2018-07-16
+ * @date 2018-12-06
  */
 
 #import "CCCCameraConstants.h"

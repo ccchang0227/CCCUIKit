@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.2] - 2018-12-06
+### Fixed
+- 修正"不同意"相機使用權後，release會當掉的bug
+
 ## [1.2.1] - 2018-07-16
 ### Modified
 - 修掉部分Warning

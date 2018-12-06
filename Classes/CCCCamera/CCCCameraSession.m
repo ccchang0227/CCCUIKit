@@ -151,8 +151,12 @@
     [_videoWriterInput release];
     [_audioWriterInput release];
     [_videoFileWriter release];
-    dispatch_release(_metaOutputQueue);
-    dispatch_release(_cameraSessionQueue);
+    if (_metaOutputQueue) {
+        dispatch_release(_metaOutputQueue);
+    }
+    if (_cameraSessionQueue) {
+        dispatch_release(_cameraSessionQueue);
+    }
     [super dealloc];
 #endif
     
