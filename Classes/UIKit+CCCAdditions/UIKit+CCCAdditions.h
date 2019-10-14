@@ -11,9 +11,9 @@
 /**
  * UIKit+CCCAdditions
  *
- * @version 1.1.0
+ * @version 1.1.1
  * @author Chih-chieh Chang
- * @date 2018-06-27
+ * @date 2019-10-14
  */
 
 #ifndef SYSTEM_VERSION_EQUAL_TO
@@ -39,8 +39,8 @@
 
 @interface UIView (CCC_SubviewHunting)
 
-- (UIView *)huntedSubviewWithClassName:(NSString *)className;
-- (void)debugSubviews;
+- (UIView *)ccc_huntedSubviewWithClassName:(NSString *)className;
+- (void)ccc_debugSubviews;
 
 @end
 
@@ -62,23 +62,23 @@
 
 @interface UIColor (CCC_Additions)
 
-+ (UIColor *)randomColor;
++ (UIColor *)ccc_randomColor;
 
 /// Assume input as 0x21F899(RGB)
-+ (UIColor *)colorWithHexRGB:(NSUInteger)hexRGBValue;
++ (UIColor *)ccc_colorWithHexRGB:(NSUInteger)hexRGBValue;
 
 /// Assume input as 0x21F899(RGB), and alpha with range 0.0~1.0
-+ (UIColor *)colorWithHexRGB:(NSUInteger)hexRGBValue alpha:(CGFloat)alpha;
++ (UIColor *)ccc_colorWithHexRGB:(NSUInteger)hexRGBValue alpha:(CGFloat)alpha;
 
-@property (readonly, nonatomic) UIColor *contrastColor;
+@property (readonly, nonatomic) UIColor *ccc_contrastColor;
 
 @end
 
 
 @interface UIViewController (CCC_TopViewControllerAdditions)
 
-@property (readonly, nonatomic) UIViewController *topViewController;
-+ (UIViewController *)topViewController:(UIViewController *)rootViewController;
+@property (readonly, nonatomic) UIViewController *ccc_topViewController;
++ (UIViewController *)ccc_topViewController:(UIViewController *)rootViewController;
 
 @end
 
@@ -86,10 +86,10 @@
 @interface NSString (CCC_Additions)
 
 /// detect whether string is all digit.
-@property (readonly, nonatomic, getter=isAllDigits) BOOL allDigits;
+@property (readonly, nonatomic, getter=ccc_isAllDigits) BOOL ccc_allDigits;
 /// detect string is email format or not.
-@property (readonly, nonatomic, getter=isEmailFormat) BOOL emailFormat;
+@property (readonly, nonatomic, getter=ccc_isEmailFormat) BOOL ccc_emailFormat;
 /// detect string is phone number format or not.
-@property (readonly, nonatomic, getter=isPhoneNumberFormat) BOOL phoneNumberFormat;
+@property (readonly, nonatomic, getter=ccc_isPhoneNumberFormat) BOOL ccc_phoneNumberFormat;
 
 @end

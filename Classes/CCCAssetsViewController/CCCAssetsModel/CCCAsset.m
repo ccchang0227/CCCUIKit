@@ -267,55 +267,37 @@
     
     if (NSClassFromString(@"PHAsset")) {
         if (_phAsset) {
+            void (^runBlock)(void) = ^{
+                PHImageManager *imageManager = [PHImageManager defaultManager];
+                PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
+                imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
+                imageRequestOptions.synchronous = YES;
+                
+                [imageManager requestImageForAsset:_phAsset targetSize:CGSizeMake(150, 150) contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
+                    
+                    UIImage *image = [CCCAssetsModel createSquareImageFromImage:result];
+                    
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                        if (handler) {
+                            handler(image);
+                        }
+                    }];
+                }];
+                
+#if !__has_feature(objc_arc)
+                [imageRequestOptions release];
+#endif
+            };
+            
             if (operationQueue) {
                 if (operationQueue.isSuspended) {
                     [operationQueue setSuspended:NO];
                 }
                 
-                [operationQueue addOperationWithBlock:^ {
-                    PHImageManager *imageManager = [PHImageManager defaultManager];
-                    PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                    imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
-                    imageRequestOptions.synchronous = YES;
-                    
-                    [imageManager requestImageForAsset:_phAsset targetSize:CGSizeMake(150, 150) contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
-                        
-                        UIImage *image = [CCCAssetsModel createSquareImageFromImage:result];
-                        
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                            if (handler) {
-                                handler(image);
-                            }
-                        }];
-                    }];
-                    
-#if !__has_feature(objc_arc)
-                    [imageRequestOptions release];
-#endif
-                }];
+                [operationQueue addOperationWithBlock:runBlock];
             }
             else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-                    PHImageManager *imageManager = [PHImageManager defaultManager];
-                    PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                    imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
-                    imageRequestOptions.synchronous = YES;
-                    
-                    [imageManager requestImageForAsset:_phAsset targetSize:CGSizeMake(150, 150) contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
-                        
-                        UIImage *image = [CCCAssetsModel createSquareImageFromImage:result];
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^ {
-                            if (handler) {
-                                handler(image);
-                            }
-                        });
-                    }];
-                    
-#if !__has_feature(objc_arc)
-                    [imageRequestOptions release];
-#endif
-                });
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), runBlock);
             }
         }
     }
@@ -328,68 +310,43 @@
         else {
             NSURL *url = [_mpMediaItem valueForProperty:MPMediaItemPropertyAssetURL];
             if (url && url.absoluteString.length > 0) {
+                void (^runBlock)(void) = ^{
+                    AVURLAsset *asset = [AVURLAsset assetWithURL:url];
+                    AVAssetImageGenerator *imgGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+                    imgGenerator.appliesPreferredTrackTransform = YES;
+                    CMTime time = CMTimeMake(asset.duration.value*0.1, asset.duration.timescale); //kCMTimeZero
+                    CGImageRef cgImage = [imgGenerator copyCGImageAtTime:time actualTime:NULL error:nil];
+                    if (cgImage) {
+                        UIImage *image = [UIImage imageWithCGImage:cgImage];
+                        CGImageRelease(cgImage);
+                        cgImage = NULL;
+                        
+                        image = [CCCAssetsModel resizeAspectFitImage:image maxSize:150];
+#if !__has_feature(objc_arc)
+                        if (_aspectRatioThumbImage) {
+                            [_aspectRatioThumbImage release];
+                        }
+#endif
+                        _aspectRatioThumbImage = [image retain];
+                        image = [CCCAssetsModel createSquareImageFromImage:_aspectRatioThumbImage];
+                        
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                            if (handler) {
+                                handler(image);
+                            }
+                        }];
+                    }
+                };
                 
                 if (operationQueue) {
                     if (operationQueue.isSuspended) {
                         [operationQueue setSuspended:NO];
                     }
                     
-                    [operationQueue addOperationWithBlock:^ {
-                        AVURLAsset *asset = [AVURLAsset assetWithURL:url];
-                        AVAssetImageGenerator *imgGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
-                        imgGenerator.appliesPreferredTrackTransform = YES;
-                        CMTime time = CMTimeMake(asset.duration.value*0.1, asset.duration.timescale); //kCMTimeZero
-                        CGImageRef cgImage = [imgGenerator copyCGImageAtTime:time actualTime:NULL error:nil];
-                        if (cgImage) {
-                            UIImage *image = [UIImage imageWithCGImage:cgImage];
-                            CGImageRelease(cgImage);
-                            cgImage = NULL;
-                            
-                            image = [CCCAssetsModel resizeAspectFitImage:image maxSize:150];
-#if !__has_feature(objc_arc)
-                            if (_aspectRatioThumbImage) {
-                                [_aspectRatioThumbImage release];
-                            }
-#endif
-                            _aspectRatioThumbImage = [image retain];
-                            image = [CCCAssetsModel createSquareImageFromImage:_aspectRatioThumbImage];
-                            
-                            [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                                if (handler) {
-                                    handler(image);
-                                }
-                            }];
-                        }
-                    }];
+                    [operationQueue addOperationWithBlock:runBlock];
                 }
                 else {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-                        AVURLAsset *asset = [AVURLAsset assetWithURL:url];
-                        AVAssetImageGenerator *imgGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
-                        imgGenerator.appliesPreferredTrackTransform = YES;
-                        CMTime time = CMTimeMake(asset.duration.value*0.1, asset.duration.timescale); //kCMTimeZero
-                        CGImageRef cgImage = [imgGenerator copyCGImageAtTime:time actualTime:NULL error:nil];
-                        if (cgImage) {
-                            UIImage *image = [UIImage imageWithCGImage:cgImage];
-                            CGImageRelease(cgImage);
-                            cgImage = NULL;
-                            
-                            image = [CCCAssetsModel resizeAspectFitImage:image maxSize:150];
-#if !__has_feature(objc_arc)
-                            if (_aspectRatioThumbImage) {
-                                [_aspectRatioThumbImage release];
-                            }
-#endif
-                            _aspectRatioThumbImage = [image retain];
-                            image = [CCCAssetsModel createSquareImageFromImage:_aspectRatioThumbImage];
-                            
-                            dispatch_async(dispatch_get_main_queue(), ^ {
-                                if (handler) {
-                                    handler(image);
-                                }
-                            });
-                        }
-                    });
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), runBlock);
                 }
             }
         }
@@ -408,57 +365,38 @@
     
     if (NSClassFromString(@"PHAsset")) {
         if (_phAsset) {
+            void (^runBlock)(void) = ^{
+                PHImageManager *imageManager = [PHImageManager defaultManager];
+                PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
+                imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
+                imageRequestOptions.synchronous = YES;
+                
+                [imageManager requestImageForAsset:_phAsset targetSize:CGSizeMake(150, 150) contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
+                    
+                    UIImage *image = result;
+                    
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                        if (handler) {
+                            handler(image);
+                        }
+                    }];
+                    
+                }];
+                
+#if !__has_feature(objc_arc)
+                [imageRequestOptions release];
+#endif
+            };
+            
             if (operationQueue) {
                 if (operationQueue.isSuspended) {
                     [operationQueue setSuspended:NO];
                 }
                 
-                [operationQueue addOperationWithBlock:^ {
-                    PHImageManager *imageManager = [PHImageManager defaultManager];
-                    PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                    imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
-                    imageRequestOptions.synchronous = YES;
-                    
-                    [imageManager requestImageForAsset:_phAsset targetSize:CGSizeMake(150, 150) contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
-                        
-                        UIImage *image = result;
-                        
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                            if (handler) {
-                                handler(image);
-                            }
-                        }];
-                        
-                    }];
-                    
-#if !__has_feature(objc_arc)
-                    [imageRequestOptions release];
-#endif
-                }];
+                [operationQueue addOperationWithBlock:runBlock];
             }
             else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-                    PHImageManager *imageManager = [PHImageManager defaultManager];
-                    PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                    imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
-                    imageRequestOptions.synchronous = YES;
-                    
-                    [imageManager requestImageForAsset:_phAsset targetSize:CGSizeMake(150, 150) contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
-                        
-                        UIImage *image = result;
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^ {
-                            if (handler) {
-                                handler(image);
-                            }
-                        });
-                        
-                    }];
-                    
-#if !__has_feature(objc_arc)
-                    [imageRequestOptions release];
-#endif
-                });
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), runBlock);
             }
             
         }
@@ -471,66 +409,42 @@
         else {
             NSURL *url = [_mpMediaItem valueForProperty:MPMediaItemPropertyAssetURL];
             if (url && url.absoluteString.length > 0) {
+                void (^runBlock)(void) = ^{
+                    AVURLAsset *asset = [AVURLAsset assetWithURL:url];
+                    AVAssetImageGenerator *imgGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+                    imgGenerator.appliesPreferredTrackTransform = YES;
+                    CMTime time = CMTimeMake(asset.duration.value*0.1, asset.duration.timescale); //kCMTimeZero
+                    CGImageRef cgImage = [imgGenerator copyCGImageAtTime:time actualTime:NULL error:nil];
+                    if (cgImage) {
+                        UIImage *image = [UIImage imageWithCGImage:cgImage];
+                        CGImageRelease(cgImage);
+                        cgImage = NULL;
+                        
+                        image = [CCCAssetsModel resizeAspectFitImage:image maxSize:150];
+#if !__has_feature(objc_arc)
+                        if (_aspectRatioThumbImage) {
+                            [_aspectRatioThumbImage release];
+                        }
+#endif
+                        _aspectRatioThumbImage = [image retain];
+                        
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                            if (handler) {
+                                handler(image);
+                            }
+                        }];
+                    }
+                };
                 
                 if (operationQueue) {
                     if (operationQueue.isSuspended) {
                         [operationQueue setSuspended:NO];
                     }
                     
-                    [operationQueue addOperationWithBlock:^ {
-                        AVURLAsset *asset = [AVURLAsset assetWithURL:url];
-                        AVAssetImageGenerator *imgGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
-                        imgGenerator.appliesPreferredTrackTransform = YES;
-                        CMTime time = CMTimeMake(asset.duration.value*0.1, asset.duration.timescale); //kCMTimeZero
-                        CGImageRef cgImage = [imgGenerator copyCGImageAtTime:time actualTime:NULL error:nil];
-                        if (cgImage) {
-                            UIImage *image = [UIImage imageWithCGImage:cgImage];
-                            CGImageRelease(cgImage);
-                            cgImage = NULL;
-                            
-                            image = [CCCAssetsModel resizeAspectFitImage:image maxSize:150];
-#if !__has_feature(objc_arc)
-                            if (_aspectRatioThumbImage) {
-                                [_aspectRatioThumbImage release];
-                            }
-#endif
-                            _aspectRatioThumbImage = [image retain];
-                            
-                            [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                                if (handler) {
-                                    handler(image);
-                                }
-                            }];
-                        }
-                    }];
+                    [operationQueue addOperationWithBlock:runBlock];
                 }
                 else {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-                        AVURLAsset *asset = [AVURLAsset assetWithURL:url];
-                        AVAssetImageGenerator *imgGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
-                        imgGenerator.appliesPreferredTrackTransform = YES;
-                        CMTime time = CMTimeMake(asset.duration.value*0.1, asset.duration.timescale); //kCMTimeZero
-                        CGImageRef cgImage = [imgGenerator copyCGImageAtTime:time actualTime:NULL error:nil];
-                        if (cgImage) {
-                            UIImage *image = [UIImage imageWithCGImage:cgImage];
-                            CGImageRelease(cgImage);
-                            cgImage = NULL;
-                            
-                            image = [CCCAssetsModel resizeAspectFitImage:image maxSize:150];
-#if !__has_feature(objc_arc)
-                            if (_aspectRatioThumbImage) {
-                                [_aspectRatioThumbImage release];
-                            }
-#endif
-                            _aspectRatioThumbImage = [image retain];
-                            
-                            dispatch_async(dispatch_get_main_queue(), ^ {
-                                if (handler) {
-                                    handler(image);
-                                }
-                            });
-                        }
-                    });
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), runBlock);
                 }
             }
         }
@@ -551,67 +465,44 @@
     
     if (NSClassFromString(@"PHAsset")) {
         if (_phAsset) {
+            void (^runBlock)(void) = ^{
+                PHImageManager *imageManager = [PHImageManager defaultManager];
+                PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
+                imageRequestOptions.version = PHImageRequestOptionsVersionCurrent;//PHImageRequestOptionsVersionOriginal;
+//                imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
+                imageRequestOptions.synchronous = YES;
+                
+                CGSize targetSize = PHImageManagerMaximumSize;
+                if (_assetType == CCCAssetTypeVideo) {
+                    targetSize = CGSizeMake(_phAsset.pixelWidth, _phAsset.pixelHeight);
+                }
+                
+                [imageManager requestImageForAsset:_phAsset targetSize:targetSize contentMode:PHImageContentModeAspectFill options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
+                    
+                    UIImage *image = result;
+                    
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                        if (handler) {
+                            handler(image);
+                        }
+                    }];
+                    
+                }];
+                
+#if !__has_feature(objc_arc)
+                [imageRequestOptions release];
+#endif
+            };
+            
             if (operationQueue) {
                 if (operationQueue.isSuspended) {
                     [operationQueue setSuspended:NO];
                 }
                 
-                [operationQueue addOperationWithBlock:^ {
-                    PHImageManager *imageManager = [PHImageManager defaultManager];
-                    PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                    imageRequestOptions.version = PHImageRequestOptionsVersionCurrent;//PHImageRequestOptionsVersionOriginal;
-                    imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
-                    imageRequestOptions.synchronous = YES;
-                    
-                    CGSize targetSize = PHImageManagerMaximumSize;
-                    if (_assetType == CCCAssetTypeVideo) {
-                        targetSize = CGSizeMake(_phAsset.pixelWidth, _phAsset.pixelHeight);
-                    }
-                    [imageManager requestImageForAsset:_phAsset targetSize:targetSize contentMode:PHImageContentModeAspectFill options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
-                        
-                        UIImage *image = result;
-                        
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                            if (handler) {
-                                handler(image);
-                            }
-                        }];
-                        
-                    }];
-                    
-#if !__has_feature(objc_arc)
-                    [imageRequestOptions release];
-#endif
-                }];
+                [operationQueue addOperationWithBlock:runBlock];
             }
             else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-                    PHImageManager *imageManager = [PHImageManager defaultManager];
-                    PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                    imageRequestOptions.version = PHImageRequestOptionsVersionCurrent;//PHImageRequestOptionsVersionOriginal;
-                    imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
-                    imageRequestOptions.synchronous = YES;
-                    
-                    CGSize targetSize = PHImageManagerMaximumSize;
-                    if (_assetType == CCCAssetTypeVideo) {
-                        targetSize = CGSizeMake(_phAsset.pixelWidth, _phAsset.pixelHeight);
-                    }
-                    [imageManager requestImageForAsset:_phAsset targetSize:targetSize contentMode:PHImageContentModeAspectFill options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
-                        
-                        UIImage *image = result;
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^ {
-                            if (handler) {
-                                handler(image);
-                            }
-                        });
-                        
-                    }];
-                    
-#if !__has_feature(objc_arc)
-                    [imageRequestOptions release];
-#endif
-                });
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), runBlock);
             }
             
         }
@@ -620,50 +511,34 @@
     if (_mpMediaItem) {
         NSURL *url = [_mpMediaItem valueForProperty:MPMediaItemPropertyAssetURL];
         if (url && url.absoluteString.length > 0) {
+            void (^runBlock)(void) = ^{
+                AVURLAsset *asset = [AVURLAsset assetWithURL:url];
+                AVAssetImageGenerator *imgGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+                imgGenerator.appliesPreferredTrackTransform = YES;
+                CMTime time = CMTimeMake(asset.duration.value*0.1, asset.duration.timescale); //kCMTimeZero
+                CGImageRef cgImage = [imgGenerator copyCGImageAtTime:time actualTime:NULL error:nil];
+                if (cgImage) {
+                    UIImage *image = [UIImage imageWithCGImage:cgImage];
+                    CGImageRelease(cgImage);
+                    cgImage = NULL;
+                    
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                        if (handler) {
+                            handler(image);
+                        }
+                    }];
+                }
+            };
             
             if (operationQueue) {
                 if (operationQueue.isSuspended) {
                     [operationQueue setSuspended:NO];
                 }
                 
-                [operationQueue addOperationWithBlock:^ {
-                    AVURLAsset *asset = [AVURLAsset assetWithURL:url];
-                    AVAssetImageGenerator *imgGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
-                    imgGenerator.appliesPreferredTrackTransform = YES;
-                    CMTime time = CMTimeMake(asset.duration.value*0.1, asset.duration.timescale); //kCMTimeZero
-                    CGImageRef cgImage = [imgGenerator copyCGImageAtTime:time actualTime:NULL error:nil];
-                    if (cgImage) {
-                        UIImage *image = [UIImage imageWithCGImage:cgImage];
-                        CGImageRelease(cgImage);
-                        cgImage = NULL;
-                        
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                            if (handler) {
-                                handler(image);
-                            }
-                        }];
-                    }
-                }];
+                [operationQueue addOperationWithBlock:runBlock];
             }
             else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-                    AVURLAsset *asset = [AVURLAsset assetWithURL:url];
-                    AVAssetImageGenerator *imgGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
-                    imgGenerator.appliesPreferredTrackTransform = YES;
-                    CMTime time = CMTimeMake(asset.duration.value*0.1, asset.duration.timescale); //kCMTimeZero
-                    CGImageRef cgImage = [imgGenerator copyCGImageAtTime:time actualTime:NULL error:nil];
-                    if (cgImage) {
-                        UIImage *image = [UIImage imageWithCGImage:cgImage];
-                        CGImageRelease(cgImage);
-                        cgImage = NULL;
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^ {
-                            if (handler) {
-                                handler(image);
-                            }
-                        });
-                    }
-                });
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), runBlock);
             }
         }
     }

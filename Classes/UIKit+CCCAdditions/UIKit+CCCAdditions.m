@@ -14,13 +14,13 @@
 
 @implementation UIView (CCC_SubviewHunting)
 
-- (UIView *)huntedSubviewWithClassName:(NSString *)className {
+- (UIView *)ccc_huntedSubviewWithClassName:(NSString *)className {
     if ([[[self class] description] isEqualToString:className]) {
         return self;
     }
     
     for (UIView *subview in self.subviews) {
-        UIView *huntedSubview = [subview huntedSubviewWithClassName:className];
+        UIView *huntedSubview = [subview ccc_huntedSubviewWithClassName:className];
         
         if (huntedSubview) {
             return huntedSubview;
@@ -30,7 +30,7 @@
     return nil;
 }
 
-- (void)debugSubviews {
+- (void)ccc_debugSubviews {
     [self _debugSubviews:0];
 }
 
@@ -105,25 +105,25 @@
 
 @implementation UIColor (CCC_Additions)
 
-+ (UIColor *)randomColor {
++ (UIColor *)ccc_randomColor {
     return [UIColor colorWithRed:(arc4random()/(CGFloat)CCC_ARC4RANDOM_MAX)
                            green:(arc4random()/(CGFloat)CCC_ARC4RANDOM_MAX)
                             blue:(arc4random()/(CGFloat)CCC_ARC4RANDOM_MAX)
                            alpha:1.000];
 }
 
-+ (UIColor *)colorWithHexRGB:(NSUInteger)hexRGBValue {
-    return [UIColor colorWithHexRGB:hexRGBValue alpha:1.0];
++ (UIColor *)ccc_colorWithHexRGB:(NSUInteger)hexRGBValue {
+    return [UIColor ccc_colorWithHexRGB:hexRGBValue alpha:1.0];
 }
 
-+ (UIColor *)colorWithHexRGB:(NSUInteger)hexRGBValue alpha:(CGFloat)alpha {
++ (UIColor *)ccc_colorWithHexRGB:(NSUInteger)hexRGBValue alpha:(CGFloat)alpha {
     return [UIColor colorWithRed:((float)((hexRGBValue&0xFF0000) >> 16))/255.0
                            green:((float)((hexRGBValue&0x00FF00) >>  8))/255.0
                             blue:((float)((hexRGBValue&0x0000FF) >>  0))/255.0
                            alpha:alpha];
 }
 
-- (UIColor *)contrastColor {
+- (UIColor *)ccc_contrastColor {
     CGFloat r, g, b, a;
     [self getRed:&r green:&g blue:&b alpha:&a];
     
@@ -135,21 +135,21 @@
 
 @implementation UIViewController (CCC_TopViewControllerAdditions)
 
-- (UIViewController *)topViewController {
-    return [[self class] topViewController:self.view.window.rootViewController];
+- (UIViewController *)ccc_topViewController {
+    return [[self class] ccc_topViewController:self.view.window.rootViewController];
 }
 
-+ (UIViewController *)topViewController:(UIViewController *)rootViewController {
++ (UIViewController *)ccc_topViewController:(UIViewController *)rootViewController {
     if ([rootViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *navigationController = (UINavigationController *)rootViewController;
-        return [self topViewController:[navigationController.viewControllers lastObject]];
+        return [self ccc_topViewController:[navigationController.viewControllers lastObject]];
     }
     if ([rootViewController isKindOfClass:[UITabBarController class]]) {
         UITabBarController *tabController = (UITabBarController *)rootViewController;
-        return [self topViewController:tabController.selectedViewController];
+        return [self ccc_topViewController:tabController.selectedViewController];
     }
     if (rootViewController.presentedViewController) {
-        return [self topViewController:rootViewController];
+        return [self ccc_topViewController:rootViewController];
     }
     return rootViewController;
 }
@@ -159,7 +159,7 @@
 
 @implementation NSString (CCC_Additions)
 
-- (BOOL)isAllDigits {
+- (BOOL)ccc_isAllDigits {
     NSCharacterSet *notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
     if ([self rangeOfCharacterFromSet:notDigits].location == NSNotFound) {
         return YES;
@@ -169,7 +169,7 @@
     }
 }
 
-- (BOOL)isEmailFormat {
+- (BOOL)ccc_isEmailFormat {
     if ((0 != [self rangeOfString:@"@"].length) &&
         (0 != [self rangeOfString:@"."].length)) {
         
@@ -212,7 +212,7 @@
     }
 }
 
-- (BOOL)isPhoneNumberFormat {
+- (BOOL)ccc_isPhoneNumberFormat {
     NSError *error = nil;
     NSDataDetector *matchdetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber error:&error];
     NSUInteger matchNumber = [matchdetector numberOfMatchesInString:self options:0 range:NSMakeRange(0, self.length)];

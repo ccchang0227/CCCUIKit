@@ -11,9 +11,9 @@
 /**
  * 裝置資訊
  *
- * @version 1.2.0
+ * @version 1.2.1
  * @author Chih-chieh Chang
- * @date 2018-11-23
+ * @date 2019-10-14
  */
 NS_ROOT_CLASS
 @interface CCCDevice

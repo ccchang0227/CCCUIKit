@@ -233,67 +233,43 @@
                 options.fetchLimit = 1;
             }
             
+            void(^runBlock)(void) = ^{
+                PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:_phAssetCollection options:options];
+                if (fetchResult.count > 0) {
+                    PHAsset *phAsset = [fetchResult lastObject];
+                    if (phAsset) {
+                        PHImageManager *imageManager = [PHImageManager defaultManager];
+                        PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
+                        imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
+                        imageRequestOptions.synchronous = YES;
+                        
+                        [imageManager requestImageForAsset:phAsset targetSize:CGSizeMake(200, 200) contentMode:PHImageContentModeAspectFill options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
+                            
+                            result = [CCCAssetsModel createSquareImageFromImage:result];
+                            [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                                if (handler) {
+                                    handler (result);
+                                }
+                            }];
+                            
+                        }];
+                        
+#if !__has_feature(objc_arc)
+                        [imageRequestOptions release];
+#endif
+                    }
+                }
+            };
+            
             if (operationQueue) {
                 if (operationQueue.isSuspended) {
                     [operationQueue setSuspended:NO];
                 }
                 
-                [operationQueue addOperationWithBlock:^ {
-                    PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:_phAssetCollection options:options];
-                    if (fetchResult.count > 0) {
-                        PHAsset *phAsset = [fetchResult lastObject];
-                        if (phAsset) {
-                            PHImageManager *imageManager = [PHImageManager defaultManager];
-                            PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                            imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
-                            imageRequestOptions.synchronous = YES;
-                            
-                            [imageManager requestImageForAsset:phAsset targetSize:CGSizeMake(200, 200) contentMode:PHImageContentModeAspectFill options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
-                                
-                                result = [CCCAssetsModel createSquareImageFromImage:result];
-                                [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-                                    if (handler) {
-                                        handler (result);
-                                    }
-                                }];
-                                
-                            }];
-                            
-#if !__has_feature(objc_arc)
-                            [imageRequestOptions release];
-#endif
-                        }
-                    }
-                }];
+                [operationQueue addOperationWithBlock:runBlock];
             }
             else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-                    PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:_phAssetCollection options:options];
-                    if (fetchResult.count > 0) {
-                        PHAsset *phAsset = [fetchResult lastObject];
-                        if (phAsset) {
-                            PHImageManager *imageManager = [PHImageManager defaultManager];
-                            PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-                            imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
-                            imageRequestOptions.synchronous = YES;
-                            
-                            [imageManager requestImageForAsset:phAsset targetSize:CGSizeMake(200, 200) contentMode:PHImageContentModeAspectFill options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
-                                
-                                result = [CCCAssetsModel createSquareImageFromImage:result];
-                                dispatch_async(dispatch_get_main_queue(), ^ {
-                                    if (handler) {
-                                        handler (result);
-                                    }
-                                });
-                                
-                            }];
-                            
-#if !__has_feature(objc_arc)
-                            [imageRequestOptions release];
-#endif
-                        }
-                    }
-                });
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), runBlock);
             }
             
 #if !__has_feature(objc_arc)
