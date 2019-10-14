@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CCCUIKit'
-  s.version          = '1.3.3'
+  s.version          = '1.3.4'
   s.summary          = "C.C.Chang's custom UIKit."
 
   s.homepage         = 'https://github.com/ccchang0227/CCCUIKit'
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit'
 
   s.subspec 'UIKit+CCCAdditions' do |ss|
-    # current version: 1.1.0
+    # current version: 1.1.1
     ss.requires_arc = false
     ss.ios.deployment_target = '7.0'
     ss.tvos.deployment_target = '9.0'
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCAssetsViewController' do |ss|
-    # current version: 1.1.2
+    # current version: 1.1.3
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCAssetsViewController/*.{h,m}'
     ss.resources = 'Classes/CCCAssetsViewController/*.xib', 'Assets/CCCAssets_*.png'
@@ -69,7 +69,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCDevice' do |ss|
-    # current version: 1.2.0
+    # current version: 1.2.1
     ss.requires_arc = false
     ss.ios.deployment_target = '7.0'
     ss.tvos.deployment_target = '9.0'

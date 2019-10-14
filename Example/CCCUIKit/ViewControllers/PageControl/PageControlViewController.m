@@ -59,7 +59,7 @@
     UIView *previousView = nil;
     for (int i = 0; i < 10; i ++) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-        view.backgroundColor = [UIColor randomColor];
+        view.backgroundColor = [UIColor ccc_randomColor];
         view.translatesAutoresizingMaskIntoConstraints = NO;
         [self.scrollView addSubview:view];
         
@@ -67,7 +67,7 @@
         label.backgroundColor = [UIColor clearColor];
         label.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         label.text = [NSString stringWithFormat:@"%d", i];
-        label.textColor = [view.backgroundColor contrastColor];
+        label.textColor = [view.backgroundColor ccc_contrastColor];
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont boldSystemFontOfSize:100];
         [view addSubview:label];

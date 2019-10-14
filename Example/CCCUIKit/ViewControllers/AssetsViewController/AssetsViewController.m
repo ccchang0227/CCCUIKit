@@ -8,8 +8,9 @@
 
 #import "AssetsViewController.h"
 #import <CCCUIKit/CCCAssetsViewController.h>
+#import "DisplayImageViewController.h"
 
-@interface AssetsViewController ()
+@interface AssetsViewController () <CCCAssetsViewControllerDelegate>
 
 @end
 
@@ -42,6 +43,7 @@
 
 - (IBAction)showAssetsPicker:(UIButton*)sender {
     CCCAssetsViewController *viewCtrlAssets = [[CCCAssetsViewController alloc] initWithNibName:@"CCCAssetsViewController" bundle:nil];
+    viewCtrlAssets.delegate = self;
     switch (sender.tag) {
         case 1:
             viewCtrlAssets.assetsFetchType = CCCAssetsFetchTypeImage;
@@ -56,7 +58,32 @@
             break;
     }
     
+    viewCtrlAssets.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:viewCtrlAssets animated:YES completion:nil];
+}
+
+#pragma mark - CCCAssetsViewControllerDelegate
+
+- (void)cccAssetsViewController:(CCCAssetsViewController *)viewController didPickAsset:(CCCAsset *)asset {
+    [viewController dismissViewControllerAnimated:NO completion:nil];
+    
+    if (asset.assetType != CCCAssetTypeImage) {
+        return;
+    }
+    
+    __weak typeof(self) tempSelf = self;
+    [asset loadLargeImageInOperationQueue:nil withHandler:^(UIImage *image) {
+        if (image) {
+            __strong typeof(tempSelf) strongSelf = tempSelf;
+            
+            DisplayImageViewController *imageViewController = [strongSelf.storyboard instantiateViewControllerWithIdentifier:@"DisplayImageViewController2"];
+            imageViewController.image = image;
+            [strongSelf.navigationController pushViewController:imageViewController animated:YES];
+            
+        }
+        
+    }];
+    
 }
 
 @end

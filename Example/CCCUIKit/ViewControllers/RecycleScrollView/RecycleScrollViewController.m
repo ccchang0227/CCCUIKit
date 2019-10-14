@@ -211,7 +211,7 @@
     
     if (reuseView == nil) {
         reuseView = [[CCCRecycleView alloc] initWithFrame:CGRectZero];
-        reuseView.backgroundColor = [UIColor randomColor];
+        reuseView.backgroundColor = [UIColor ccc_randomColor];
         
         UIButton *button = [[UIButton alloc] initWithFrame:reuseView.bounds];
         button.backgroundColor = [UIColor clearColor];
@@ -224,7 +224,7 @@
     }
     
     UIButton *button = (UIButton*)[reuseView.contentView viewWithTag:222];
-    [button setTitleColor:[reuseView.backgroundColor contrastColor] forState:UIControlStateNormal];
+    [button setTitleColor:[reuseView.backgroundColor ccc_contrastColor] forState:UIControlStateNormal];
     [button setTitle:[NSString stringWithFormat:@"%ld", (long)index] forState:UIControlStateNormal];
     if (scrollView.scrollDirection == CCCRecycleScrollDirectionHorizontal) {
         button.layer.name = @"Hor";

@@ -135,6 +135,15 @@
     else if ([deviceIdentifier isEqualToString:@"iPhone11,8"]) {
         model = @"iPhone XR";
     }
+    else if ([deviceIdentifier isEqualToString:@"iPhone12,1"]) {
+        model = @"iPhone 11";
+    }
+    else if ([deviceIdentifier isEqualToString:@"iPhone12,3"]) {
+        model = @"iPhone 11 Pro";
+    }
+    else if ([deviceIdentifier isEqualToString:@"iPhone12,5"]) {
+        model = @"iPhone 11 Pro Max";
+    }
     else if ([deviceIdentifier isEqualToString:@"iPad1,1"] ||
              [deviceIdentifier isEqualToString:@"iPad1,2"]) {
         model = @"iPad";
@@ -237,6 +246,9 @@
     else if ([deviceIdentifier isEqualToString:@"iPod7,1"]) {
         model = @"iPodTouch 6";
     }
+    else if ([deviceIdentifier isEqualToString:@"iPod9,1"]) {
+        model = @"iPodTouch 7";
+    }
     else if ([deviceIdentifier isEqualToString:@"AppleTV2,1"]) {
         return @"AppleTV 2";
     }
@@ -246,6 +258,12 @@
     }
     else if ([deviceIdentifier isEqualToString:@"AppleTV5,3"]) {
         return @"AppleTV 4";
+    }
+    else if ([deviceIdentifier isEqualToString:@"AppleTV6,2"]) {
+        return @"AppleTV 4K";
+    }
+    else if ([deviceIdentifier isEqualToString:@"AudioAccessory1,1"]) {
+        return @"HomePod";
     }
     else if ([deviceIdentifier isEqualToString:@"i386"] ||
              [deviceIdentifier isEqualToString:@"x86_64"]) {
@@ -288,6 +306,10 @@
     CGFloat height = MAX(screenSize.width, screenSize.height);
     CGFloat screenScale = [UIScreen mainScreen].scale;
     
+    // (CGSize) screenSize = (width = 414, height = 896)
+    // (CGSize) screenSize = (width = 375, height = 812)
+    // (CGSize) screenSize = (width = 414, height = 896)
+    
     if (height == 480) {
         return @"3.5 inch";
     }
@@ -306,6 +328,13 @@
     }
     else if (height == 812) {
         return @"5.8 inch";
+    }
+    else if (height == 896) {
+        if (screenScale == 3.0) {
+            return @"6.5 inch";
+        }
+        
+        return @"6.1 inch";
     }
     else if (height == 1024) {
         NSString *model = [self model];

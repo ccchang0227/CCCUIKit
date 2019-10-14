@@ -15,9 +15,9 @@
 /**
  * Custom ImagePickerViewController
  *
- * @version 1.1.2
+ * @version 1.1.3
  * @author Chih-chieh Chang
- * @date 2018-11-23
+ * @date 2019-10-14
  */
 @interface CCCAssetsViewController : UIViewController <UINavigationControllerDelegate, CCCAssetsGroupsViewControllerDelegate, CCCAllAssetsViewControllerDelegate>
 
