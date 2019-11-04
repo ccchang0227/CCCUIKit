@@ -4,14 +4,14 @@ C.C.Chang's custom UIKit.<br>
 
 ## Requirements
 
-iOS 7.0 以上<br>
+iOS 8.0 以上<br>
 tvOS 9.0以上 (部分支援)
 
 ## Classes
 
 * UIKit+CCCAdditions (1.1.1)<br>
-* CCCAssetsViewController (1.1.3)<br>
-* CCCCamera (1.2.2)<br>
+* CCCAssetsViewController (1.1.4)<br>
+* CCCCamera (1.2.3)<br>
 * CCCCanvas (1.0.1)<br>
 * CCCCycleView (1.1.0)<br>
 * CCCDevice (1.2.1)<br>

@@ -294,7 +294,9 @@
     
 //    CGRect imageRect = CGRectMake(_focusPoint.x+_size.width/2.0+2, _focusPoint.y-15, 30, 30);
     CGRect imageRect = CGRectMake(_size.width/2.0+2, yPosition-15, 30, 30);
-    UIImage *lightImage = [UIImage imageNamed:@"CCCCamera_Light.png"];
+    UIImage *lightImage = [UIImage imageNamed:@"CCCCamera_Light.png"
+                                     inBundle:[NSBundle bundleForClass:[CCCCameraView class]]
+                compatibleWithTraitCollection:nil];
     CGContextSetShouldAntialias(context, true);
     CGContextSetAllowsAntialiasing(context, true);
     CGContextSetInterpolationQuality(context, kCGInterpolationDefault);
