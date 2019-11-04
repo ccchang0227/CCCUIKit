@@ -624,7 +624,9 @@ CGFloat const allAssetsCollectionViewFooterHeight = 80.0;
     _videoSymbolImageView = [[UIImageView alloc] init];
     _videoSymbolImageView.backgroundColor = [UIColor clearColor];
     _videoSymbolImageView.contentMode = UIViewContentModeScaleAspectFit;
-    _videoSymbolImageView.image = [UIImage imageNamed:@"CCCAssets_VideoIcon.png"];
+    _videoSymbolImageView.image = [UIImage imageNamed:@"CCCAssets_VideoIcon.png"
+                                             inBundle:[NSBundle bundleForClass:[CCCAllAssetsViewController class]]
+                        compatibleWithTraitCollection:nil];
     _videoSymbolImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_videoSymbolImageView];
     

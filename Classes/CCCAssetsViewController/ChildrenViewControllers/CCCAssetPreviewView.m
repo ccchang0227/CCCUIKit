@@ -364,8 +364,8 @@
     _playPauseButton = [[UIButton alloc] init];
     _playPauseButton.backgroundColor = [UIColor clearColor];
     _playPauseButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [_playPauseButton setImage:[UIImage imageNamed:@"CCCAssets_Play"] forState:UIControlStateNormal];
-    [_playPauseButton setImage:[UIImage imageNamed:@"CCCAssets_Pause"] forState:UIControlStateSelected];
+    [_playPauseButton setImage:[UIImage imageNamed:@"CCCAssets_Play" inBundle:[NSBundle bundleForClass:[CCCAssetPreviewView class]] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_playPauseButton setImage:[UIImage imageNamed:@"CCCAssets_Pause" inBundle:[NSBundle bundleForClass:[CCCAssetPreviewView class]] compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
     [_playPauseButton addTarget:self action:@selector(playPauseAction:) forControlEvents:UIControlEventTouchUpInside];
     _playPauseButton.translatesAutoresizingMaskIntoConstraints = NO;
     [_controlBarView addSubview:_playPauseButton];

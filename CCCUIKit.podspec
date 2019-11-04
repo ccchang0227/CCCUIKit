@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CCCUIKit'
-  s.version          = '1.3.4'
+  s.version          = '1.3.5'
   s.summary          = "C.C.Chang's custom UIKit."
 
   s.homepage         = 'https://github.com/ccchang0227/CCCUIKit'
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.authors          = { 'Chih-chieh Chang' => 'ccch.realtouch@gmail.com' }
   s.source           = { :git => 'https://github.com/ccchang0227/CCCUIKit.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '8.0'
   s.source_files = 'Classes/CCCUIKit.h'
 
   s.frameworks = 'UIKit'
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCAssetsViewController' do |ss|
-    # current version: 1.1.3
+    # current version: 1.1.4
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCAssetsViewController/*.{h,m}'
     ss.resources = 'Classes/CCCAssetsViewController/*.xib', 'Assets/CCCAssets_*.png'
@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CCCCamera' do |ss|
-    # current version: 1.2.2
+    # current version: 1.2.3
     ss.requires_arc = false
     ss.source_files = 'Classes/CCCCamera/**/*.{h,m}'
     ss.resources = 'Assets/CCCCamera_*.png'
